@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+         #
+#    By: jonpaul <jonpaul@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:38:40 by mcatalan          #+#    #+#              #
-#    Updated: 2024/01/10 13:05:58 by mcatalan         ###   ########.fr        #
+#    Updated: 2024/01/10 18:03:14 by jonpaul          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,14 @@ YELLOW = \033[0;33m
 BLUE = \033[0;34m
 RESET = \033[0m
 
-SRC = $(wildcard *.c)
+SRC = $(wildcard src/*.c)
 
 OBJ = $(SRC:.c=.o)
 
 DEPS = $(SRC:.c=.d)
 
 %.o : %.c Makefile
+	@echo "$(GREEN)Compiling...$(RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@ -MMD
 
 all : $(NAME)
