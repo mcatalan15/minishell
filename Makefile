@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jonpaul <jonpaul@student.42.fr>            +#+  +:+       +#+         #
+#    By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:38:40 by mcatalan          #+#    #+#              #
-#    Updated: 2024/01/10 18:03:14 by jonpaul          ###   ########.fr        #
+#    Updated: 2024/01/11 11:5:04 by mcatalan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,14 +30,14 @@ DEPS = $(SRC:.c=.d)
 
 %.o : %.c Makefile
 	@echo "$(GREEN)Compiling...$(RESET)"
-	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -c $< -o $@ $(FFLAGS) -MMD
 
 all : $(NAME)
 
 -include $(DEPS)
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $@
+	$(CC) $(CFLAGS) $(OBJ) -o $@ $(FFLAGS)
 
 clean :
 	@echo "$(RED)Cleaning up objets...$(RESET)"
