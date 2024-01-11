@@ -10,42 +10,74 @@
 #                                                                              #
 # **************************************************************************** #
 
+# Print MINISHELL and authors' names
+MINISHELL_MSG = MINISHELL
+AUTHORS_MSG = by jpaul-k & mcatalan
+MESSAGE_LEN = $$(($(shell echo $(MINISHELL_MSG) | wc -c) - 1))
+
+PRINT_MINISHELL = @printf "$(VIOLET)%*s$(RESET)\n" $(MESSAGE_LEN) $(MINISHELL_MSG)
+PRINT_AUTHORS = @echo "$(BLUE)$(AUTHORS_MSG)$(RESET)"
+
+
+# Name of the executable && compiler && flags
 NAME = minishell
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
 RM = rm -rf
+LDFALGS = -lreadline
+
+#Directories
+SRC_DIR = src
+OBJ_DIR = obj
+DEP_DIR = dep
+LIBFT_DIR = includes/libft
 
 # Colors
 RED = \033[0;31m
 GREEN = \033[0;32m
 YELLOW = \033[0;33m
 BLUE = \033[0;34m
+VIOLET = \033[0;35m
 RESET = \033[0m
 
-SRC = $(wildcard src/*.c)
+SRC = $(wildcard $(SRC_DIR)/*.c)
 
-OBJ = $(SRC:.c=.o)
+OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
-DEPS = $(SRC:.c=.d)
+DEPS = $(addprefix $(DEP_DIR)/, $(notdir $(SRC:.c=.d)))
 
-%.o : %.c Makefile
-	@echo "$(GREEN)Compiling...$(RESET)"
-	$(CC) $(CFLAGS) -c $< -o $@ $(FFLAGS) -MMD
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c Makefile | $(OBJ_DIR) $(DEP_DIR)
+	@echo "$(YELLOW)Compiling...$(RESET)"
+	@$(CC) $(CFLAGS) -c $< -o $@ -MMD
 
-all : $(NAME)
+all : print_message $(NAME)
+	@echo "$(GREEN)Build finished successfully!$(RESET)"
+
+print_message:
+	$(PRINT_MINISHELL)
+	$(PRINT_AUTHORS)
 
 -include $(DEPS)
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $@ $(FFLAGS)
+	@echo "$(YELLOW)Linking...$(RESET)"
+	@$(CC) $(CFLAGS) $(OBJ) -o $@ $(LDFALGS) -L $(LIBFT_DIR) -lft
 
 clean :
-	@echo "$(RED)Cleaning up objets...$(RESET)"
-	$(RM) $(OBJ) $(DEPS)
+	@echo "$(RED)Cleaning up objets and dependencies...$(RESET)"
+	@$(RM) $(OBJ_DIR) $(DEP_DIR)
 
 fclean : clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re : fclean all
 
-.PHONY: clean fclean all re
+$(OBJ_DIR) :
+	@echo "$(YELLOW)Creating objects directory...$(RESET)"
+	@mkdir -p $(OBJ_DIR)
+
+$(DEP_DIR) :
+	@echo "$(YELLOW)Creating dependencies directory...$(RESET)"
+	@mkdir -p $(DEP_DIR)
+
+.PHONY: clean fclean all re print_message

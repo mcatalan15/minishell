@@ -13,9 +13,9 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct s_vars
-{
-    char **path;
-}
+// typedef struct s_vars
+// {
+//     char **path;
+// }
 
 #endif

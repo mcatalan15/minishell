@@ -13,39 +13,46 @@
 
 #include "../includes/minishell.h"
 
-#include "../includes/minishell.h"
-
-int main()
-{
-    char    *str;
+// int main()
+// {
+//     char    *str;
     
-    str = readline("enter some shit: ");
-    printf("%s\n", str);
-	free(str);
+//     str = readline("enter some shit: ");
+//     printf("%s\n", str);
+// 	free(str);
+// }
+
+void	print_env(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i] != NULL)
+	{
+		printf("%s\n", env[i]);
+		i++;
+	}
 }
 
-// void	print_env(char **env)
-// {
-// 	int	i;
+void	main_args(int argc, char **argv)
+{
+	if (argc != 1 || argv[1] != NULL)
+	{
+		printf("Error: to many arguments\n");
+		exit(0);
+	}
+}
 
-// 	i = 0;
-// 	while (env[i] != NULL)
-// 	{
-// 		printf("%s\n", env[i]);
-// 		i++;
-// 	}
-// }
+int	main(int argc, char **argv, char **env)
+{
+	char *str;
 
-// int	main(int argc, char **argv, char **env)
-// {
-// 	(void)argv;
-// 	if (argc == 1)
-// 	{
-// 		print_env(env);
-// 	}
-// 	else
-// 	{
-// 		perror("Error: to many arguments\n");
-// 		exit(1);
-// 	}
-// }
+	(void)env;
+	main_args(argc, argv);
+	while(1)
+	{
+		str = readline(BLUE"minishell> "RESET);
+
+		printf("%s\n", str);
+	}
+}
