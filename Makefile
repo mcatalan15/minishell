@@ -30,7 +30,8 @@ LDFALGS = -lreadline
 SRC_DIR = src
 OBJ_DIR = obj
 DEP_DIR = dep
-LIBFT_DIR = includes/libft
+LIBFT_DIR = includes/libft/
+
 
 # Colors
 RED = \033[0;31m
@@ -50,8 +51,12 @@ $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c Makefile | $(OBJ_DIR) $(DEP_DIR)
 	@echo "$(YELLOW)Compiling...$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@ -MMD
 
-all : print_message $(NAME)
+all : print_message subsystem $(NAME)
 	@echo "$(GREEN)Build finished successfully!$(RESET)"
+
+subsystem:
+	@echo "$(YELLOW)Building libft...$(RESET)"
+	@make -s -C $(LIBFT_DIR)
 
 print_message:
 	$(PRINT_MINISHELL)
@@ -66,9 +71,11 @@ $(NAME) : $(OBJ)
 clean :
 	@echo "$(RED)Cleaning up objets and dependencies...$(RESET)"
 	@$(RM) $(OBJ_DIR) $(DEP_DIR)
+	@make -s -C $(LIBFT_DIR) clean
 
 fclean : clean
 	@$(RM) $(NAME)
+	@make -s -C $(LIBFT_DIR) fclean
 
 re : fclean all
 

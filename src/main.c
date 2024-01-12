@@ -45,11 +45,11 @@ void	main_args(int argc, char **argv)
 
 int	main(int argc, char **argv, char **env)
 {
-	char *str;
+	char	*str;
 
 	(void)env;
 	main_args(argc, argv);
-	while(1)
+	while (1)
 	{
 		str = readline(BLUE"minishell> "RESET);
 
