@@ -18,20 +18,18 @@ MESSAGE_LEN = $$(($(shell echo $(MINISHELL_MSG) | wc -c) - 1))
 PRINT_MINISHELL = @printf "$(VIOLET)%*s$(RESET)\n" $(MESSAGE_LEN) $(MINISHELL_MSG)
 PRINT_AUTHORS = @echo "$(BLUE)$(AUTHORS_MSG)$(RESET)"
 
-
 # Name of the executable && compiler && flags
 NAME = minishell
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
 RM = rm -rf
-LDFALGS = -lreadline
+LDFLAGS = -lreadline
 
 #Directories
 SRC_DIR = src
 OBJ_DIR = obj
 DEP_DIR = dep
 LIBFT_DIR = includes/libft/
-
 
 # Colors
 RED = \033[0;31m
@@ -66,7 +64,7 @@ print_message:
 
 $(NAME) : $(OBJ)
 	@echo "$(YELLOW)Linking...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJ) -o $@ $(LDFALGS) -L $(LIBFT_DIR) -lft
+	@$(CC) $(CFLAGS) $(OBJ) -o $@ $(LDFLAGS) -L $(LIBFT_DIR) -lft
 
 clean :
 	@echo "$(RED)Cleaning up objets and dependencies...$(RESET)"

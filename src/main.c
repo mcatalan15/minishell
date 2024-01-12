@@ -25,6 +25,12 @@ void	print_env(char **env)
 	}
 }
 
+char	*parsing(char *str)
+{
+
+	return (str);
+}
+
 void	main_args(int argc, char **argv)
 {
 	if (argc != 1 || argv[1] != NULL)
@@ -34,16 +40,26 @@ void	main_args(int argc, char **argv)
 	}
 }
 
+void	handle_history(char *str)
+{
+	if (!str || *str == '\0')
+		return ;
+	add_history(str);
+
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	char	*str;
 
 	(void)env;
+	using_history();
 	main_args(argc, argv);
 	while (1)
 	{
 		str = readline(BLUE"minishell> "RESET);
-
-		printf("%s\n", str);
+		handle_history(str);
+		free(str);
 	}
+	clear_history();
 }
