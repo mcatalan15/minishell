@@ -13,15 +13,6 @@
 
 #include "../includes/minishell.h"
 
-// int main()
-// {
-//     char    *str;
-    
-//     str = readline("enter some shit: ");
-//     printf("%s\n", str);
-// 	free(str);
-// }
-
 void	print_env(char **env)
 {
 	int	i;
