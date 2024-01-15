@@ -51,7 +51,7 @@ void	handle_history(char *str)
 int	main(int argc, char **argv, char **env)
 {
 	char	*str;
-	char **s;
+	char	**s;
 	// t_shell	shell;
 
 	(void)env;
@@ -63,9 +63,9 @@ int	main(int argc, char **argv, char **env)
 		str = readline(BLUE"minishell> "RESET);
 		handle_history(str);
 		s = ft_split_shell(str);
-		while(s[i] != NULL)
-			printf("%s\n", s[i++]);
-		// printf("\n");
+		// while(s[i] != NULL)
+		// 	printf("%s\n", s[i++]);
+		
 		free(str);
 	}
 	clear_history();

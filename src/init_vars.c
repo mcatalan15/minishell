@@ -14,12 +14,12 @@
 
 // static int  get_type(char *str)
 // {
-//     if (str[0] == ' ' && !str[1])
-//         return (2);
 //     if (ft_strchr(str, '\"'))
 //         return (3);
 //     if (ft_strchr(str, '\''))
 //         return (4);
+//     if (str[0] == ' ')
+//         return (2);
 //     if (str[0] == '>' && !str[1])
 //         return (5);
 //     if (str[0] == '<' && !str[1])
@@ -62,9 +62,18 @@
 //     }
 // }
 
-// int init_vars(char *line, t_shell *shell)
-// {
-//     char    **split;
-    
-//     split = ft_split_shell(NULL, line, '|');
-// }
+int init_vars(char *line, t_shell *shell)
+{
+    char    **split;
+
+    split = ft_split_shell(line);
+}
+
+
+// echo hola > out|pwd
+// |
+// ft_split_shell
+// |
+// echo hola > out
+// pwd
+// NULL

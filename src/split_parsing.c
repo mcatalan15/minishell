@@ -104,6 +104,5 @@ char	**ft_split_shell(char const *str)
 	if (!str || !arr)
 		return (NULL);
 	arr = ft_split_ext(arr, (char *)str, '|');
-	
 	return (arr);
 }

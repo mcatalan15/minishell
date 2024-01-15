@@ -24,17 +24,17 @@
 
 // struct  s_token
 // {
-//     char    *str;                 //*type 1: str
-//     int     type;                 //*type 2: ' '
-//     t_token *next;                //*type 3: "__"
+//     char    *str;
+//     int     type;
+//     t_token *next;
 //     t_token *prev;
-// };                                //*type 4: '__'
-//                                   //*type 5:  > 
-// struct  s_command                   //*type 6:  < 
-// {                                 //*type 7:  >> 
-//     char    **cmd;            //*type 8:  << 
-//     char    *path;                //*type 9:  |  
-//     t_token *tokens;              //*type 10: $  
+// };
+
+// struct  s_command
+// {
+//     char    **cmd;
+//     char    *path;  
+//     t_token *tokens;  
 //     t_command *next;
 //     t_command *prev;
 // };
@@ -46,6 +46,17 @@
 //     t_token    *token;;
 // }
 
-
+/*
+TYPES
+1: str
+2: ' '
+3: "__"
+4: '__'
+5:  >
+6:  <
+7:  >>
+8:  <<
+9: $
+*/
 
 #endif
