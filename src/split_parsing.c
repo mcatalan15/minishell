@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_2.c                                          :+:      :+:    :+:   */
+/*   split_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 12:43:19 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/15 12:47:47 by jpaul-kr         ###   ########.fr       */
+/*   Created: 2024/01/16 09:47:34 by jpaul-kr          #+#    #+#             */
+/*   Updated: 2024/01/16 12:12:43 by jpaul-kr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*   Updated: 2024/01/16 11:08:36 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	num_words(const char *str, char delim)
+int num_words(const char *str, char delim)
 {
-	int	i;
-	int	followed;
-	int	num_words;
+	int i;
+	int followed;
+	int num_words;
 
 	i = 0;
 	followed = 0;
@@ -35,9 +39,9 @@ int	num_words(const char *str, char delim)
 	return (num_words);
 }
 
-void	free_arr(char **arr)
+void free_arr(char **arr)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (arr[i])
@@ -48,10 +52,10 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-static char	*ext_split(char const *str, int s, int f)
+static char *ext_split(char const *str, int s, int f)
 {
-	int		j;
-	char	*arr;
+	int j;
+	char *arr;
 
 	j = 0;
 	arr = malloc(sizeof(char) * (f - s + 1));
@@ -67,11 +71,11 @@ static char	*ext_split(char const *str, int s, int f)
 	return (arr);
 }
 
-static char	**ft_split_ext(char **arr, char *str, char c)
+static char **ft_split_ext(char **arr, char *str, char c)
 {
-	int	i;
-	int	j;
-	int	pos;
+	int i;
+	int j;
+	int pos;
 
 	i = 0;
 	j = 0;
@@ -96,9 +100,9 @@ static char	**ft_split_ext(char **arr, char *str, char c)
 	return (arr);
 }
 
-char	**ft_split_shell(char const *str)
+char **ft_split_shell(char const *str)
 {
-	char	**arr;
+	char **arr;
 
 	arr = malloc(sizeof(char *) * (num_words(str, '|') + 1));
 	if (!str || !arr)

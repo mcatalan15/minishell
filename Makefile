@@ -40,6 +40,9 @@ VIOLET = \033[0;35m
 RESET = \033[0m
 
 SRC = $(wildcard $(SRC_DIR)/*.c)
+# SRC = 	src/main.c			\
+# 		src/utils.c			\
+# 		src/split_parsing.c	\
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 

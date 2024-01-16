@@ -6,7 +6,7 @@
 /*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/15 12:47:14 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:20:13 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 // Our .c functions by file
 // init_vars.c
-// int init_vars(char *line, t_shell *shell);
+int init_vars(char *line, t_shell *shell);
 
 // utils.c
 // void ft_print_tokens(t_token *tokens);
