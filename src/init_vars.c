@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/16 13:07:21 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:26:09 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,37 +104,48 @@ static t_token  *put_tokens(t_token *token, char *str)
     return (aux);
 }
 
+
 int init_vars(char *line, t_shell *shell)
 {
-    char        **split;
-    t_command   *aux;
-    int         i;
+	char **split;
+	t_command   *aux;
+	int         i;
 
-    i = -1;
-    shell->command = command_new();
-    split = ft_split_shell(line);
-    aux = shell->command;
-    while (split[++i])
-    {
-        aux->token = put_tokens(aux->token, split[i]);
-        if (!aux->token)
-        aux = aux->next;
-        aux = command_new();
-    }
-    
-    while (shell->command)
-    {
-        while (shell->command->token)
-        {
-            printf("%s\n", shell->command->token->str);
-            shell->command->token = shell->command->token->next;
-        }
-        shell->command = shell->command->next;
-    }
-    
-    return (0);
+	i = -1;
+	shell->command = command_new();
+	split = ft_split_shell(line);
+	aux = shell->command;
+	while (split[++i])
+	{
+	    aux->token = put_tokens(aux->token, split[i]);
+	    if (!aux->token)
+	    aux = aux->next;
+	    aux = command_new();
+	}
+
+	while (shell->command)
+	{
+	    while (shell->command->token)
+	    {
+	        printf("%s\n", shell->command->token->str);
+	        shell->command->token = shell->command->token->next;
+	    }
+	    shell->command = shell->command->next;
+	}
+
+	return (0);
 }
 
+// int init_vars(char *line, t_shell *shell)
+// {
+//     char        **split;
+
+//     split = ft_split_shell(line);
+// 	for(int i = 0; split[i]; i++)
+// 		printf("%s\n", split[i]);
+// 	(void)shell;    
+//     return (0);
+// }
 
 // echo hola > out|pwd
 // |

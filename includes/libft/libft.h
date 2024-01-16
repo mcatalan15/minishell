@@ -75,5 +75,6 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
 void			ft_putchar(char c);
 long long int	ft_atol(const char *str);
+char *ft_strncpy(char *dest, const char *src, size_t n);
 
 #endif
