@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/17 12:17:11 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/17 19:54:26 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	get_type(char *str)
 {
+	if (!str[0])
+		return (0);
 	if (ft_isalnum(str[0]))
 		return (1);
 	if (str[0] == '\"')
@@ -70,11 +72,11 @@ static t_token	*put_tokens(t_token *token, char *str)
 
 	// la lista se crea pero aux no apunta a la lista y al final no hace nada
 	i = 0;
-	aux = token;
+	aux = NULL;
 	while (str[i])
 	{
 		pos = 0;
-		while (str[i] == ' ')
+		while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 			i++;
 		flag = get_type(&str[i]);
 		if (flag == 4 || flag == 5)
@@ -92,16 +94,31 @@ static t_token	*put_tokens(t_token *token, char *str)
 			(flag != get_type(&str[i + pos]) && (flag == 2 || flag == 3)))
 				pos++;
 			token = token_new(ft_substr(str, i, pos), flag);
+			if (flag == 2 || flag == 3)
+				pos++;
 		}
-		printf("%s, type: %d", token->str, token->type);
 		i += pos;
+		while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+			i++;
+		token->prev = aux;
+		aux = token;
+		//printf("str: %s\n", aux->str);
 		token = token->next;
 	}
+	while (aux->prev)
+	{
+		//printf("token->str: %s\n", token->str);
+		aux = aux->prev;
+	}
 	token = aux;
+	while (token)
+	{
+		printf("token->str: %s\n", token->str);
+		token = token->next;
+	}
 	//ft_print_tokens(token);
-	return (token);
+	return (aux);
 }
-
 
 int	init_vars(char *line, t_shell *shell)
 {
@@ -112,16 +129,21 @@ int	init_vars(char *line, t_shell *shell)
 	i = -1;
 	shell->command = command_new();
 	split = ft_split_shell(line);
+	// for(int j = 0; split[j]; j++)
+	// 	printf("%s\n", split[j]);
 	aux = shell->command;
 	while (split[++i])
 	{
 		aux->token = put_tokens(aux->token, split[i]);
 		if (!aux->token)
-            return (0);
+		{
+			printf("Token es null\n");
+			return (0);
+		}
 		aux = aux->next;
 		aux = command_new();
 	}
-
+	//free(split);
 	// while (shell->command)
 	// {
 	// 	while (shell->command->token)
@@ -135,16 +157,6 @@ int	init_vars(char *line, t_shell *shell)
 	return (0);
 }
 
-// int init_vars(char *line, t_shell *shell)
-// {
-//     char        **split;
-
-//     split = ft_split_shell(line);
-// 	for(int i = 0; split[i]; i++)
-// 		printf("%s\n", split[i]);
-// 	(void)shell;    
-//     return (0);
-// }
 
 // echo hola > out|pwd
 // |
