@@ -20,7 +20,7 @@
 // 		shell->tokens = shell->tokens->next;
 // 		free(shell->tokens->prev);
 // 	}
-	
+
 // 	while(shell)
 // 	{
 // 		free(shell->path);
@@ -29,14 +29,14 @@
 // 	}
 // }
 
-// void ft_print_tokens(t_token *tokens)
-// {
-// 	t_token *tmp;
+void	ft_print_tokens(t_token *tokens)
+{
+	t_token	*tmp;
 
-// 	tmp = tokens;
-// 	while (tmp)
-// 	{
-// 		printf("type: %d, value: %s\n", tmp->type, tmp->str);
-// 		tmp = tmp->next;
-// 	}
-// }
+	tmp = tokens;
+	while (tmp)
+	{
+		printf("value: %s, type: %d\n", tmp->str, tmp->type);
+		tmp = tmp->next;
+	}
+}

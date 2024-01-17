@@ -28,10 +28,10 @@
 
 // Our .c functions by file
 // init_vars.c
-int init_vars(char *line, t_shell *shell);
+int		init_vars(char *line, t_shell *shell);
 
 // utils.c
-// void ft_print_tokens(t_token *tokens);
+void	ft_print_tokens(t_token *tokens);
 
 // utils_2.c
 char	**ft_split_shell(char const *str);
