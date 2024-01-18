@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/16 12:20:13 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:46:12 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		init_vars(char *line, t_shell *shell);
 // utils.c
 void	ft_print_tokens(t_token *tokens);
 
-// utils_2.c
-char	**ft_split_shell(char const *str);
+// split_parsing.c
+char **ft_split_shell(char const *str);
 
 #endif

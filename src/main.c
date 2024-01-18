@@ -38,6 +38,8 @@ void	handle_history(char *str)
 {
 	if (!str || *str == '\0')
 		return ;
+	if (ft_strcmp(str, "exit") == 0)
+		exit(0);
 	add_history(str);
 }
 
