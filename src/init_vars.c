@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/17 19:54:26 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/18 12:51:23 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static t_token	*put_tokens(t_token *token, char *str)
 	int		pos;
 	int		flag;
 
-	// la lista se crea pero aux no apunta a la lista y al final no hace nada
 	i = 0;
 	aux = NULL;
 	while (str[i])
@@ -102,21 +101,16 @@ static t_token	*put_tokens(t_token *token, char *str)
 			i++;
 		token->prev = aux;
 		aux = token;
-		//printf("str: %s\n", aux->str);
 		token = token->next;
 	}
 	while (aux->prev)
 	{
-		//printf("token->str: %s\n", token->str);
+		token = aux;
 		aux = aux->prev;
+		aux->next = token;
 	}
 	token = aux;
-	while (token)
-	{
-		printf("token->str: %s\n", token->str);
-		token = token->next;
-	}
-	//ft_print_tokens(token);
+	ft_print_tokens(token);
 	return (aux);
 }
 
@@ -129,34 +123,17 @@ int	init_vars(char *line, t_shell *shell)
 	i = -1;
 	shell->command = command_new();
 	split = ft_split_shell(line);
-	// for(int j = 0; split[j]; j++)
-	// 	printf("%s\n", split[j]);
 	aux = shell->command;
 	while (split[++i])
 	{
 		aux->token = put_tokens(aux->token, split[i]);
 		if (!aux->token)
-		{
-			printf("Token es null\n");
 			return (0);
-		}
 		aux = aux->next;
 		aux = command_new();
 	}
-	//free(split);
-	// while (shell->command)
-	// {
-	// 	while (shell->command->token)
-	// 	{
-	// 		printf("%s\n", shell->command->token->str);
-	// 		shell->command->token = shell->command->token->next;
-	// 	}
-	// 	shell->command = shell->command->next;
-	// }
-
 	return (0);
 }
-
 
 // echo hola > out|pwd
 // |

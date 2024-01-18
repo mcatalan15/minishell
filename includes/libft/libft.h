@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:09:06 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2023/12/06 13:19:12 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/18 12:39:35 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
 void			ft_putchar(char c);
 long long int	ft_atol(const char *str);
-char *ft_strncpy(char *dest, const char *src, size_t n);
+char			*ft_strncpy(char *dest, const char *src, size_t n);
+char			*ft_strcpy(char *dest, const char *src);
+char			*ft_strcat(char *dest, const char *src);
 
 #endif

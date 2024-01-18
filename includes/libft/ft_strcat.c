@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 12:39:58 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/01/18 12:39:59 by mcatalan@st      ###   ########.fr       */
+/*   Created: 2024/01/18 12:38:08 by mcatalan@st       #+#    #+#             */
+/*   Updated: 2024/01/18 12:40:47 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strncpy(char *dest, const char *src, size_t n)
+char	*ft_strcat(char *dest, const char *src)
 {
-	size_t	i;
+	char	*ptr;
 
-	i = 0;
-	while (i < n && src[i] != '\0')
+	ptr = dest + ft_strlen(dest);
+	while (*src != '\0')
 	{
-		dest[i] = src[i];
-		i++;
+		*ptr++ = *src++;
 	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
+	*ptr = '\0';
 	return (dest);
 }

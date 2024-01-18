@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   definitions.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:57:45 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/15 12:44:56 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/01/18 12:46:23 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,12 @@
 
 // token values
 # define T_STR 1
-# define T_SP 2
-# define T_CD 3
-# define T_CS 4
-# define T_REDIN 5
-# define T_REDOUT 6
-# define T_DOUT 7
-# define T_DIN 8
-# define T_PIPE 9
-# define T_DOLLAR 10
+# define T_CD 2
+# define T_CS 3
+# define T_REDIN 4
+# define T_REDOUT 5
+# define T_DOUT 6
+# define T_DIN 7
+# define T_DOLLAR 8
 
 #endif
