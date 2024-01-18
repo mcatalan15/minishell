@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:09:06 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/01/18 19:01:26 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/18 19:53:32 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,7 @@ void			ft_putchar(char c);
 long long int	ft_atol(const char *str);
 char			*ft_strncpy(char *dest, const char *src, size_t n);
 int				ft_strcmp(const char *s1, const char *s2);
+char			*ft_strcpy(char *dest, const char *src);
+char			*ft_strcat(char *dest, const char *src);
 
 #endif

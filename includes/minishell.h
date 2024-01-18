@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/18 19:02:06 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/18 19:51:48 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int		init_vars(char *line, t_shell *shell);
 void	ft_print_tokens(t_token *tokens);
 
 // split_parsing.c
-char **ft_split_shell(char const *str);
+char	**ft_split_shell(char const *str);
 
 #endif
