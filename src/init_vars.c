@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/18 12:53:25 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/18 19:02:59 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,56 +61,141 @@ static t_command	*command_new(void)
 	return (command_new);
 }
 
-static t_token	*put_tokens(t_token *token, char *str)
+static int skip_whitespace(char *str, int i)
 {
-	t_token	*aux;
-	int		i;
-	int		pos;
-	int		flag;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	return (i);
+}
 
-	i = 0;
-	aux = NULL;
+static int handle_single_char_tokens(t_token **token, char *str, int i)
+{
+	int flag = get_type(&str[i]);
+	if (flag == 4 || flag == 5)
+		*token = token_new(ft_substr(str, i++, 1), flag);
+	return (i);
+}
+
+static int handle_double_char_tokens(t_token **token, char *str, int i)
+{
+	int flag = get_type(&str[i]);
+	if (flag == 6 || flag == 7)
+	{
+		*token = token_new(ft_substr(str, i, 2), flag);
+		i += 2;
+	}
+	return (i);
+}
+
+static int handle_other_tokens(t_token **token, char *str, int i)
+{
+	int pos = 0;
+	int flag = get_type(&str[i]);
+
+	if (str[i] != ' ' && str[i])
+	{
+		if (flag == 2 || flag == 3 || flag == 8)
+			i++;
+		while (ft_isalnum(str[i + pos]) ||
+			   (flag != get_type(&str[i + pos]) && (flag == 2 || flag == 3)))
+			pos++;
+
+		*token = token_new(ft_substr(str, i, pos), flag);
+
+		if (flag == 2 || flag == 3)
+			pos++;
+	}
+	return (i + pos);
+}
+
+static void link_tokens(t_token **token, t_token **aux)
+{
+	while ((*aux)->prev)
+	{
+		*token = *aux;
+		*aux = (*aux)->prev;
+		(*aux)->next = *token;
+	}
+	*token = *aux;
+}
+
+static t_token *put_tokens(t_token *token, char *str)
+{
+	t_token *aux = NULL;
+	int i = 0;
+
 	while (str[i])
 	{
-		pos = 0;
-		while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-			i++;
-		flag = get_type(&str[i]);
-		if (flag == 4 || flag == 5)
-			token = token_new(ft_substr(str, i++, 1), flag);
-		else if (flag == 6 || flag == 7)
-		{
-			token = token_new(ft_substr(str, i, 2), flag);
-			i += 2;
-		}
-		else if (str[i] != ' ' && str[i])
-		{
-			if (flag == 2 || flag == 3 || flag == 8)
-				i++;
-			while (ft_isalnum(str[i + pos]) || \
-			(flag != get_type(&str[i + pos]) && (flag == 2 || flag == 3)))
-				pos++;
-			token = token_new(ft_substr(str, i, pos), flag);
-			if (flag == 2 || flag == 3)
-				pos++;
-		}
-		i += pos;
-		while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-			i++;
+		i = skip_whitespace(str, i);
+		i = handle_single_char_tokens(&token, str, i);
+		i = handle_double_char_tokens(&token, str, i);
+		i = handle_other_tokens(&token, str, i);
+
+		i = skip_whitespace(str, i);
+
 		token->prev = aux;
 		aux = token;
 		token = token->next;
 	}
-	while (aux->prev)
-	{
-		token = aux;
-		aux = aux->prev;
-		aux->next = token;
-	}
-	token = aux;
+
+	link_tokens(&token, &aux);
 	ft_print_tokens(token);
 	return (aux);
 }
+
+// static t_token	*put_tokens(t_token *token, char *str)
+// {
+// 	t_token	*aux;
+// 	int		i;
+// 	int		pos;
+// 	int		flag;
+
+// 	// la lista se crea pero aux no apunta a la lista y al final no hace nada
+// 	i = 0;
+// 	aux = NULL;
+// 	while (str[i])
+// 	{
+// 		pos = 0;
+// 		while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+// 			i++;
+// 		flag = get_type(&str[i]);
+// 		if (flag == 4 || flag == 5)
+// 			token = token_new(ft_substr(str, i++, 1), flag);
+// 		else if (flag == 6 || flag == 7)
+// 		{
+// 			token = token_new(ft_substr(str, i, 2), flag);
+// 			i += 2;
+// 		}
+// 		else if (str[i] != ' ' && str[i])
+// 		{
+// 			if (flag == 2 || flag == 3 || flag == 8)
+// 				i++;
+// 			while (ft_isalnum(str[i + pos]) || \
+// 			(flag != get_type(&str[i + pos]) && (flag == 2 || flag == 3)))
+// 				pos++;
+// 			token = token_new(ft_substr(str, i, pos), flag);
+// 			if (flag == 2 || flag == 3)
+// 				pos++;
+// 		}
+// 		i += pos;
+// 		while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+// 			i++;
+// 		token->prev = aux;
+// 		aux = token;
+// 		token = token->next;
+// 	}
+// 	while (aux->prev)
+// 	{
+// 		//printf("token->str: %s\n", token->str);
+// 		aux = aux->prev;
+// 	}
+// 	token = aux;
+// 	while (token)
+// 	{
+// 		printf("token->str: %s\n", token->str);
+// 		token = token->next;
+// 	return (aux);
+// }
 
 int	init_vars(char *line, t_shell *shell)
 {
