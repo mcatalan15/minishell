@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/18 12:51:23 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/18 12:53:25 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static int	get_type(char *str)
 {
 	if (!str[0])
 		return (0);
-	if (ft_isalnum(str[0]))
-		return (1);
 	if (str[0] == '\"')
 		return (2);
 	if (str[0] == '\'')
@@ -32,7 +30,7 @@ static int	get_type(char *str)
 		return (7);
 	if (str[0] == '$' && str[1])
 		return (8);
-	return (0);
+	return (1);
 }
 
 static t_token	*token_new(char *str, int type)
