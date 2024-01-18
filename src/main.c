@@ -41,21 +41,33 @@ void	handle_history(char *str)
 	add_history(str);
 }
 
+char	*get_cwd()
+{
+	char	cwd[1024];	
+	char	*colored_cwd = malloc(ft_strlen(BLUE) + ft_strlen(getcwd(cwd, sizeof(cwd))) + ft_strlen(RESET) + 3);
+	strcpy(colored_cwd, BLUE);
+	strcat(colored_cwd, getcwd(cwd, sizeof(cwd)));
+	strcat(colored_cwd, RESET);
+	strcat(colored_cwd, "$");
+	strcat(colored_cwd, " ");
+	return (colored_cwd);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	char	*str;
 	// char	**s;
 	// int		i;
-	t_shell	shell;
+	// t_shell	shell;
 
 	(void)env;
 	using_history();
 	main_args(argc, argv);
 	while (1)
 	{
-		str = readline(BLUE"minishell> "RESET);
+		str = readline(get_cwd());
 		handle_history(str);
-		init_vars(str, &shell);
+		// init_vars(str, &shell);
 		free(str);
 	}
 	clear_history();

@@ -23,7 +23,7 @@ NAME = minishell
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
 RM = rm -rf
-LDFLAGS = -lreadline
+LDFLAGS = -lreadline  ##  -g -lreadline -L includes/readline/lib -lreadline -L includes/readline/lib -lhistory -L includes/readline/lib -ltermcap
 
 #Directories
 SRC_DIR = src
