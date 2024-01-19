@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/18 12:50:17 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/19 19:53:07 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,14 @@ void	handle_history(char *str)
 char	*get_cwd(void)
 {
 	char	cwd[1024];
-	char	*colored_cwd;
+	char	*cwd_string;
 
-	colored_cwd = malloc(ft_strlen(BLUE)
-			+ ft_strlen(getcwd(cwd, sizeof(cwd)))
-			+ ft_strlen(RESET) + 3);
-	ft_strcpy(colored_cwd, BLUE);
-	ft_strcat(colored_cwd, getcwd(cwd, sizeof(cwd)));
-	ft_strcat(colored_cwd, RESET);
-	ft_strcat(colored_cwd, "$");
-	ft_strcat(colored_cwd, " ");
-	return (colored_cwd);
+	cwd_string = malloc(strlen(getcwd(cwd, sizeof(cwd))) + 3);
+
+	strcpy(cwd_string, getcwd(cwd, sizeof(cwd)));
+	strcat(cwd_string, "$ ");
+
+	return (cwd_string);
 }
 
 int	main(int argc, char **argv, char **env)
