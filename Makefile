@@ -31,7 +31,7 @@ OBJ_DIR = obj
 DEP_DIR = dep
 LIBFT_DIR = includes/libft/
 RL_DIR = includes/readline/
-READLINE = $(RL_DIR)libreadline.a $(RL_DIR)libhistory.a $(RL_DIR)libtermcap.a
+READLINE = $(RL_DIR)libreadline.a $(RL_DIR)libhistory.a
 
 # Colors
 RED = \033[0;31m
@@ -72,7 +72,7 @@ print_message:
 
 $(NAME) : $(OBJ)
 	@echo "$(YELLOW)Linking...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJ) -o $@ $(RLFLAGS) -L $(LIBFT_DIR) -lft
+	@$(CC) $(CFLAGS) $(OBJ) -o $@ -L $(RL_DIR) $(RLFLAGS) -L $(LIBFT_DIR) -lft
 
 clean :
 	@echo "$(RED)Cleaning up objets and dependencies...$(RESET)"
