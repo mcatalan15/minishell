@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/18 19:54:19 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/21 19:56:58 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,20 @@
 static int	get_type(char *str)
 {
 	if (!str[0])
-		return (0);
-	if (str[0] == '\"')
-		return (2);
-	if (str[0] == '\'')
-		return (3);
+		return (T_NULL);
 	if (str[0] == '>' && str[1] != '>')
-		return (4);
+		return (T_REDIN);
 	if (str[0] == '<' && str[1] != '<')
-		return (5);
+		return (T_REDOUT);
 	if (str[0] == '>' && str[1] == '>')
-		return (6);
+		return (T_DIN);
 	if (str[0] == '<' && str[1] == '<')
-		return (7);
+		return (T_DOUT);
 	if (str[0] == '$' && str[1])
-		return (8);
-	return (1);
+		return (T_DOLLAR);
+	if (str[0] == '|')
+		return (T_PIPE);
+	return (T_STR);
 }
 
 static t_token	*token_new(char *str, int type)
@@ -67,6 +65,7 @@ static t_token	*put_tokens(t_token *token, char *str)
 	int		i;
 	int		pos;
 	int		flag;
+	char	f;
 
 	i = 0;
 	aux = NULL;
@@ -76,23 +75,28 @@ static t_token	*put_tokens(t_token *token, char *str)
 		while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 			i++;
 		flag = get_type(&str[i]);
-		if (flag == 4 || flag == 5)
+		if (flag == T_REDIN || flag == T_REDOUT)
 			token = token_new(ft_substr(str, i++, 1), flag);
-		else if (flag == 6 || flag == 7)
+		else if (flag == T_DIN || flag == T_DOUT)
 		{
 			token = token_new(ft_substr(str, i, 2), flag);
 			i += 2;
 		}
 		else if (str[i] != ' ' && str[i])
 		{
-			if (flag == 2 || flag == 3 || flag == 8)
-				i++;
-			while (ft_isalnum(str[i + pos]) || \
-			(flag != get_type(&str[i + pos]) && (flag == 2 || flag == 3)))
+			f = '\0';
+			while ((!ft_isspace(str[i + pos]) && str[i] && \
+			!ft_isoperate(get_type(&str[i + pos]))) || (f && str[i + pos]))
+			{
+				if (ft_isdquote(str[i + pos]) && !f)
+					f = '\"';
+				if (ft_issquote(str[i + pos]) && !f)
+					f = '\'';
+				else if (str[i + pos] == f)
+					f = '\0';
 				pos++;
+			}
 			token = token_new(ft_substr(str, i, pos), flag);
-			if (flag == 2 || flag == 3)
-				pos++;
 		}
 		i += pos;
 		while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
@@ -114,22 +118,13 @@ static t_token	*put_tokens(t_token *token, char *str)
 
 int	init_vars(char *line, t_shell *shell)
 {
-	t_command	*aux;
-	char		**split;
-	int			i;
+	//char		**split;
 
-	i = -1;
 	shell->command = command_new();
-	split = ft_split_shell(line);
-	aux = shell->command;
-	while (split[++i])
-	{
-		aux->token = put_tokens(aux->token, split[i]);
-		if (!aux->token)
-			return (0);
-		aux = aux->next;
-		aux = command_new();
-	}
+	//split = ft_split_shell(line);
+	shell->command->token = put_tokens(shell->command->token, line);
+	if (!shell->command->token)
+		return (0);
 	return (0);
 }
 

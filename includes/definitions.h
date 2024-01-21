@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:57:45 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/18 12:46:23 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/21 19:36:03 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@
 # define SUCCESS 1
 
 // token values
+# define T_NULL 0
 # define T_STR 1
-# define T_CD 2
-# define T_CS 3
-# define T_REDIN 4
-# define T_REDOUT 5
-# define T_DOUT 6
-# define T_DIN 7
-# define T_DOLLAR 8
+# define T_REDIN 2
+# define T_REDOUT 3
+# define T_DIN 4
+# define T_DOUT 5
+# define T_DOLLAR 6
+# define T_PIPE 7
+# define T_SQUOTE 8
+# define T_DQUOTE 9
 
 #endif
