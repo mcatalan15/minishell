@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/22 11:24:01 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:53:50 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 // Our .c functions by file
 // init_vars.c
 int		init_vars(char *line, t_shell *shell);
+
+// shell_program.c
+void	shell_program(t_shell *shell);
 
 // utils.c
 void	ft_print_tokens(t_token *tokens);

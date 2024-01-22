@@ -24,6 +24,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
 RM = rm -rf
 RLFLAGS = -lreadline -ltermcap ##  -g -lreadline -L includes/readline/lib -lreadline -L includes/readline/lib -lhistory -L includes/readline/lib -ltermcap
+RLURL = http://git.savannah.gnu.org/cgit/readline.git/snapshot/readline-bfe9c573a9e376323929c80b2b71c59727fab0cc.tar.gz
 
 #Directories
 SRC_DIR = src
@@ -31,6 +32,7 @@ OBJ_DIR = obj
 DEP_DIR = dep
 LIBFT_DIR = includes/libft/
 RL_DIR = includes/readline/
+RL_FILE = readline.tar.gz
 READLINE = $(RL_DIR)libreadline.a $(RL_DIR)libhistory.a
 
 # Colors
@@ -59,8 +61,23 @@ subsystem:
 	@make -s -C $(LIBFT_DIR)
 	@echo ✅
 
+# $(RL_DIR):
+# 	@echo "$(YELLOW)Downloading readline...$(RESET)"
+# 	@cd $(RL_DIR)
+# 	@curl -k $(RLURL) > readline.tar.gz
+# 	@tar -xf $(RL_FILE)
+	
+# 	@echo ✅
+
 readline:
+#	@if [ ! -f $(RL_DIR) ]; then \
+#		printf "$(YELLOW)configuring readline...$(RESET)\n"; \
+#		cd $(RL_DIR) && \
+#		./configure &> dev/null && \
+#		echo ✅; \
+#	fi
 	@echo "$(YELLOW)Building readline...$(RESET)"
+	@cd $(RL_DIR) && ./configure
 	@make -s -C $(RL_DIR)
 	@echo ✅
 
