@@ -21,7 +21,7 @@ PRINT_AUTHORS = @echo "$(BLUE)$(AUTHORS_MSG)$(RESET)"
 # Name of the executable && compiler && flags
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
 RM = rm -rf
 RLFLAGS = -lreadline -ltermcap ##  -g -lreadline -L includes/readline/lib -lreadline -L includes/readline/lib -lhistory -L includes/readline/lib -ltermcap
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/21 19:56:58 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/22 12:17:43 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static t_token	*put_tokens(t_token *token, char *str)
 		while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 			i++;
 		flag = get_type(&str[i]);
-		if (flag == T_REDIN || flag == T_REDOUT)
+		if (flag == T_REDIN || flag == T_REDOUT || flag == T_PIPE)
 			token = token_new(ft_substr(str, i++, 1), flag);
 		else if (flag == T_DIN || flag == T_DOUT)
 		{
@@ -85,12 +85,12 @@ static t_token	*put_tokens(t_token *token, char *str)
 		else if (str[i] != ' ' && str[i])
 		{
 			f = '\0';
-			while ((!ft_isspace(str[i + pos]) && str[i] && \
+			while ((!ft_isspace(str[i + pos]) && str[i + pos] && \
 			!ft_isoperate(get_type(&str[i + pos]))) || (f && str[i + pos]))
 			{
 				if (ft_isdquote(str[i + pos]) && !f)
 					f = '\"';
-				if (ft_issquote(str[i + pos]) && !f)
+				else if (ft_issquote(str[i + pos]) && !f)
 					f = '\'';
 				else if (str[i + pos] == f)
 					f = '\0';
@@ -112,7 +112,7 @@ static t_token	*put_tokens(t_token *token, char *str)
 		aux->next = token;
 	}
 	token = aux;
-	ft_print_tokens(token);
+	//ft_print_tokens(token);
 	return (aux);
 }
 

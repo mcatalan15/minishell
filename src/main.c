@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/21 18:23:37 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/22 12:11:17 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	handle_history(char *str)
 {
 	if (!str || *str == '\0')
 		return ;
-	if (ft_strcmp(str, "exit") == 0)
-		exit(0);
 	add_history(str);
 }
 
@@ -46,16 +44,23 @@ int	main(int argc, char **argv, char **env)
 {
 	t_shell	shell;
 	char	*str;
+	char	*cwd;
 
 	(void)env;
 	using_history();
 	main_args(argc, argv);
 	while (1)
 	{
-		str = readline(get_cwd());
+		cwd = get_cwd();
+		str = readline(cwd);
 		handle_history(str);
 		init_vars(str, &shell);
+		shell_program(&shell);
+		if (ft_strcmp(str, "exit") == 0)
+			break ;
 		free(str);
+		free(cwd);
 	}
 	clear_history();
+	exit_program(&shell, 0);
 }
