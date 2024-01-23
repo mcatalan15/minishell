@@ -23,7 +23,7 @@ NAME = minishell
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
 RM = rm -rf
-RLFLAGS = -lreadline -ltermcap ##  -g -lreadline -L includes/readline/lib -lreadline -L includes/readline/lib -lhistory -L includes/readline/lib -ltermcap
+RLFLAGS = -lreadline -ltermcap ##  -lreadline -L includes/readline/lib -lreadline -L includes/readline/lib -lhistory -L includes/readline/lib -ltermcap
 RLURL = http://git.savannah.gnu.org/cgit/readline.git/snapshot/readline-bfe9c573a9e376323929c80b2b71c59727fab0cc.tar.gz
 
 #Directories
@@ -61,50 +61,33 @@ subsystem:
 	@make -s -C $(LIBFT_DIR)
 	@echo ✅
 
-# ifeq ($(wildcard $(RL_DIR)),)
-# # If the readline folder doesn't exist. Download, configure and make
-# readline: | rl_download
-# 	cd $(RL_DIR) && ./configure && make
-# else
-# # In case the readline older exists
-# ifeq ($(wildcard $(RL_DIR)/config.status),)
-# # If config.status doesn't exist. configure readline
-# readline:
-# 	@echo "configuring readline."
-# 	cd $(RL_DIR) && ./configure && make
-# else
-# # If config.status exist, readline already cnfigured
-# readline:
-# 	@echo "Readline is already configured."
-# endif
-# endif
-
-# rl_download:
-# 	@echo "Downloading readline"
-# 	cd includes
-# 	curl -k $(RLURL) > $(RL_FILE)
-# 	tar -xvf $(RL_FILE) -C includes/ --transform='readline'
-# 	rm $(RL_FILE)
-# 	@echo ✅
-
-# # $(RL_DIR):
-# # 	@echo "$(YELLOW)Downloading readline...$(RESET)"
-# # 	@cd $(RL_DIR)
-# # 	@curl -k $(RLURL) > readline.tar.gz
-# # 	@tar -xf $(RL_FILE)
-	
-# # 	@echo ✅
-
+ifeq ($(wildcard $(RL_DIR)),)
+readline: | rl_download
+	@cd ./$(RL_DIR) && ./configure &> /dev/null && make
+else
+ifeq ($(wildcard $(RL_DIR)/config.status),)
 readline:
-#	@if [ ! -f $(RL_DIR) ]; then \
-#		printf "$(YELLOW)configuring readline...$(RESET)\n"; \
-#		cd $(RL_DIR) && \
-#		./configure &> dev/null && \
-#		echo ✅; \
-#	fi
-	@echo "$(YELLOW)Building readline...$(RESET)"
-#	@cd $(RL_DIR) && ./configure
-	@make -s -C $(RL_DIR)
+	@echo "$(YELLOW)Configuring readline...$(RESET)"
+	cd $(RL_DIR) && ./configure && make
+else ifeq ($(wildcard $(RL_DIR)/libreadline.a),)
+readline:
+	@echo "$(GREEN)Readline is already configured!$(RESET)✅"
+	cd $(RL_DIR) && make
+else
+readline:
+	@echo "$(GREEN)Readline is already built!$(RESET)✅"
+	@echo "$(GREEN)Skipping...$(RESET)"
+	@echo ✅
+endif
+endif
+
+rl_download:
+	@echo "$(YELLOW)Downloading readline...$(RESET)"
+	@cd includes
+	@curl -k $(RLURL) > $(RL_FILE)
+	@tar -xvf $(RL_FILE)
+	@mv readline-* ./includes/readline
+	@rm $(RL_FILE)
 	@echo ✅
 
 print_message:
@@ -113,9 +96,9 @@ print_message:
 
 -include $(DEPS)
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(READLINE)
 	@echo "$(YELLOW)Linking...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJ) -o $@ -L $(RL_DIR) $(RLFLAGS) -L $(LIBFT_DIR) -lft
+	@$(CC) $(CFLAGS) $(OBJ) -o $@ $(RL_DIR)$(READLINE) $(RLFLAGS) -L $(LIBFT_DIR) -lft
 
 clean :
 	@echo "$(RED)Cleaning up objets and dependencies...$(RESET)"
@@ -123,10 +106,14 @@ clean :
 	@make -s -C $(LIBFT_DIR) clean
 
 fclean : clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(READLINE)
 	@make -s -C $(LIBFT_DIR) fclean
 
 re : fclean all
+
+rm_download:
+	@echo "$(RED)Removing readline...$(RESET)"
+	@$(RM) $(RL_DIR)
 
 $(OBJ_DIR) :
 	@echo "$(YELLOW)Creating objects directory...$(RESET)"
@@ -136,4 +123,4 @@ $(DEP_DIR) :
 	@echo "$(YELLOW)Creating dependencies directory...$(RESET)"
 	@mkdir -p $(DEP_DIR)
 
-.PHONY: clean fclean all re print_message
+.PHONY: clean fclean all re print_message rl_download readline rm_download
