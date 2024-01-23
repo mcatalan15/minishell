@@ -61,13 +61,39 @@ subsystem:
 	@make -s -C $(LIBFT_DIR)
 	@echo ✅
 
-# $(RL_DIR):
-# 	@echo "$(YELLOW)Downloading readline...$(RESET)"
-# 	@cd $(RL_DIR)
-# 	@curl -k $(RLURL) > readline.tar.gz
-# 	@tar -xf $(RL_FILE)
-	
+# ifeq ($(wildcard $(RL_DIR)),)
+# # If the readline folder doesn't exist. Download, configure and make
+# readline: | rl_download
+# 	cd $(RL_DIR) && ./configure && make
+# else
+# # In case the readline older exists
+# ifeq ($(wildcard $(RL_DIR)/config.status),)
+# # If config.status doesn't exist. configure readline
+# readline:
+# 	@echo "configuring readline."
+# 	cd $(RL_DIR) && ./configure && make
+# else
+# # If config.status exist, readline already cnfigured
+# readline:
+# 	@echo "Readline is already configured."
+# endif
+# endif
+
+# rl_download:
+# 	@echo "Downloading readline"
+# 	cd includes
+# 	curl -k $(RLURL) > $(RL_FILE)
+# 	tar -xvf $(RL_FILE) -C includes/ --transform='readline'
+# 	rm $(RL_FILE)
 # 	@echo ✅
+
+# # $(RL_DIR):
+# # 	@echo "$(YELLOW)Downloading readline...$(RESET)"
+# # 	@cd $(RL_DIR)
+# # 	@curl -k $(RLURL) > readline.tar.gz
+# # 	@tar -xf $(RL_FILE)
+	
+# # 	@echo ✅
 
 readline:
 #	@if [ ! -f $(RL_DIR) ]; then \
@@ -77,7 +103,7 @@ readline:
 #		echo ✅; \
 #	fi
 	@echo "$(YELLOW)Building readline...$(RESET)"
-	@cd $(RL_DIR) && ./configure
+#	@cd $(RL_DIR) && ./configure
 	@make -s -C $(RL_DIR)
 	@echo ✅
 

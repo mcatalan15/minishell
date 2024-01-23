@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/22 17:53:50 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/23 13:09:26 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ int		ft_isdquote(char c);
 // utils2.c
 char	*get_cwd(void);
 void	exit_program(t_shell *shell, int type);
+
+// errors.c
+void	stx_erro(t_shell *shell, int type, char c);
 
 // split_parsing.c
 char	**ft_split_shell(char const *str);

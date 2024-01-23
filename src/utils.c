@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:24:52 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/22 10:34:10 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:50:29 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_isspace(char c)
 int	ft_isoperate(int flag)
 {
 	if ((flag >= T_REDIN && flag <= T_DOUT) || flag == T_PIPE)
-		return (1);
+		return (flag);
 	return (0);
 }
 
