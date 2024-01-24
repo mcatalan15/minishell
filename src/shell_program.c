@@ -6,11 +6,13 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/24 11:54:16 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:54:31 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static int
 
 static int	parsing(t_shell *shell)
 {

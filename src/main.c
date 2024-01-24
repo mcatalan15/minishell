@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/24 12:04:17 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:57:46 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		cwd = get_cwd();
-		str = get_next_line(0);
+		str = readline(cwd);
 		handle_history(str);
 		init_vars(str, &shell);
 		shell_program(&shell);
@@ -61,6 +61,7 @@ int	main(int argc, char **argv, char **env)
 		free(str);
 		free(cwd);
 	}
+	printf("\nExit");
 	clear_history();
 	clear_program(&shell, 0, 1);
 }
