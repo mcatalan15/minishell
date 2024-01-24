@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/23 11:05:48 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:55:49 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ static t_command	*command_new(void)
 		return (NULL);
 	command_new->cmd = NULL;
 	command_new->path = NULL;
-	command_new->next = NULL;
-	command_new->prev = NULL;
 	return (command_new);
 }
 

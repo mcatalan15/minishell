@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:09:06 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/01/18 19:53:32 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/24 12:11:13 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 # include <fcntl.h>
 # include <stdarg.h>
 # include <wchar.h>
-# include <stdlib.h>
+# include <limits.h>
+# include <string.h>
+
+# include "get_next_line.h"
 
 typedef struct t_list
 {

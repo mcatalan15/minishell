@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/23 19:32:06 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/24 11:51:27 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 int		init_vars(char *line, t_shell *shell);
 
 // shell_program.c
-void	shell_program(t_shell *shell);
+int		shell_program(t_shell *shell);
 
 // utils.c
 void	ft_print_tokens(t_token *tokens);
@@ -43,10 +43,10 @@ int		ft_isdquote(char c);
 
 // utils2.c
 char	*get_cwd(void);
-void	exit_program(t_shell *shell, int type);
+int		clear_program(t_shell *shell, int type, int flag);
 
 // errors.c
-void	stx_erro(t_shell *shell, int type, char c);
+int		stx_erro(t_shell *shell, char c);
 
 // split_parsing.c
 char	**ft_split_shell(char const *str);

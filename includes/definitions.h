@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:57:45 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/22 11:12:25 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:50:34 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define EXIT_SUCCESS 0
 # define PATH_ERROR 127
 # define NO_PERM 126
+# define STX_ERRO 258
 
 // # define SIG_INT
 // 128 + SIG_INT

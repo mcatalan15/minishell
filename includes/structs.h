@@ -3,46 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:18:52 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/16 12:18:36 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:44:13 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct s_token  t_token;
-typedef struct s_shell   t_shell;
-typedef struct s_command    t_command;
+typedef struct s_token		t_token;
+typedef struct s_shell		t_shell;
+typedef struct s_command	t_command;
 // typedef struct s_vars
 // {
 //     char **path;
 //     char **env;
 // }t_vars;
 
-struct  s_token
+struct	s_token
 {
-    char    *str;
-    int     type;
-    t_token *next;
-    t_token *prev;
+	char	*str;
+	int		type;
+	t_token	*next;
+	t_token	*prev;
 };
 
-struct  s_command
+struct	s_command
 {
-    char    **cmd;
-    char    *path;  
-    t_token *token;  
-    t_command *next;
-    t_command *prev;
+	char	**cmd;
+	char	*path;
+	t_token	*token;
 };
 
 struct s_shell
 {
-    char    **env;
-    t_command   *command;
+	char		**env;
+	int			end_type;
+	t_command	*command;
 };
 
 /*

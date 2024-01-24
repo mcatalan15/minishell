@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/23 19:32:14 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/24 12:04:17 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		cwd = get_cwd();
-		str = readline(cwd);
+		str = get_next_line(0);
 		handle_history(str);
 		init_vars(str, &shell);
 		shell_program(&shell);
@@ -62,5 +62,5 @@ int	main(int argc, char **argv, char **env)
 		free(cwd);
 	}
 	clear_history();
-	exit_program(&shell, 0);
+	clear_program(&shell, 0, 1);
 }

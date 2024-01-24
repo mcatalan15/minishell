@@ -6,13 +6,13 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:33:27 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/22 12:02:59 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:06:14 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	exit_program(t_shell *shell, int type)
+int	clear_program(t_shell *shell, int type, int flag)
 {
 	t_token	*aux;
 
@@ -26,7 +26,9 @@ void	exit_program(t_shell *shell, int type)
 		shell->command->token = aux;
 	}
 	free(shell->command);
-	exit(type);
+	if (flag)
+		exit(type);
+	return (0);
 }
 
 char	*get_cwd(void)
