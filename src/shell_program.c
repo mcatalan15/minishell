@@ -3,16 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/24 12:54:31 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:30:47 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int
+static int	expansion(t_shell *shell)
+{
+	t_token	*aux;
+	
+	aux = shell->command->token;
+	while (aux)
+	{
+		aux = aux->next;
+	}
+}
 
 static int	parsing(t_shell *shell)
 {
