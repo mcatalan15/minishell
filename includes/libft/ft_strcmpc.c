@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmpc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:09:49 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/25 13:26:38 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:38:10 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	ft_strcmpc(const char *s1, const char *s2, char c)
 {
-	printf("HOLA\n");
-	while (*s1 && (*s1 == *s2) && *s2 != c)
-	{
-		s1++;
-		s2++;
-	}
-	printf("value: %d", (*(unsigned char *)s1 - *(unsigned char *)s2));
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	// printf("HOLA\n");
+	int	i;
+
+	i = 0;
+	while (s1[i] && (s1[i] == s2[i]) && s1[i + 1] != c)
+		i++;
+	// printf("value: %d", (s1[i] - s2[i]));
+	return (s1[i] - s2[i]);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/25 13:27:12 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:46:36 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	expand(t_token *token, char **env, char *str)
 
 	len = 0;
 	exp = NULL;
-	
+
 	while (str[len] && (ft_isalnum(str[len]) || str[len] == '_')\
-	 && str[0] != '?')
+	&& str[0] != '?')
 		len++;
 	if (str[0] == '?')
 		len++;
@@ -30,9 +30,8 @@ static void	expand(t_token *token, char **env, char *str)
 	exp = ft_substr(str, 0, len);
 	while (env[++i])
 	{
-		if (!ft_strcmpc(env[i], exp, '=')) // el strcmpc nunca retorna 0 
+		if (!ft_strcmpc(env[i], exp, '='))
 		{
-			printf("%s\n", exp);
 			free(exp);
 			len = 0;
 			exp = ft_strchr(env[i], '=') + 1;
@@ -42,6 +41,7 @@ static void	expand(t_token *token, char **env, char *str)
 			break ;
 		}
 	}
+	printf("%s\n", exp);
 	(void)token;
 	(void)str;
 	(void)env;
