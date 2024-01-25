@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/24 11:51:27 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/25 10:43:11 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ int		clear_program(t_shell *shell, int type, int flag);
 
 // errors.c
 int		stx_erro(t_shell *shell, char c);
+
+// expansion.c
+void    expanding(t_token *token, char **env);
 
 // split_parsing.c
 char	**ft_split_shell(char const *str);

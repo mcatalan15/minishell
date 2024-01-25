@@ -6,7 +6,7 @@
 /*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/24 14:30:47 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/01/25 10:59:09 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ static int	expansion(t_shell *shell)
 	aux = shell->command->token;
 	while (aux)
 	{
+		if (aux->type == T_DOLLAR || aux->type == T_STR)
+			expanding(aux, shell->env);
 		aux = aux->next;
 	}
+	return (1);
 }
 
 static int	parsing(t_shell *shell)
@@ -46,5 +49,6 @@ int	shell_program(t_shell *shell)
 {
 	if (!parsing(shell))
 		return (0);
+	expansion(shell);
 	return (1);
 }

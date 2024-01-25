@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/24 12:57:46 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/25 10:58:28 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char **argv, char **env)
 	char	*str;
 	char	*cwd;
 
-	(void)env;
+	shell.env = env;
 	using_history();
 	main_args(argc, argv);
 	while (1)
@@ -61,7 +61,7 @@ int	main(int argc, char **argv, char **env)
 		free(str);
 		free(cwd);
 	}
-	printf("\nExit");
+	printf("exit\n");
 	clear_history();
 	clear_program(&shell, 0, 1);
 }
