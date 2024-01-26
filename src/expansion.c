@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/25 19:46:36 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/26 12:52:09 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,25 @@ static void	expand(t_token *token, char **env, char *str)
 {
 	int		i;
 	char	*exp;
+	char	*tmp;
 	int		len;
 
 	len = 0;
 	exp = NULL;
 
-	while (str[len] && (ft_isalnum(str[len]) || str[len] == '_')\
+	while (str[len] && (ft_isalnum(str[len]) || str[len] == '_') \
 	&& str[0] != '?')
 		len++;
 	if (str[0] == '?')
 		len++;
 	i = -1;
-	exp = ft_substr(str, 0, len);
+	tmp = ft_substr(str, 0, len);
 	while (env[++i])
 	{
-		if (!ft_strcmpc(env[i], exp, '='))
+		if (!ft_strcmpc(env[i], tmp, '='))
 		{
+			exp = tmp;
+			tmp = ft_strjoin("$", tmp);
 			free(exp);
 			len = 0;
 			exp = ft_strchr(env[i], '=') + 1;
@@ -41,10 +44,14 @@ static void	expand(t_token *token, char **env, char *str)
 			break ;
 		}
 	}
-	printf("%s\n", exp);
-	(void)token;
-	(void)str;
-	(void)env;
+	str = token->str;
+	if (!env[i])
+		exp = ft_strdup("\0");
+	token->str = ft_strswap(str, tmp, exp);
+	printf("%s\n", token->str);
+	free(str);
+	free(tmp);
+	free(exp);
 }
 
 void	expanding(t_token *token, char **env)
