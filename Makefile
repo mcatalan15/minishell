@@ -32,7 +32,7 @@ OBJ_DIR = obj
 DEP_DIR = dep
 LIBFT_DIR = includes/libft/
 RL_DIR = includes/readline/
-RL_FILE = readline.tar.gz
+RL_FILE = readline.tar
 READLINE = $(RL_DIR)libreadline.a $(RL_DIR)libhistory.a
 
 # Colors
@@ -62,7 +62,7 @@ subsystem:
 	@echo ✅
 
 ifeq ($(wildcard $(RL_DIR)),)
-readline: | rl_download
+readline: | rl_decompress
 	@cd ./$(RL_DIR) && ./configure &> /dev/null && make
 else
 ifeq ($(wildcard $(RL_DIR)/config.status),)
@@ -81,13 +81,15 @@ readline:
 endif
 endif
 
-rl_download:
-	@echo "$(YELLOW)Downloading readline...$(RESET)"
-	@cd includes
-	@curl -k $(RLURL) > $(RL_FILE)
+rl_decompress:
+	@echo "$(YELLOW)Decompressing readline...$(RESET)"
 	@tar -xvf $(RL_FILE)
 	@mv readline-* ./includes/readline
-	@rm $(RL_FILE)
+	@echo ✅
+
+rl_download:
+	@echo "$(YELLOW)Downloading readline...$(RESET)"
+	@curl -k $(RLURL) > $(RL_FILE)
 	@echo ✅
 
 print_message:
@@ -104,6 +106,7 @@ clean :
 	@echo "$(RED)Cleaning up objets and dependencies...$(RESET)"
 	@$(RM) $(OBJ_DIR) $(DEP_DIR) $(RL_DIR)*.a
 	@make -s -C $(LIBFT_DIR) clean
+	@make -s -C $(RL_DIR) clean
 
 fclean : clean
 	@$(RM) $(NAME) $(READLINE)
@@ -111,7 +114,7 @@ fclean : clean
 
 re : fclean all
 
-rm_download:
+rm_readline:
 	@echo "$(RED)Removing readline...$(RESET)"
 	@$(RM) $(RL_DIR)
 
@@ -123,4 +126,4 @@ $(DEP_DIR) :
 	@echo "$(YELLOW)Creating dependencies directory...$(RESET)"
 	@mkdir -p $(DEP_DIR)
 
-.PHONY: clean fclean all re print_message rl_download readline rm_download
+.PHONY: clean fclean all re print_message rl_download rl_decompress readline rm_readline
