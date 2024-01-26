@@ -98,7 +98,7 @@ print_message:
 
 $(NAME) : $(OBJ) $(READLINE)
 	@echo "$(YELLOW)Linking...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJ) -o $@ $(READLINE) $(RLFLAGS) -L $(LIBFT_DIR) -lft
+	@$(CC) $(CFLAGS) $(OBJ) $(READLINE) -o $@ $(RLFLAGS) -L $(LIBFT_DIR) -lft
 
 clean :
 	@echo "$(RED)Cleaning up objets and dependencies...$(RESET)"
