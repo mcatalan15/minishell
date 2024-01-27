@@ -21,7 +21,7 @@ PRINT_AUTHORS = @echo "$(BLUE)$(AUTHORS_MSG)$(RESET)"
 # Name of the executable && compiler && flags
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g ##-fsanitize=address
 RM = rm -rf
 RLFLAGS = -lreadline -ltermcap ##  -lreadline -L includes/readline/lib -lreadline -L includes/readline/lib -lhistory -L includes/readline/lib -ltermcap
 RLURL = http://git.savannah.gnu.org/cgit/readline.git/snapshot/readline-bfe9c573a9e376323929c80b2b71c59727fab0cc.tar.gz
@@ -100,7 +100,7 @@ print_message:
 
 $(NAME) : $(OBJ) $(READLINE)
 	@echo "$(YELLOW)Linking...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJ) $(READLINE) -o $@ $(RLFLAGS) -L $(LIBFT_DIR) -lft
+	@$(CC) $(CFLAGS) $(OBJ) $(READLINE) -o $@ $(RLFLAGS) -L $(LIBFT_DIR) -lft  ## -g -lreadline -L/usr/lib/x86_64-linux-gnu
 
 clean :
 	@echo "$(RED)Cleaning up objets and dependencies...$(RESET)"

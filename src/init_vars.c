@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/25 10:59:32 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:28:51 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static t_command	*command_new(void)
 	return (command_new);
 }
 
-static t_token	*put_tokens(t_token *token, char *str)
+t_token	*put_tokens(t_token *token, char *str)
 {
 	t_token	*aux;
 	int		i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strswap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:14:07 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/26 12:22:24 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/27 18:40:58 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*ft_strswap(char *dst, char *src, char *sub)
 
 	i = 0;
 	aux = ft_strnstr(dst, src, 0x7fffffff);
+	if (!aux)
+		return (NULL);
 	len = ft_strlen(dst) + ft_strlen(sub) - ft_strlen(src);
 	tmp = malloc((len + 1) * sizeof(char));
 	if (!tmp)

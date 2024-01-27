@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/26 09:10:35 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/27 18:25:48 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ int	main(int argc, char **argv, char **env)
 		handle_history(str);
 		init_vars(str, &shell);
 		shell_program(&shell);
-		if (ft_strcmp(str, "exit") == 0)
+		if (!ft_strcmp(str, "exit"))
+		{
+			free(str);
 			break ;
+		}
 		free(str);
 		free(cwd);
 	}

@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/26 09:08:52 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/27 20:09:42 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 // Our .c functions by file
 // init_vars.c
 int		init_vars(char *line, t_shell *shell);
+t_token	*put_tokens(t_token *token, char *str);
 
 // shell_program.c
 int		shell_program(t_shell *shell);
@@ -49,7 +50,7 @@ int		clear_program(t_shell *shell, int type, int flag);
 int		stx_erro(t_shell *shell, char c);
 
 // expansion.c
-void    expanding(t_token *token, char **env);
+t_token	*expanding(t_token *token, char **env);
 
 // split_parsing.c
 char	**ft_split_shell(char const *str);
