@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/28 15:02:49 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/28 18:51:02 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,28 @@ static int	remove_quotes(char *str, int pos)
 		str[i + 1] = str[i + 2];
 		i++;
 	}
-	printf("rm Q: %s\n", str);
 	return (2);
+}
+
+static t_token	*split_expansion(t_token *token)
+{
+	t_token	*aux;
+	int		i;
+
+	aux = token;
+	i = 0;
+	while (aux->str[i])
+	{
+		if (aux->type == T_DQUOTE)
+			printf("is_double_quote\n");
+		if (aux->type == T_STR)
+			printf("is_string\n");
+		if (aux->type == T_DOLLAR)
+			printf("is_expansion\n");
+		i++;
+	}
+	printf("split: %s\n", aux->str);
+	return (token);
 }
 
 t_token	*expanding(t_token *token, char **env)
@@ -130,6 +150,7 @@ t_token	*expanding(t_token *token, char **env)
 			if (f == '\"')
 				token->type = T_DQUOTE;
 		}
+		split_expansion(token);
 		//split
 	}
 	// token = split_tokens(token);
