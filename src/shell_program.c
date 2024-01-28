@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/27 20:16:22 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/28 14:31:59 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	expansion(t_shell *shell)
 	{
 		if (aux->type == T_DOLLAR || aux->type == T_STR)
 			expanding(aux, shell->env);
-		aux = aux->next;
+		aux = aux->next; //-> error
 	}
 	return (1);
 }

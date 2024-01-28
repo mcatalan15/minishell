@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:14:07 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/27 18:40:58 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/28 14:52:44 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,35 @@ char	*ft_strswap(char *dst, char *src, char *sub)
 	char	*aux;
 	int		i;
 	int		len;
+	char	*dst_ptr;
 
 	i = 0;
 	aux = ft_strnstr(dst, src, 0x7fffffff);
+	// printf("dst: %s  tmp: %s  exp: %s\n", dst, src, sub);
 	if (!aux)
 		return (NULL);
 	len = ft_strlen(dst) + ft_strlen(sub) - ft_strlen(src);
 	tmp = malloc((len + 1) * sizeof(char));
 	if (!tmp)
 		return (NULL);
+	dst_ptr = dst;
 	len = 0;
-	while (dst[i] && dst != aux)
-		tmp[i++] = *(dst++);
-	dst += ft_strlen(src);
+	while (*dst_ptr && dst_ptr != aux)
+		tmp[i++] = *(dst_ptr++);
+	dst_ptr += ft_strlen(src);
 	while (sub[len])
 		tmp[i++] = sub[len++];
-	while (*dst)
-		tmp[i++] = *(dst++);
+	while (*dst_ptr)
+		tmp[i++] = *(dst_ptr++);
+	// while (dst[i] && dst != aux)
+	// 	tmp[i++] = *(dst++);
+	// dst += ft_strlen(src);
+	// while (sub[len])
+	// 	tmp[i++] = sub[len++];
+	// while (*dst)
+	// 	tmp[i++] = *(dst++);
 	tmp[i] = '\0';
+	// printf("strswap: %s\n", tmp);
 	return (tmp);
 }
 
