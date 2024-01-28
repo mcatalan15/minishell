@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/27 20:09:42 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/28 18:17:10 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int		ft_isdquote(char c);
 // utils2.c
 char	*get_cwd(void);
 int		clear_program(t_shell *shell, int type, int flag);
+// int		ft_quoted_closed(char *str);
 
 // errors.c
 int		stx_erro(t_shell *shell, char c);

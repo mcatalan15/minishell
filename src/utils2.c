@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:33:27 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/24 11:06:14 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/28 18:16:57 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+// int	ft_quoted_closed(char *str)
+// {
+// 	int		i;
+// 	char	quote;
+
+// 	i = 0;
+// 	quote = 0;
+// 	while (str[i])
+// 	{
+// 		if (str[i] == '\'' && !quote)
+// 			quote = str[i];
+// 		else if (str[i] == '\"' && !quote)
+// 			quote = str[i];
+// 		else if (str[i] == quote)
+// 			quote = '\0';
+// 		i++;
+// 	}
+// 	if (quote == '\0')
+// 		return (0);
+// 	return (1);
+// }
 
 int	clear_program(t_shell *shell, int type, int flag)
 {
