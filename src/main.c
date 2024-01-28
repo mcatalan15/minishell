@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/27 18:25:48 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/28 17:37:59 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ void	handle_history(char *str)
 	add_history(str);
 }
 
+void	free_prompt(char *str, char *cwd)
+{
+	free(str);
+	free(cwd);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	shell;
@@ -54,15 +60,14 @@ int	main(int argc, char **argv, char **env)
 		cwd = get_cwd();
 		str = readline(cwd);
 		handle_history(str);
-		init_vars(str, &shell);
-		shell_program(&shell);
 		if (!ft_strcmp(str, "exit"))
 		{
 			free(str);
 			break ;
 		}
-		free(str);
-		free(cwd);
+		init_vars(str, &shell);
+		shell_program(&shell);
+		free_prompt(str, cwd);
 	}
 	printf("exit\n");
 	clear_history();

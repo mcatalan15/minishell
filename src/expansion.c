@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/28 14:44:12 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/28 15:02:49 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,6 @@ t_token	*expanding(t_token *token, char **env)
 	f = '\0';
 	while (token->str[++i])
 	{
-
-		//printf("token str: %c\n", token->str[i]);
 		if (token->str[i] == '\"' && !f)
 			f = '\"';
 		else if (token->str[i] == '\'' && !f)	

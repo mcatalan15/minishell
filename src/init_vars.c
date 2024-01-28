@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/28 12:46:39 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/28 17:30:08 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ t_token	*put_tokens(t_token *token, char *str)
 
 int	init_vars(char *line, t_shell *shell)
 {
-	//char		**split;
-
 	shell->command = command_new();
 	//split = ft_split_shell(line);
 	shell->command->token = put_tokens(shell->command->token, line);

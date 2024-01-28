@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/28 14:31:59 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/28 18:11:51 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,29 @@ static int	expansion(t_shell *shell)
 	return (1);
 }
 
+// static int	ft_quoted_closed(char *str)
+// {
+// 	int		i;
+// 	char	quote;
+
+// 	i = 0;
+// 	quote = 0;
+// 	printf("str: %s\n", str);
+// 	while (str[i])
+// 	{
+// 		if (str[i] == '\'' && !quote)
+// 			quote = str[i];
+// 		else if (str[i] == '\"' && !quote)
+// 			quote = str[i];
+// 		else if (str[i] == quote)
+// 			quote = '\0';
+// 		i++;
+// 	}
+// 	if (quote == '\0')
+// 		return (0);
+// 	return (1);
+// }
+
 static int	parsing(t_shell *shell)
 {
 	t_token	*aux;
@@ -40,6 +63,8 @@ static int	parsing(t_shell *shell)
 			return (stx_erro(shell, *aux->next->str));
 		aux = aux->next;
 	}
+	// if (ft_quoted_closed(aux->str))
+	// 	return (stx_erro(shell, '"'));
 	if (ft_isoperate(aux->type) && !aux->next)
 		return (stx_erro(shell, '\n'));
 	return (1);
