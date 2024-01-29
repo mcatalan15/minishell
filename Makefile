@@ -23,7 +23,7 @@ NAME = minishell
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 RM = rm -rf
-RLFLAGS = -lreadline -ltermcap #  -lreadline -L includes/readline/lib -lreadline -L includes/readline/lib -lhistory -L includes/readline/lib -ltermcap
+RLFLAGS = -lreadline -ltermcap  -DREADLINE_LIBRARY#  -lreadline -L includes/readline/lib -lreadline -L includes/readline/lib -lhistory -L includes/readline/lib -ltermcap
 RLURL = http://git.savannah.gnu.org/cgit/readline.git/snapshot/readline-bfe9c573a9e376323929c80b2b71c59727fab0cc.tar.gz
 
 #Directories
@@ -127,3 +127,84 @@ $(DEP_DIR) :
 	@mkdir -p $(DEP_DIR)
 
 .PHONY: clean fclean all re print_message rl_download rl_decompress readline rm_readline
+
+# DEF_COLOR	:=	\033[1;97m
+# PINK		:=	\033[1;95m
+# GREEN		:=	\033[1;92m
+# CIAN		:=	\033[1;96m
+
+# NAME        = minishell
+
+# HEADER      = ./includes/minishell.h ./includes/definitions.h ./include/structs.h
+
+# SRC_PATH    = src/
+# SRCS		= $(wildcard $(SRC_DIR)/*.c)
+
+# LIBFT_PATH	= includes/libft/
+# LIBFT		= $(LIBFT_PATH)/libft.a
+
+# # PRINTF_PATH	= libs/ft_printf/
+# # PRINTF		= $(PRINTF_PATH)/libftprintf.a
+
+# RLINE_PATH	= includes/readline/
+# RLINE		= $(RLINE_PATH)/libreadline.a
+# RLINE_H		= $(RLINE_PATH)/libhistory.a
+
+# LIB_PATH	= -L$(LIBFT_PATH) -L$(RLINE_PATH) 
+# LIB_FLAGS	= $(LIBFT) $(PRINTF) -lreadline -ltermcap 
+
+# OBJ_PATH	= ./OBJ/
+# OBJ			= $(addprefix $(OBJ_PATH), $(SRC:.c=.o))
+# DEP			= $(addprefix $(OBJ_PATH), $(OBJ:.o=.d))
+
+# INC_PATH	= ./includes/ $(LIBFT_PATH) $(RLINE_PATH)
+# INC			= $(addprefix -I, $(INC_PATH))
+
+# CC			= gcc
+# CFLAGS		= -Wall -Wextra -Werror -MMD 
+# RM			= rm -f
+
+
+# all: $(RLINE) $(OBJ_PATH) subsystems $(NAME)
+	
+# clean:
+# 	@$(RM) $(OBJS) $(DEPS)
+# 	@$(RM) -rf $(OBJ_PATH)
+# 	@make -s -C $(LIBFT_PATH) clean
+# 	@make -s -C $(PRINTF_PATH) clean
+# 	@echo "$(PINK)Objects removed$(DEF_COLOR)"
+
+# fclean: clean
+# 	@$(RM) $(NAME)
+# 	@make -s -C $(LIBFT_PATH) fclean
+# 	@make -s -C $(PRINTF_PATH) fclean
+# 	@echo "$(PINK)Minishell removed$(DEF_COLOR)"
+
+# re: fclean all
+
+# cleanrl:
+# 	@make -s -C $(RLINE_PATH) mostlyclean
+# 	@echo "$(PINK)READLINE removed$(DEF_COLOR)"
+
+# $(NAME)::  $(OBJ) ./$(LIBFT) ./$(RLINE) ./$(RLINE_H)
+# 	@$(CC) $(CFLAGS) $(^) -ltermcap -lreadline -o $(NAME)
+# 	@echo "$(GREEN)MINISHELL compiled :D$(DEF_COLOR)"
+
+# subsystems:
+# 	@make -s -C $(LIBFT_PATH)
+
+# $(OBJ_PATH):
+# 	@mkdir -p $(OBJ_PATH)
+
+# $(RLINE):
+# 	@cd libs/readline && ./configure &>/dev/null
+# 	@$(MAKE) -C $(RLINE_PATH) --no-print-directory
+# 	@echo "$(CIAN)READLINE compiled$(DEF_COLOR)"
+
+# $(OBJ_PATH)%.o: $(SRC_PATH)%.c Makefile $(HEADER)
+# 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+# -include ${DEP}
+
+# # Phony
+# .PHONY: all clean fclean re cleanrl

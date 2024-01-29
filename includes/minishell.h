@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/28 18:17:10 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/29 13:31:05 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 // Our .h files
 # include "libft/libft.h"
 # include "readline/readline.h"
+// # include "readline/history.h"
 # include "structs.h"
 # include "definitions.h"
 
@@ -45,7 +46,8 @@ int		ft_isdquote(char c);
 // utils2.c
 char	*get_cwd(void);
 int		clear_program(t_shell *shell, int type, int flag);
-// int		ft_quoted_closed(char *str);
+int		ft_quoted_closed(char *str);
+char    *get_expansion(char *sub, char *exp);
 
 // errors.c
 int		stx_erro(t_shell *shell, char c);

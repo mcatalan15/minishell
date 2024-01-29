@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/28 18:51:02 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/29 13:29:45 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	expand(t_token *token, char **env, char *str)
+static int	expand(t_token *token, char **env, char *str, int pos)
 {
 	int		i;
 	char	*exp;
 	char	*tmp;
 	int		len;
+	char	*frees;
 
 	len = 0;
 	exp = NULL;
@@ -32,7 +33,7 @@ static int	expand(t_token *token, char **env, char *str)
 	while (env[++i])
 	{
 		if (!ft_strcmpc(env[i], tmp + 1, '='))
-		{	
+		{
 			len = 0;
 			exp = ft_strchr(env[i], '=') + 1;
 			while (exp[len])
@@ -41,15 +42,15 @@ static int	expand(t_token *token, char **env, char *str)
 			break ;
 		}
 	}
-	str = token->str;
+	frees = token->str;
 	if (!env[i])
 	{
 		exp = ft_strdup("\0");
-		len = -1;
+		len = 0;
 	}
-	token->str = ft_strswap(str, tmp, exp);
-	printf("str: %s  tmp: %s  exp: %s\n", token->str, tmp, exp);
-	free(str);
+	token->str = get_expansion(ft_substr(token->str, 0, pos), ft_strswap(str, tmp, exp));
+	// printf("str: %s  tmp: %s  exp: %s\n", token->str, tmp, exp);
+	free(frees);
 	free(tmp);
 	free(exp);
 	return (len);
@@ -105,26 +106,26 @@ static int	remove_quotes(char *str, int pos)
 	return (2);
 }
 
-static t_token	*split_expansion(t_token *token)
-{
-	t_token	*aux;
-	int		i;
+// static t_token	*split_expansion(t_token *token)
+// {
+// 	t_token	*aux;
+// 	int		i;
 
-	aux = token;
-	i = 0;
-	while (aux->str[i])
-	{
-		if (aux->type == T_DQUOTE)
-			printf("is_double_quote\n");
-		if (aux->type == T_STR)
-			printf("is_string\n");
-		if (aux->type == T_DOLLAR)
-			printf("is_expansion\n");
-		i++;
-	}
-	printf("split: %s\n", aux->str);
-	return (token);
-}
+// 	aux = token;
+// 	i = 0;
+// 	while (aux->str[i])
+// 	{
+// 		if (aux->type == T_DQUOTE)
+// 			printf("is_double_quote\n");
+// 		if (aux->type == T_STR)
+// 			printf("is_string\n");
+// 		if (aux->type == T_DOLLAR)
+// 			printf("is_expansion\n");
+// 		i++;
+// 	}
+// 	printf("split: %s\n", aux->str);
+// 	return (token);
+// }
 
 t_token	*expanding(t_token *token, char **env)
 {
@@ -135,6 +136,7 @@ t_token	*expanding(t_token *token, char **env)
 	f = '\0';
 	while (token->str[++i])
 	{
+		// printf("position: %c\n", token->str[i]);
 		if (token->str[i] == '\"' && !f)
 			f = '\"';
 		else if (token->str[i] == '\'' && !f)	
@@ -144,13 +146,15 @@ t_token	*expanding(t_token *token, char **env)
 			f = '\0';
 			i -= remove_quotes(token->str, i);
 		}
+		printf("position: %d		value F: %c			char: %c\n", i, f, token->str[i]);
 		if (token->str[i] == '$' && f != '\'')
 		{
-			i += expand(token, env, &token->str[i]) - 1;
+			printf("Entra\n");
+			i += expand(token, env, &token->str[i], i) - 1;
 			if (f == '\"')
 				token->type = T_DQUOTE;
 		}
-		split_expansion(token);
+		// split_expansion(token);
 		//split
 	}
 	// token = split_tokens(token);

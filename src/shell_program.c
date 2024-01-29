@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/28 18:17:06 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/29 10:42:38 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static int	parsing(t_shell *shell)
 			return (stx_erro(shell, *aux->next->str));
 		aux = aux->next;
 	}
-	// if (ft_quoted_closed(aux->str))
-	// 	return (stx_erro(shell, '"'));
+	if (ft_quoted_closed(aux->str))
+		return (stx_erro(shell, '\"'));
 	if (ft_isoperate(aux->type) && !aux->next)
 		return (stx_erro(shell, '\n'));
 	return (1);

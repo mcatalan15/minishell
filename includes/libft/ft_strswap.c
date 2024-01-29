@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strswap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:14:07 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/28 17:20:15 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/29 12:39:52 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
