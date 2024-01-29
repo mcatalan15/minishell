@@ -1,0 +1,11 @@
+{
+	"files.associations": {
+		"structs.h": "c",
+		"minishell.h": "c",
+		"array": "c",
+		"istream": "c",
+		"locale": "c",
+		"tuple": "c",
+		"variant": "c"
+	}
+}
