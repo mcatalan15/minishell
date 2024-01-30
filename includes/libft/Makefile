@@ -6,7 +6,7 @@
 #    By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 19:10:12 by mcatalan@st       #+#    #+#              #
-#    Updated: 2023/08/22 11:16:37 by mcatalan@st      ###   ########.fr        #
+#    Updated: 2024/01/30 11:09:39 by mcatalan@st      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,24 +32,32 @@ DEPS = $(addprefix $(DEPS_DIR)/,$(SRCS:.c=.d))
 
 INCLUDE = -I ./
 
-RM = rm -f
+RM = rm -rf
 
 $(OBJS_DIR)/%.o: %.c libft.h
+#	@echo "$(YELLOW)Compiling libft...$(RESET)"
 	@mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) -MMD $(INCLUDE) -c $< -o $@
+	@$(CC) $(CFLAGS) -MMD $(INCLUDE) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar -rcs $(NAME) $(OBJS)
+#	@echo "$(YELLOW)Building libft...$(RESET)"
+	@ar -rcs $(NAME) $(OBJS)
+	@echo "$(GREEN)Built libft!$(RESET)✅"
 
 -include $(DEPS)
 
 clean:
-	$(RM) -r $(OBJS_DIR)  $(DEPS)
+#	@echo "$(YELLOW)Cleaning libft...$(RESET)"
+	@$(RM) -r $(OBJS_DIR)  $(DEPS)
+	@echo "$(RED)Cleaned libft!$(RESET)✅"
 
-fclean: clean
-	$(RM) $(NAME)
+fclean:
+#	@echo "$(YELLOW)Fcleaning libft...$(RESET)"
+	@$(RM) $(NAME)
+	@$(RM) -r $(OBJS_DIR)  $(DEPS)
+	@echo "$(RED)Fcleaned libft!$(RESET)✅"
 
 re: fclean all
 .PHONY: all clean fclean re

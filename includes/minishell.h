@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/29 13:31:05 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:57:03 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@
 # include <readline/history.h>
 # include <string.h>
 
+// Readline .h files
+# include "readline/readline.h"
+# include "readline/history.h"
+
 // Our .h files
 # include "libft/libft.h"
-# include "readline/readline.h"
-// # include "readline/history.h"
 # include "structs.h"
 # include "definitions.h"
 
@@ -32,6 +34,8 @@
 // init_vars.c
 int		init_vars(char *line, t_shell *shell);
 t_token	*put_tokens(t_token *token, char *str);
+t_token	*token_new(char *str, int type);
+int		get_type(char *str);
 
 // shell_program.c
 int		shell_program(t_shell *shell);

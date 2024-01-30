@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/29 13:29:45 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:09:42 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,105 +58,94 @@ static int	expand(t_token *token, char **env, char *str, int pos)
 
 // static t_token	*add_token(t_token *token, char *str)
 // {
-// 	t_token	*aux;
-
-// 	aux = token;
 // 	ft_print_tokens(token);
+//     (void)str;
+//     return (token);
 // }
 
-// static t_token	*split_tokens(t_token *token)
-// {
-// 	t_token	*aux;
-
-// 	aux = token;
-// 	token = put_tokens(token, token->str);
-// 	while (token->next)
-// 		token = token->next;
-// 	token->next = aux->next;
-// 	while (token->prev)
-// 		token = token->prev;
-// 	if (aux->prev)
-// 		aux->prev->next = token;
-// 	token->prev = aux->prev;
-// 	aux->prev = NULL;
-// 	aux->next = NULL;
-// 	// free(aux); // -> error
-// 	// ft_print_tokens(token);
+// static t_token	*join_subtokens(t_token *token)
+// {	
 // 	return (token);
 // }
 
-static int	remove_quotes(char *str, int pos)
+static void	remove_quotes(char *str, char f)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	while (str[i] && str[i] != str[pos])
-		i++;
-	while (str[i] && i + 1 != pos)
+	while (str[i] && str[i + 1] != f)
 	{
 		str[i] = str[i + 1];
 		i++;
 	}
-	while (str[i])
+	while (str[i + 1])
 	{
 		str[i] = str[i + 2];
 		str[i + 1] = str[i + 2];
 		i++;
 	}
-	return (2);
 }
 
-// static t_token	*split_expansion(t_token *token)
-// {
-// 	t_token	*aux;
-// 	int		i;
+static t_token	*split_expansion(t_token *token, char flag, int *pos, char **env)
+{
+	int		i;
+	int		len;
+	char	*s;
+	char	type;
 
-// 	aux = token;
-// 	i = 0;
-// 	while (aux->str[i])
-// 	{
-// 		if (aux->type == T_DQUOTE)
-// 			printf("is_double_quote\n");
-// 		if (aux->type == T_STR)
-// 			printf("is_string\n");
-// 		if (aux->type == T_DOLLAR)
-// 			printf("is_expansion\n");
-// 		i++;
-// 	}
-// 	printf("split: %s\n", aux->str);
-// 	return (token);
-// }
+	i = *pos;
+	len = 0;
+	type = '\0';
+	if (flag == '\"')
+		type = T_DQUOTE;
+	else if (flag == '\'')
+		type = T_SQUOTE;
+	while ((token->str[*pos] && flag && token->str[*pos] != flag) || \
+	(!flag && token->str[*pos] != '\"' && token->str[*pos] != '\''))
+	{
+		len++;
+		(*pos)++;
+	}
+	s = ft_substr(token->str, i, len);
+	token = token_new(s, type);
+	if (flag)
+		remove_quotes(&token->str[i], flag);
+	i = -1;
+	while (token->str[++i] && token->type != T_SQUOTE)
+	{
+		if (token->str[i] == '$')
+			i += expand(token, env, token->str, i);
+	}
+	return (token);
+}
 
 t_token	*expanding(t_token *token, char **env)
 {
 	int		i;
-	char	f;
+	t_token	*aux;
+	t_token	*prev;
 
+	prev = NULL;
 	i = -1;
-	f = '\0';
 	while (token->str[++i])
 	{
-		// printf("position: %c\n", token->str[i]);
-		if (token->str[i] == '\"' && !f)
-			f = '\"';
-		else if (token->str[i] == '\'' && !f)	
-			f = '\'';
-		else if (token->str[i] == f)
-		{
-			f = '\0';
-			i -= remove_quotes(token->str, i);
-		}
-		printf("position: %d		value F: %c			char: %c\n", i, f, token->str[i]);
-		if (token->str[i] == '$' && f != '\'')
-		{
-			printf("Entra\n");
-			i += expand(token, env, &token->str[i], i) - 1;
-			if (f == '\"')
-				token->type = T_DQUOTE;
-		}
-		// split_expansion(token);
-		//split
+		if (token->str[i] == '\"')
+			aux = split_expansion(token, '\"', &i, env);
+		else if (token->str[i] == '\'')
+			aux = split_expansion(token, '\'', &i, env);
+		else
+			aux = split_expansion(token, '\0', &i, env);
+		if (!prev)
+			prev = aux;
+		else
+			aux->prev = prev;
+		prev = aux;
+		aux = aux->next;
 	}
-	// token = split_tokens(token);
+	while (prev->prev)
+		prev = prev->prev;
+	aux = prev;
+	//aux != next in split_expansion
+    //ft_print_tokens(aux);
 	return (token);
 }

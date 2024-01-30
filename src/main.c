@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/29 10:35:08 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:22:56 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ int	main(int argc, char **argv, char **env)
 		free_prompt(str, cwd);
 	}
 	printf("exit\n");
-	clear_history();
+	rl_clear_history();
 	clear_program(&shell, 0, 1);
 }

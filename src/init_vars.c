@@ -6,13 +6,13 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/28 17:30:08 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/29 18:08:08 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	get_type(char *str)
+int	get_type(char *str)
 {
 	if (!str[0])
 		return (T_NULL);
@@ -31,7 +31,7 @@ static int	get_type(char *str)
 	return (T_STR);
 }
 
-static t_token	*token_new(char *str, int type)
+t_token	*token_new(char *str, int type)
 {
 	t_token	*token;
 
