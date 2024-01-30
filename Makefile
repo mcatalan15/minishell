@@ -96,3 +96,75 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re libft readline 
+
+# UBUNTU
+# Print MINISHELL and authors' names
+# MINISHELL_MSG = MINISHELL
+# AUTHORS_MSG = by jpaul-kr & mcatalan
+# MESSAGE_LEN = $$(($(shell echo $(MINISHELL_MSG) | wc -c) - 1))
+
+# PRINT_MINISHELL = @printf "$(VIOLET)%*s$(RESET)\n" $(MESSAGE_LEN) $(MINISHELL_MSG)
+# PRINT_AUTHORS = @echo "$(BLUE)$(AUTHORS_MSG)$(RESET)"
+
+# # Colors
+# RED = \033[0;31m
+# GREEN = \033[0;32m
+# YELLOW = \033[0;33m
+# BLUE = \033[0;34m
+# VIOLET = \033[0;35m
+# RESET = \033[0m
+
+# LIBFT_D = includes/libft/
+# LIBFT = libft.a
+
+# READLINE_FLAGS = 
+
+# NAME = minishell
+
+# SRCS =	$(wildcard src/*.c)
+
+# OBJS = $(SRCS:.c=.o)
+
+# DEPS = $(SRCS:.c=.d)
+
+# INCLUDE = -I./
+# RM = rm -f
+# CFLAGS = -Wall -Wextra -Werror
+# OFLAGS = -g -lreadline -L/usr/x86_64-linux-gnu 
+# FFLAGS = -fsanitize=address
+
+# all: print_message libft readline $(NAME)
+# 	@echo "$(GREEN)Build finished successfully!$(RESET)✅"
+
+# libft:
+# 	@echo "$(YELLOW)Building libft...$(RESET)"
+# 	@make --no-print-directory -C $(LIBFT_D)
+
+# print_message:
+# 	$(PRINT_MINISHELL)
+# 	$(PRINT_AUTHORS)
+
+# %.o: %.c
+# 	@echo "$(YELLOW)Compiling...$(RESET)"
+# 	@${CC} ${CFLAGS} -MMD $(INCLUDE) -c $< -o $@
+
+# $(NAME): $(OBJS) $(LIBFT_D)$(LIBFT)
+# 	@echo "$(YELLOW)Linking...$(RESET)"
+# 	@$(CC) $(CFLAGS) $(OBJS) -o $@ $(LIBFT_D)$(LIBFT) $(OFLAGS) $(FFLAGS)
+# 	@echo "$(GREEN)Linked!$(RESET)✅"
+# -include $(DEPS)
+
+# clean:
+# 	@make clean --no-print-directory -C $(LIBFT_D)
+# 	@echo "$(RED)Cleaned readline!$(RESET)✅"
+# 	@$(RM) $(OBJS) $(DEPS)
+# 	@echo "$(RED)Cleaned minishell!$(RESET)✅"
+
+# fclean: clean
+# 	@make fclean --no-print-directory -C $(LIBFT_D)
+# 	@$(RM) $(NAME) $(DEPS)
+# 	@echo "$(RED)Fcleaned minishell!$(RESET)✅"
+
+# re: fclean all
+
+# .PHONY: all clean fclean re libft readline 
