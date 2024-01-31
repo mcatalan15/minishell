@@ -34,7 +34,8 @@ READLINE_D = readline/
 READLINE = libreadline.a
 READLINE_H = libhistory.a
 READLINE_FLAGS = -lreadline -ltermcap
-READLINE_CONFIGURE = ./configure
+READLINE_CONFIGURE = $(wildcard $(READLINE_D)config.status)
+READLINE_FILES = $(wildcard $(READLINE_D)$(READLINE) $(READLINE_D)$(READLINE_H))
 
 NAME = minishell
 
@@ -47,7 +48,7 @@ DEPS = $(SRCS:.c=.d)
 INCLUDE = -I./
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
-OFLAGS = -g #-fsanitize=address
+OFLAGS = -g -fsanitize=address
 
 all: print_message libft readline $(NAME)
 	@echo "$(GREEN)Build finished successfully!$(RESET)✅"
@@ -63,8 +64,17 @@ ifeq ($(READLINE_CONFIGURE),)
 	@make --no-print-directory -C $(READLINE_D)
 	@echo "$(GREEN)Built readline!$(RESET)✅"
 else
+ifeq ($(READLINE_FILES),)
+	@echo "$(GREEN)Readline Configured$(RESET)✅"
+	@echo "$(GREEN)Skipping...$(RESET)✅"
+	@echo "$(YELLOW)Compiling readline...$(RESET)"
+	@cd $(READLINE_D)
+	@make --no-print-directory -C $(READLINE_D)
+	@echo "$(GREEN)Readline ready$(RESET)✅"
+else
 	@echo "$(GREEN)Readline already built!$(RESET)✅"
 	@echo "$(GREEN)Skipping...$(RESET)✅"
+endif
 endif
 
 print_message:

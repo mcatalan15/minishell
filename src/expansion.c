@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/31 11:53:11 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:55:33 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,14 @@ static int	expand(t_token *token, char **env, char *str, int pos)
 	len = 0;
 	exp = NULL;
 	str++;
-	while (str[len] && (ft_isalnum(str[len]) || str[len] == '_') \
-	&& str[0] != '?')
-		len++;
-	if (str[0] == '?')
+	while (str[len] && (ft_isalnum(str[len]) || str[len] == '_'))
 		len++;
 	i = -1;
 	tmp = ft_substr(--str, 0, len + 1);
 	while (env[++i])
 	{
+		if (str[1] == '?')
+			break ;
 		if (!ft_strcmpc(env[i], tmp + 1, '='))
 		{
 			len = 0;
@@ -50,7 +49,7 @@ static int	expand(t_token *token, char **env, char *str, int pos)
 	}
 	token->str = get_expansion(ft_substr(token->str, 0, pos),
 			ft_strswap(str, tmp, exp));
-	printf("str: %s  tmp: %s  exp: %s\n", token->str, tmp, exp);
+	// printf("str: %s  tmp: %s  exp: %s\n", token->str, tmp, exp);
 	free(frees);
 	free(tmp);
 	free(exp);
@@ -161,6 +160,6 @@ t_token	*expanding(t_token *token, char **env)
 	}
 	while (aux->prev)
 		aux = aux->prev;
-	// ft_print_tokens(aux);
+	ft_print_tokens(aux);
 	return (token);
 }
