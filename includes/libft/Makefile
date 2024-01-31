@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+         #
+#    By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 19:10:12 by mcatalan@st       #+#    #+#              #
-#    Updated: 2024/01/30 11:09:39 by mcatalan@st      ###   ########.fr        #
+#    Updated: 2024/01/31 10:48:16 by mcatalan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ RM = rm -rf
 
 $(OBJS_DIR)/%.o: %.c libft.h
 #	@echo "$(YELLOW)Compiling libft...$(RESET)"
-	@mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJS_DIR) $(DEPS_DIR)
 	@$(CC) $(CFLAGS) -MMD $(INCLUDE) -c $< -o $@
 
 all: $(NAME)
@@ -50,7 +50,7 @@ $(NAME): $(OBJS)
 
 clean:
 #	@echo "$(YELLOW)Cleaning libft...$(RESET)"
-	@$(RM) -r $(OBJS_DIR)  $(DEPS)
+	@$(RM) -r $(OBJS_DIR) $(DEPS)
 	@echo "$(RED)Cleaned libft!$(RESET)✅"
 
 fclean:

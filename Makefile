@@ -47,7 +47,7 @@ DEPS = $(SRCS:.c=.d)
 INCLUDE = -I./
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
-OFLAGS = -g -fsanitize=address
+OFLAGS = -g #-fsanitize=address
 
 all: print_message libft readline $(NAME)
 	@echo "$(GREEN)Build finished successfully!$(RESET)✅"

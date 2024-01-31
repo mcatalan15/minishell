@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/30 19:51:11 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/31 10:46:08 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	expansion(t_shell *shell)
 	{
 		if (aux->type == T_DOLLAR || aux->type == T_STR)
 			expanding(aux, shell->env);
-		ft_print_tokens(aux);
+		//ft_print_tokens(aux);
 		aux = aux->next; //-> error
 	}
 	return (1);
