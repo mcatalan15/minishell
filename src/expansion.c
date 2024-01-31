@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/31 12:55:33 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:32:49 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ static int	expand(t_token *token, char **env, char *str, int pos)
 	len = 0;
 	exp = NULL;
 	str++;
-	while (str[len] && (ft_isalnum(str[len]) || str[len] == '_'))
+	if (str[0] == '?')
+		len++;
+	while (str[len] && (ft_isalnum(str[len]) || str[len] == '_')\
+	&& str[0] != '?')
 		len++;
 	i = -1;
 	tmp = ft_substr(--str, 0, len + 1);
@@ -42,6 +45,8 @@ static int	expand(t_token *token, char **env, char *str, int pos)
 		}
 	}
 	frees = token->str;
+	if (str[1] == '?')
+		exp = ft_is_interrogant(ft_itoa(token->shell->end_type), &len);
 	if (!env[i])
 	{
 		exp = ft_strdup("\0");
@@ -114,7 +119,7 @@ static t_token	*split_expansion(t_token *token, char flag, int *p, char **env)
 	if (type == T_STR)
 		(*p)--;
 	s = ft_substr(token->str, i, len);
-	token = token_new(s, type);
+	token = token_new(s, type, token->shell);
 	if (flag)
 		remove_quotes(token->str, flag);
 	i = -1;

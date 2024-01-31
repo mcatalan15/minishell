@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/29 18:08:08 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/31 18:00:29 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_type(char *str)
 	return (T_STR);
 }
 
-t_token	*token_new(char *str, int type)
+t_token	*token_new(char *str, int type, t_shell *shell)
 {
 	t_token	*token;
 
@@ -40,6 +40,7 @@ t_token	*token_new(char *str, int type)
 		return (NULL);
 	token->str = str;
 	token->type = type;
+	token->shell = shell;
 	token->next = NULL;
 	token->prev = NULL;
 	return (token);
@@ -57,7 +58,7 @@ static t_command	*command_new(void)
 	return (command_new);
 }
 
-t_token	*put_tokens(t_token *token, char *str)
+t_token	*put_tokens(t_token *token, char *str, t_shell *shell)
 {
 	t_token	*aux;
 	int		i;
@@ -74,10 +75,10 @@ t_token	*put_tokens(t_token *token, char *str)
 			i++;
 		flag = get_type(&str[i]);
 		if (flag == T_REDIN || flag == T_REDOUT || flag == T_PIPE)
-			token = token_new(ft_substr(str, i++, 1), flag);
+			token = token_new(ft_substr(str, i++, 1), flag, shell);
 		else if (flag == T_DIN || flag == T_DOUT)
 		{
-			token = token_new(ft_substr(str, i, 2), flag);
+			token = token_new(ft_substr(str, i, 2), flag, shell);
 			i += 2;
 		}
 		else if (str[i] != ' ' && str[i])
@@ -94,7 +95,7 @@ t_token	*put_tokens(t_token *token, char *str)
 					f = '\0';
 				pos++;
 			}
-			token = token_new(ft_substr(str, i, pos), flag);
+			token = token_new(ft_substr(str, i, pos), flag, shell);
 		}
 		i += pos;
 		while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
@@ -110,24 +111,15 @@ t_token	*put_tokens(t_token *token, char *str)
 		aux->next = token;
 	}
 	token = aux;
-	//ft_print_tokens(token);
 	return (aux);
 }
 
 int	init_vars(char *line, t_shell *shell)
 {
 	shell->command = command_new();
-	//split = ft_split_shell(line);
-	shell->command->token = put_tokens(shell->command->token, line);
+	shell->end_type = 14;
+	shell->command->token = put_tokens(shell->command->token, line, shell);
 	if (!shell->command->token)
 		return (0);
 	return (0);
 }
-
-// echo hola > out|pwd
-// |
-// ft_split_shell
-// |
-// echo hola > out
-// pwd
-// NULL

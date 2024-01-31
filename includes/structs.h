@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:18:52 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/31 12:56:38 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:32:28 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,24 @@ typedef struct s_flag		t_flag;
 
 struct	s_token
 {
-	char	*str;
-	int		type;
-	t_shell	*shell;
-	t_token	*next;
-	t_token	*prev;
+	char		*str;
+	int			type;
+	t_shell		*shell;
+	t_token		*next;
+	t_token		*prev;
 };
 
 struct	s_command
 {
 	char	**cmd;
 	char	*path;
-	int		end_type;
 	t_token	*token;
 };
 
 struct s_shell
 {
 	char		**env;
+	int			end_type;
 	t_command	*command;
 };
 

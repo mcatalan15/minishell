@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/31 10:06:57 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:54:54 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 // Our .c functions by file
 // init_vars.c
 int		init_vars(char *line, t_shell *shell);
-t_token	*put_tokens(t_token *token, char *str);
-t_token	*token_new(char *str, int type);
+t_token	*put_tokens(t_token *token, char *str, t_shell *shell);
+t_token	*token_new(char *str, int type, t_shell *shell);
 int		get_type(char *str);
 
 // shell_program.c
@@ -52,6 +52,9 @@ char	*get_cwd(void);
 int		clear_program(t_shell *shell, int type, int flag);
 int		ft_quoted_closed(char *str);
 char	*get_expansion(char *sub, char *exp);
+
+// utils3.c
+char	*ft_is_interrogant(char *end_type, int *len);
 
 // errors.c
 int		stx_erro(t_shell *shell, char c);

@@ -103,9 +103,15 @@ fclean: clean
 	@$(RM) $(NAME) $(DEPS)
 	@echo "$(RED)Fcleaned minishell!$(RESET)✅"
 
+	
+jesusg:
+	@echo "$(VIOLET)Jesus is watching you...$(RESET)👀"
+	@$(RM) -r $(OBJS_DIR) $(OBJS) $(DEPS)
+	@echo "$(RED)Jesus has cleaned your soul!$(RESET)✅"
+
 re: fclean all
 
-.PHONY: all clean fclean re libft readline 
+.PHONY: all clean fclean re libft readline jesusg
 
 # UBUNTU
 # Print MINISHELL and authors' names
