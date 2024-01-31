@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/31 19:32:49 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/31 19:35:20 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,24 +72,6 @@ static int	expand(t_token *token, char **env, char *str, int pos)
 // {	
 // 	return (token);
 // }
-
-static void	remove_quotes(char *str, char f)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i + 1] != f)
-	{
-		str[i] = str[i + 1];
-		i++;
-	}
-	while (str[i + 1])
-	{
-		str[i] = str[i + 2];
-		str[i + 1] = str[i + 2];
-		i++;
-	}
-}
 
 static t_token	*split_expansion(t_token *token, char flag, int *p, char **env)
 {

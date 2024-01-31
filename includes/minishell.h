@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/31 18:54:54 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/01/31 19:35:55 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char	*get_expansion(char *sub, char *exp);
 
 // utils3.c
 char	*ft_is_interrogant(char *end_type, int *len);
+void	remove_quotes(char *str, char f);
 
 // errors.c
 int		stx_erro(t_shell *shell, char c);
