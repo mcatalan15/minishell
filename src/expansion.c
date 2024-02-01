@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/31 19:35:20 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/01 13:23:19 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,80 @@ static int	expand(t_token *token, char **env, char *str, int pos)
 	return (len);
 }
 
-// static t_token	*add_token(t_token *token, char *str)
-// {
-// 	ft_print_tokens(token);
-//     (void)str;
-//     return (token);
-// }
+static char	*addstr(t_token *token, int pos, int len)
+{
+	char	*str;
+	int		i;
+	
+	i = len;
+	str = NULL;
+	printf("Entra\n");
+	printf("Token: %s		pos: %d		len: %d\n", str, pos, len);
+	if (token->prev && pos < len - 1)
+	{
+		while (pos >= 0 && len > 0)
+		{
+			pos--;
+			len--;
+		}
+		pos = ft_strlen(token->prev->str) - 1;
+		str = addstr(token->prev, pos, len);
+	}
+	while (i > 1)
+	{
+		i--;
+		pos--;
+	}
+	str = get_expansion(str, ft_substr(token->str, pos, len - ft_strlen(str)));
+	return (str);
+}
 
-// static t_token	*join_subtokens(t_token *token)
-// {	
-// 	return (token);
-// }
+static t_token	*join_subtokens(t_token *token)
+{
+	t_token	*aux;
+	t_token	*new;
+	char	*str;
+	int		i;
+	int		len;
+	
+	len = 0;
+	while (token)
+	{
+		i = -1;
+		while (token->str[++i])
+		{
+			len++;
+			//printf("token: %c		i: %d		len: %d\n", token->str[i], i, len);
+			if (ft_isspace(token->str[i]) && token->type == T_STR)
+			{
+				
+				str = addstr(token, i, len);
+				printf("str: %s\n", str);
+				aux = token_new(str, T_STR, token->shell);
+				while(ft_isspace(token->str[i]))
+					i++;
+				if (!new)
+					new = aux;
+				else
+				{
+					new->next = aux;
+					aux->prev = new;
+					new = new->next;
+				}
+				len = 0;
+			}
+		}
+		printf("acaba\n");
+		token = token->next;
+	}
+	str = addstr(token->prev, --i, --len);
+	aux = token_new(str, T_STR, token->shell);
+	new->next = aux;
+	while (new->prev)
+		new = new->prev;
+	//ft_print_tokens(new);
+	return (token);
+}
 
 static t_token	*split_expansion(t_token *token, char flag, int *p, char **env)
 {
@@ -147,6 +210,7 @@ t_token	*expanding(t_token *token, char **env)
 	}
 	while (aux->prev)
 		aux = aux->prev;
+	aux = join_subtokens(aux);
 	ft_print_tokens(aux);
 	return (token);
 }

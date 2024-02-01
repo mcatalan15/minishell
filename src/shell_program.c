@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/31 10:46:08 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:26:19 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	expansion(t_shell *shell)
 	aux = shell->command->token;
 	while (aux)
 	{
-		if (aux->type == T_DOLLAR || aux->type == T_STR)
+		if ((aux->type == T_DOLLAR || aux->type == T_STR)) //-> quitar caso << D_OUT
 			expanding(aux, shell->env);
 		//ft_print_tokens(aux);
 		aux = aux->next; //-> error

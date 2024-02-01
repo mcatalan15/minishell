@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/31 19:35:55 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/01 10:47:15 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		ft_isdquote(char c);
 
 // utils2.c
 char	*get_cwd(void);
-int		clear_program(t_shell *shell, int type, int flag);
+int		clear_list(t_shell *shell, int type, int flag);
 int		ft_quoted_closed(char *str);
 char	*get_expansion(char *sub, char *exp);
 

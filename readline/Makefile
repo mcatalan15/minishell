@@ -31,9 +31,9 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/marc/Desktop2/42/CCore/minishell/readline
+BUILD_DIR = /Users/jpaul-kr/Documents/curso/C03/minishell_code/readline
 
-INSTALL = /usr/local/bin/ginstall -c
+INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_DATA = ${INSTALL} -m 644
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:33:27 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/29 13:30:55 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:23:44 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*get_expansion(char *sub, char *exp)
 {
 	char *str;
-	
+	//gestionar si es null
 	str = ft_strjoin(sub, exp);
 	free(sub);
 	free(exp);
@@ -43,7 +43,7 @@ int	ft_quoted_closed(char *str)
 	return (1);
 }
 
-int	clear_program(t_shell *shell, int type, int flag)
+int	clear_list(t_shell *shell, int type, int flag)
 {
 	t_token	*aux;
 
