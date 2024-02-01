@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:33:27 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/01 13:23:44 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/02/01 20:59:33 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*get_expansion(char *sub, char *exp)
 {
-	char *str;
-	//gestionar si es null
-	str = ft_strjoin(sub, exp);
+	char	*str;
+
+	str = ft_strjoin(sub, exp); //-> error if str is NULL
 	free(sub);
 	free(exp);
 	return (str);
@@ -47,7 +47,7 @@ int	clear_list(t_shell *shell, int type, int flag)
 {
 	t_token	*aux;
 
-	if (!shell->command)
+	if (shell->command)
 		return (0);
 	aux = shell->command->token;
 	while (shell->command->token)
