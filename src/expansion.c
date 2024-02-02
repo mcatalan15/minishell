@@ -6,7 +6,7 @@
 /*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/02 13:08:05 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:13:02 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ static t_token	*join_subtokens(t_token *token)
 	if (str)
 		add_new_token(&new, &aux, &str, shell);
 	new = aux;
-	// ft_print_tokens(new);
+	ft_print_tokens(new);
 	return (new);
 }
 
@@ -213,6 +213,7 @@ t_token	*expanding(t_token *token, char **env)
 		aux = aux->prev;
 	next = aux;
 	aux = join_subtokens(aux);
+	printf("aux str: %s\n", aux->str);
 	clear_list(next);
 	aux->prev = token->prev;
 	if (token->prev)
