@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:33:27 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/01 20:59:33 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/02 11:02:29 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_quoted_closed(char *str)
 	return (1);
 }
 
-int	clear_list(t_shell *shell, int type, int flag)
+int	clear_program(t_shell *shell, int type, int flag)
 {
 	t_token	*aux;
 
@@ -75,4 +75,21 @@ char	*get_cwd(void)
 	strcpy(cwd_string, getcwd(cwd, sizeof(cwd)));
 	strcat(cwd_string, "$ ");
 	return (cwd_string);
+}
+
+int	clear_list(t_token *token)
+{
+	t_token *aux;
+
+	aux = token;
+	if (aux)
+		return(0);
+	while (aux)
+	{
+		aux = aux->next;
+		free(token->str);
+		free(token);
+		token = aux;
+	}
+	return (0);
 }

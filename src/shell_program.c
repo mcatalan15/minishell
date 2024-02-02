@@ -6,7 +6,7 @@
 /*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/01 11:26:19 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/02/02 12:04:31 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,16 @@ static int	expansion(t_shell *shell)
 	while (aux)
 	{
 		if ((aux->type == T_DOLLAR || aux->type == T_STR)) //-> quitar caso << D_OUT
-			expanding(aux, shell->env);
-		//ft_print_tokens(aux);
+		{
+			if (!aux->prev)
+			{
+				shell->command->token = expanding(aux, shell->env);
+				while (shell->command->token->prev)
+					shell->command->token = shell->command->token->prev;
+			}
+			else
+				aux = expanding(aux, shell->env);
+		}
 		aux = aux->next; //-> error
 	}
 	return (1);
@@ -53,6 +61,6 @@ int	shell_program(t_shell *shell)
 	if (!parsing(shell))
 		return (0);
 	expansion(shell);
-	//ft_print_tokens(shell->command->token);
+	ft_print_tokens(shell->command->token);
 	return (1);
 }

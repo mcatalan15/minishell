@@ -6,7 +6,7 @@
 /*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/02 09:50:04 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:52:03 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,24 +119,21 @@ static t_token	*join_subtokens(t_token *token)
 		i = -1;
 		while (token->str[++i])
 		{
-			zprintf("c = %c\n", token->str[i]);
 			if (!ft_isspace(token->str[i]) || token->type != T_STR)
 				str = addstr(str, token->str[i]);
 			else
+			{
 				add_new_token(&new, &aux, &str, shell);
+				while (ft_isspace(token->str[i + 1]))
+					i++;
+			}
 		}
 		token = token->next;
 	}
 	if (str)
 		add_new_token(&new, &aux, &str, shell);
-	//MIRAR, DA ERROR
-	while (new->prev)
-	{
-		printf("entra\n");
-		new = new->prev;
-	}
-	printf("new: %s\n", new->str);
-	ft_print_tokens(new);
+	new = aux;
+	// ft_print_tokens(new);
 	return (new);
 }
 
@@ -214,7 +211,20 @@ t_token	*expanding(t_token *token, char **env)
 	}
 	while (aux->prev)
 		aux = aux->prev;
+	next = aux;
 	aux = join_subtokens(aux);
-	ft_print_tokens(aux);
-	return (token);
+	clear_list(next);
+	aux->prev = token->prev;
+	if (token->prev)
+		token->prev->next = aux;
+	while (aux->next)
+		aux = aux->next;
+	aux->next = token->next;
+	if (token->next)
+		token->next->prev = aux;
+	free(token->str);
+	free(token);
+	token = NULL;
+	//ft_print_tokens(aux);
+	return (aux);
 }
