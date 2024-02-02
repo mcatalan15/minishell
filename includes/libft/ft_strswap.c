@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strswap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:14:07 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/31 19:31:01 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/02 12:53:32 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*ft_strswap(char *dst, char *src, char *sub)
 	char	*dst_ptr;
 
 	i = 0;
+	printf("dst: %s		src: %s			sub: %s\n", dst, src, sub);
 	aux = ft_strnstr(dst, src, 0x7fffffff);
 	if (!aux)
 		return (NULL);
@@ -38,6 +39,7 @@ char	*ft_strswap(char *dst, char *src, char *sub)
 	while (*dst_ptr)
 		tmp[i++] = *(dst_ptr++);
 	tmp[i] = '\0';
+	printf("result: %s\n", tmp);
 	return (tmp);
 }
 

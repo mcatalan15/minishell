@@ -6,7 +6,7 @@
 /*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/02 11:52:03 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:08:05 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ static int	expand(t_token *token, char **env, char *str, int pos)
 	len = 0;
 	exp = NULL;
 	str++;
-	if (str[0] == '?')
+	if (str[0] == '?' || ft_isdigit(str[0]))
 		len++;
 	while (str[len] && (ft_isalnum(str[len]) || str[len] == '_')\
-	&& str[0] != '?')
+	&& str[0] != '?' && !ft_isdigit(str[0]))
 		len++;
 	i = -1;
 	tmp = ft_substr(--str, 0, len + 1);
 	while (env[++i])
 	{
-		if (str[1] == '?')
+		if (str[1] == '?' || ft_isdigit(str[1]))
 			break ;
 		if (!ft_strcmpc(env[i], tmp + 1, '='))
 		{
@@ -47,7 +47,7 @@ static int	expand(t_token *token, char **env, char *str, int pos)
 	frees = token->str;
 	if (str[1] == '?')
 		exp = ft_is_interrogant(ft_itoa(token->shell->end_type), &len);
-	if (!env[i])
+	if (!env[i] || ft_isdigit(str[1]))
 	{
 		exp = ft_strdup("\0");
 		len = 0;
@@ -217,6 +217,7 @@ t_token	*expanding(t_token *token, char **env)
 	aux->prev = token->prev;
 	if (token->prev)
 		token->prev->next = aux;
+	// Error si se expande a NULL y solo hay eso. Ej: $ASDDFAFSDG
 	while (aux->next)
 		aux = aux->next;
 	aux->next = token->next;
