@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/01 22:23:56 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/02 09:50:04 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ static t_token	*join_subtokens(t_token *token)
 		i = -1;
 		while (token->str[++i])
 		{
-			printf("c = %c\n", token->str[i]);
+			zprintf("c = %c\n", token->str[i]);
 			if (!ft_isspace(token->str[i]) || token->type != T_STR)
 				str = addstr(str, token->str[i]);
 			else
@@ -131,7 +131,10 @@ static t_token	*join_subtokens(t_token *token)
 		add_new_token(&new, &aux, &str, shell);
 	//MIRAR, DA ERROR
 	while (new->prev)
+	{
+		printf("entra\n");
 		new = new->prev;
+	}
 	printf("new: %s\n", new->str);
 	ft_print_tokens(new);
 	return (new);
