@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/02 14:13:02 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/02/03 12:42:03 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static int	expand(t_token *token, char **env, char *str, int pos)
 	}
 	token->str = get_expansion(ft_substr(token->str, 0, pos),
 			ft_strswap(str, tmp, exp));
-	// printf("str: %s  tmp: %s  exp: %s\n", token->str, tmp, exp);
 	free(frees);
 	free(tmp);
 	free(exp);
@@ -88,6 +87,11 @@ void	add_new_token(t_token **new, t_token **tmp, char **str, t_shell *shell)
 {
 	t_token	*aux;
 
+	if (!*str)
+	{
+		*str = malloc(sizeof(char));
+		*str[0] = '\0';
+	}
 	aux = token_new(*str, T_STR, shell);
 	if (!*new)
 	{
@@ -113,6 +117,7 @@ static t_token	*join_subtokens(t_token *token)
 
 	str = NULL;
 	new = NULL;
+	aux = NULL;
 	shell = token->shell;
 	while (token)
 	{
@@ -130,10 +135,9 @@ static t_token	*join_subtokens(t_token *token)
 		}
 		token = token->next;
 	}
-	if (str)
+	if (str || !aux)
 		add_new_token(&new, &aux, &str, shell);
 	new = aux;
-	ft_print_tokens(new);
 	return (new);
 }
 
@@ -188,14 +192,12 @@ t_token	*expanding(t_token *token, char **env)
 	i = -1;
 	while (token->str[++i])
 	{
-		//printf("f: %c	pos: %d", token->str[i], i);
 		if (token->str[i] == '\"')
 			next = split_expansion(token, '\"', &i, env);
 		else if (token->str[i] == '\'')
 			next = split_expansion(token, '\'', &i, env);
 		else
 			next = split_expansion(token, '\0', &i, env);
-		// printf("next:%s	i: %d\n",next->str, i);
 		if (!aux)
 		{
 			aux = next;
@@ -213,12 +215,10 @@ t_token	*expanding(t_token *token, char **env)
 		aux = aux->prev;
 	next = aux;
 	aux = join_subtokens(aux);
-	printf("aux str: %s\n", aux->str);
 	clear_list(next);
 	aux->prev = token->prev;
 	if (token->prev)
 		token->prev->next = aux;
-	// Error si se expande a NULL y solo hay eso. Ej: $ASDDFAFSDG
 	while (aux->next)
 		aux = aux->next;
 	aux->next = token->next;
@@ -227,6 +227,5 @@ t_token	*expanding(t_token *token, char **env)
 	free(token->str);
 	free(token);
 	token = NULL;
-	//ft_print_tokens(aux);
 	return (aux);
 }
