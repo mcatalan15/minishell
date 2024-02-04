@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/02 11:19:13 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/02/03 19:51:00 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void	free_prompt(char *str, char *cwd)
 	free(cwd);
 }
 
-
-
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	shell;
@@ -63,13 +61,13 @@ int	main(int argc, char **argv, char **env)
 		str = readline(cwd);
 		handle_history(str);
 		if (!ft_strcmp(str, "exit"))
-		{
-			free(str);
 			break ;
+		if (!ft_is_enter(str))
+		{
+			init_vars(str, &shell);
+			shell_program(&shell);
+			free_prompt(str, cwd);
 		}
-		init_vars(str, &shell);
-		shell_program(&shell);
-		free_prompt(str, cwd);
 	}
 	printf("exit\n");
 	rl_clear_history();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:09:06 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/01/29 12:31:52 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/03 19:52:33 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ char			*ft_strcpy(char *dest, const char *src);
 char			*ft_strcat(char *dest, const char *src);
 int				ft_strcmpc(const char *s1, const char *s2, char c);
 char			*ft_strswap(char *dst, char *src, char *sub);
+int				ft_is_enter(char *str);
 
 #endif
