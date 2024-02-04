@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/02 12:04:31 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/02/04 21:40:37 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	expansion(t_shell *shell)
 				while (shell->command->token->prev)
 					shell->command->token = shell->command->token->prev;
 			}
-			else
+			else if (aux->prev->type != T_DOUT)
 				aux = expanding(aux, shell->env);
 		}
 		aux = aux->next; //-> error

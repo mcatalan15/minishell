@@ -6,13 +6,15 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:09:06 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/03 19:52:33 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/04 21:49:30 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # define BUFF_SIZE 10
+# define BUFFER_SIZE 1
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <stddef.h>
@@ -83,5 +85,20 @@ char			*ft_strcat(char *dest, const char *src);
 int				ft_strcmpc(const char *s1, const char *s2, char c);
 char			*ft_strswap(char *dst, char *src, char *sub);
 int				ft_is_enter(char *str);
+int				ft_isspace(char c);
+
+// get_next_line.c
+char			*get_next_line(int fd);
+char			*readbuf(int fd, char *str);
+char			*n_line(char *str);
+char			*clean_storage(char *str);
+char			*ft_free(char **str);
+
+// get_next_line_utils.c
+char			*ft_strjoin_gnl(char *s1, char *s2);
+size_t			ft_strl(char *str);
+char			*ft_strchr(const char *s, char c);
+char			*ft_substr_gnl(char *s, unsigned int start, size_t l);
+char			*ft_strncpy(char *dest, const char *src, size_t n);
 
 #endif
