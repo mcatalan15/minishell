@@ -6,15 +6,8 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:58:29 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/05 14:09:33 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/05 18:40:58 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// t_token	*redirect(t_token *token)
-// {
-// 	t_token	*aux;
-
-	
-// }

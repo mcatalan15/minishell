@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/04 21:39:44 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/05 18:37:55 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_token	*token_new(char *str, int type, t_shell *shell)
 {
 	t_token	*token;
 
-	token = malloc(sizeof(t_token)); //-> error
+	token = malloc(sizeof(t_token));
 	if (!token)
 		return (NULL);
 	token->str = str;

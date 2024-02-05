@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/03 12:42:03 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/05 19:04:41 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	expand(t_token *token, char **env, char *str, int pos)
 	str++;
 	if (str[0] == '?' || ft_isdigit(str[0]))
 		len++;
-	while (str[len] && (ft_isalnum(str[len]) || str[len] == '_')\
+	while (str[len] && (ft_isalnum(str[len]) || str[len] == '_') \
 	&& str[0] != '?' && !ft_isdigit(str[0]))
 		len++;
 	i = -1;
@@ -58,29 +58,6 @@ static int	expand(t_token *token, char **env, char *str, int pos)
 	free(tmp);
 	free(exp);
 	return (len);
-}
-
-static char	*addstr(char *str, char c)
-{
-	char	*new;
-	int		i;
-
-	i = 0;
-	new = malloc((ft_strlen(str) + 2) * sizeof(char));
-	if (!new)
-		return (NULL);
-	if (str)
-	{
-		while (str[i])
-		{
-			new[i] = str[i];
-			i++;
-		}
-	}
-	new[i++] = c;
-	new[i] = '\0';
-	free(str);
-	return (new);
 }
 
 void	add_new_token(t_token **new, t_token **tmp, char **str, t_shell *shell)
@@ -179,6 +156,21 @@ static t_token	*split_expansion(t_token *token, char flag, int *p, char **env)
 			i += expand(token, env, &token->str[i], i) - 1;
 	}
 	return (token);
+}
+
+t_token	*create_and_link_tokens(t_token *current, t_token *next)
+{
+	if (!current)
+	{
+		current = next;
+		current->prev = NULL;
+	}
+	else
+	{
+		current->next = next;
+		next->prev = current;
+	}
+	return (next);
 }
 
 t_token	*expanding(t_token *token, char **env)

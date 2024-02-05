@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/05 14:09:17 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/05 18:43:04 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		clear_list(t_token *token);
 // utils3.c
 char	*ft_is_interrogant(char *end_type, int *len);
 void	remove_quotes(char *str, char f);
+char	*addstr(char *str, char c);
 
 // errors.c
 int		stx_erro(t_shell *shell, char c);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:33:27 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/02 11:02:29 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:39:51 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*get_expansion(char *sub, char *exp)
 {
 	char	*str;
 
-	str = ft_strjoin(sub, exp); //-> error if str is NULL
+	str = ft_strjoin(sub, exp);
 	free(sub);
 	free(exp);
 	return (str);
@@ -53,7 +53,6 @@ int	clear_program(t_shell *shell, int type, int flag)
 	while (shell->command->token)
 	{
 		aux = aux->next;
-		//printf("token->str: %p, token: %p\n",shell->command->token->str, shell->command->token);
 		free(shell->command->token->str);
 		free(shell->command->token);
 		shell->command->token = aux;
@@ -71,7 +70,6 @@ char	*get_cwd(void)
 	char	*cwd_string;
 
 	cwd_string = malloc(strlen(getcwd(cwd, sizeof(cwd))) + 3);
-
 	strcpy(cwd_string, getcwd(cwd, sizeof(cwd)));
 	strcat(cwd_string, "$ ");
 	return (cwd_string);
@@ -79,11 +77,11 @@ char	*get_cwd(void)
 
 int	clear_list(t_token *token)
 {
-	t_token *aux;
+	t_token	*aux;
 
 	aux = token;
 	if (aux)
-		return(0);
+		return (0);
 	while (aux)
 	{
 		aux = aux->next;

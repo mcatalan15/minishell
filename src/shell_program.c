@@ -6,29 +6,11 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/05 14:09:05 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/05 18:40:39 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// static int	redirection(t_shell *shell)
-// {
-// 	t_token	*aux;
-
-// 	aux = shell->command->token;
-// 	while (aux)
-// 	{
-// 		// if (aux->type >= 2 && aux->type <= 4)
-// 		// 	redirect(aux);
-// 			//redirections
-// 		// else if (aux->type == T_DOUT)
-// 		// 	here_doc(aux);
-// 			// here doc
-// 	}
-
-// 	return (1);
-// }
 
 static int	expansion(t_shell *shell)
 {
@@ -37,7 +19,7 @@ static int	expansion(t_shell *shell)
 	aux = shell->command->token;
 	while (aux)
 	{
-		if ((aux->type == T_DOLLAR || aux->type == T_STR)) //-> quitar caso << D_OUT
+		if ((aux->type == T_DOLLAR || aux->type == T_STR))
 		{
 			if (!aux->prev)
 			{
@@ -48,7 +30,7 @@ static int	expansion(t_shell *shell)
 			else if (aux->prev->type != T_DOUT)
 				aux = expanding(aux, shell->env);
 		}
-		aux = aux->next; //-> error
+		aux = aux->next;
 	}
 	return (1);
 }
@@ -79,7 +61,6 @@ int	shell_program(t_shell *shell)
 	if (!parsing(shell))
 		return (0);
 	expansion(shell);
-	// redirection(shell);
 	ft_print_tokens(shell->command->token);
 	return (1);
 }

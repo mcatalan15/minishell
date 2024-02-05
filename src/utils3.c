@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:51:38 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/01/31 19:35:38 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/05 18:53:20 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*ft_is_interrogant(char *end_type, int *len)
 		(*len)++;
 	return (end_type);
 }
-
 
 void	remove_quotes(char *str, char f)
 {
@@ -39,3 +38,25 @@ void	remove_quotes(char *str, char f)
 	}
 }
 
+char	*addstr(char *str, char c)
+{
+	char	*new;
+	int		i;
+
+	i = 0;
+	new = malloc((ft_strlen(str) + 2) * sizeof(char));
+	if (!new)
+		return (NULL);
+	if (str)
+	{
+		while (str[i])
+		{
+			new[i] = str[i];
+			i++;
+		}
+	}
+	new[i++] = c;
+	new[i] = '\0';
+	free(str);
+	return (new);
+}
