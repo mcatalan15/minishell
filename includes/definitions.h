@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   definitions.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:57:45 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/27 13:54:08 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/05 11:54:58 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@
 // token values
 # define T_NULL 0
 # define T_STR 1
-# define T_REDIN 2
-# define T_REDOUT 3
-# define T_DIN 4
-# define T_DOUT 5
+# define T_REDIN 2	// <
+# define T_REDOUT 3	// >
+# define T_DIN 4	// >>
+# define T_DOUT 5	// <<
 # define T_DOLLAR 6
 # define T_PIPE 7
 # define T_SQUOTE 8

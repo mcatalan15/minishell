@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/02 10:54:02 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/02/05 12:17:11 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,8 @@ t_token	*expanding(t_token *token, char **env);
 
 // split_parsing.c
 char	**ft_split_shell(char const *str);
+
+// redirections.c
+t_token	*redirect(t_token *token);
 
 #endif

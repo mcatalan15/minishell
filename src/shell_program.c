@@ -6,18 +6,29 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/05 11:01:48 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/05 12:25:02 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// static int	expansion(t_shell *shell)
-// {
-// 	t_token	*aux;
+static int	redirection(t_shell *shell)
+{
+	t_token	*aux;
 
-// 	aux = shell->command->token;
-// }
+	aux = shell->command->token;
+	while (aux)
+	{
+		// if (aux->type >= 2 && aux->type <= 4)
+		// 	redirect(aux);
+			//redirections
+		// else if (aux->type == T_DOUT)
+		// 	here_doc(aux);
+			// here doc
+	}
+
+	return (1);
+}
 
 static int	expansion(t_shell *shell)
 {
@@ -68,7 +79,7 @@ int	shell_program(t_shell *shell)
 	if (!parsing(shell))
 		return (0);
 	expansion(shell);
-	// redirection(shell);
+	redirection(shell);
 	ft_print_tokens(shell->command->token);
 	return (1);
 }
