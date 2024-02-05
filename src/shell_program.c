@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/04 21:40:37 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/05 11:01:48 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+// static int	expansion(t_shell *shell)
+// {
+// 	t_token	*aux;
+
+// 	aux = shell->command->token;
+// }
 
 static int	expansion(t_shell *shell)
 {
@@ -61,6 +68,7 @@ int	shell_program(t_shell *shell)
 	if (!parsing(shell))
 		return (0);
 	expansion(shell);
+	// redirection(shell);
 	ft_print_tokens(shell->command->token);
 	return (1);
 }

@@ -64,16 +64,21 @@ ifeq ($(READLINE_CONFIGURE),)
 	@make --no-print-directory -C $(READLINE_D)
 	@echo "$(GREEN)Built readline!$(RESET)✅"
 else
+ifeq ($(wildcard $(READLINE_D)/config.status),)
+	@echo "$(YELLOW)Configuring readline$(RESET)"
+	@cd $(READLINE_D) && ./configure
+else
 ifeq ($(READLINE_FILES),)
 	@echo "$(GREEN)Readline Configured$(RESET)✅"
-	@echo "$(GREEN)Skipping...$(RESET)✅"
 	@echo "$(YELLOW)Compiling readline...$(RESET)"
+	@echo "$(GREEN)Skipping...$(RESET)✅"
 	@cd $(READLINE_D)
 	@make --no-print-directory -C $(READLINE_D)
 	@echo "$(GREEN)Readline ready$(RESET)✅"
 else
 	@echo "$(GREEN)Readline already built!$(RESET)✅"
 	@echo "$(GREEN)Skipping...$(RESET)✅"
+endif
 endif
 endif
 
