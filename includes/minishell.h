@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/06 12:02:14 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:48:12 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int		shell_program(t_shell *shell, char *str);
 
 // utils.c
 void	ft_print_tokens(t_token *tokens);
-int		ft_isspace(char c);
 int		ft_isoperate(int flag);
 int		ft_issquote(char c);
 int		ft_isdquote(char c);
+void	join_subtoken2(t_token *token, char **str, t_token **new, t_shell *shell);
 
 // utils2.c
 char	*get_cwd(void);
@@ -66,6 +66,7 @@ int		stx_erro(t_shell *shell, char c);
 
 // expansion.c
 t_token	*expanding(t_token *token, char **env);
+void	add_new_token(t_token **new, char **str, t_shell *shell);
 
 // split_parsing.c
 char	**ft_split_shell(char const *str);

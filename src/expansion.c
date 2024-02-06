@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/06 11:36:23 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:47:55 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	expand(t_token *token, char **env, char *str, int pos)
 	return (len);
 }
 
-void	add_new_token(t_token **new, t_token **tmp, char **str, t_shell *shell)
+void	add_new_token(t_token **new, char **str, t_shell *shell)
 {
 	t_token	*aux;
 
@@ -71,12 +71,10 @@ void	add_new_token(t_token **new, t_token **tmp, char **str, t_shell *shell)
 	}
 	aux = token_new(*str, T_STR, shell);
 	if (!*new)
-	{
 		*new = aux;
-		*tmp = *new;
-	}
 	else
 	{
+		printf("entra\n");
 		(*new)->next = aux;
 		aux->prev = *new;
 		*new = (*new)->next;
@@ -87,34 +85,21 @@ void	add_new_token(t_token **new, t_token **tmp, char **str, t_shell *shell)
 static t_token	*join_subtokens(t_token *token)
 {
 	t_token	*new;
-	t_token	*aux;
 	char	*str;
-	int		i;
 	t_shell	*shell;
 
 	str = NULL;
 	new = NULL;
-	aux = NULL;
 	shell = token->shell;
 	while (token)
 	{
-		i = -1;
-		while (token->str[++i])
-		{
-			if (!ft_isspace(token->str[i]) || token->type != T_STR)
-				str = addstr(str, token->str[i]);
-			else
-			{
-				add_new_token(&new, &aux, &str, shell);
-				while (ft_isspace(token->str[i + 1]))
-					i++;
-			}
-		}
+		join_subtoken2(token, &str, &new, shell);
 		token = token->next;
 	}
-	if (str || !aux)
-		add_new_token(&new, &aux, &str, shell);
-	new = aux;
+	if (str || !new)
+		add_new_token(&new, &str, shell);
+	while (new->prev)
+		new = new->prev;
 	return (new);
 }
 
