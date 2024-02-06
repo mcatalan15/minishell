@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/05 18:40:39 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/06 11:35:44 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ static int	parsing(t_shell *shell)
 	return (1);
 }
 
-int	shell_program(t_shell *shell)
+int	shell_program(t_shell *shell, char *str)
 {
+	init_vars(str, shell);
 	if (!parsing(shell))
 		return (0);
 	expansion(shell);

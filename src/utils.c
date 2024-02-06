@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:24:52 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/04 21:49:02 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/06 11:21:32 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_print_tokens(t_token *tokens)
 	tmp = tokens;
 	while (tmp)
 	{
-		printf("value: %s type: %d\n", tmp->str, tmp->type);
+		printf("value: %s type: %d mem: %p\n", tmp->str, tmp->type, tmp);
 		tmp = tmp->next;
 	}
 }

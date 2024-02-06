@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:33:27 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/05 18:39:51 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/06 11:26:06 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	clear_program(t_shell *shell, int type, int flag)
 {
 	t_token	*aux;
 
-	if (shell->command)
+	if (!shell->command)
 		return (0);
 	aux = shell->command->token;
 	while (shell->command->token)
@@ -80,7 +80,7 @@ int	clear_list(t_token *token)
 	t_token	*aux;
 
 	aux = token;
-	if (aux)
+	if (!aux)
 		return (0);
 	while (aux)
 	{

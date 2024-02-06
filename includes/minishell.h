@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/05 18:43:04 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/06 12:02:14 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_token	*token_new(char *str, int type, t_shell *shell);
 int		get_type(char *str);
 
 // shell_program.c
-int		shell_program(t_shell *shell);
+int		shell_program(t_shell *shell, char *str);
 
 // utils.c
 void	ft_print_tokens(t_token *tokens);
@@ -58,6 +58,8 @@ int		clear_list(t_token *token);
 char	*ft_is_interrogant(char *end_type, int *len);
 void	remove_quotes(char *str, char f);
 char	*addstr(char *str, char c);
+t_token	*token_new(char *str, int type, t_shell *shell);
+int		get_type(char *str);
 
 // errors.c
 int		stx_erro(t_shell *shell, char c);

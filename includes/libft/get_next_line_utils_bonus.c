@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 10:07:18 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/04 21:33:20 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/06 10:52:27 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,3 @@ char	*ft_substr_gnl(char *s, unsigned int start, size_t l)
 	str[l] = '\0';
 	return (str);
 }
-

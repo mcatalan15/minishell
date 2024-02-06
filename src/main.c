@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/05 14:06:35 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/06 11:38:11 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,11 @@ int	main(int argc, char **argv, char **env)
 		if (!ft_strcmp(str, "exit"))
 			break ;
 		if (!ft_is_enter(str))
-		{
-			init_vars(str, &shell);
-			shell_program(&shell);
-			free_prompt(str, cwd);
-		}
+			shell_program(&shell, str);
+		free_prompt(str, cwd);
+		clear_program(&shell, 0, 0);
 	}
+	free_prompt(str, cwd);
 	printf("exit\n");
 	rl_clear_history();
 	clear_program(&shell, 0, 1);
