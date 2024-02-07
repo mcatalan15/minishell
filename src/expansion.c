@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/06 12:47:55 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/07 11:32:53 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,16 @@ static int	expand(t_token *token, char **env, char *str, int pos)
 	int		len;
 	char	*frees;
 
-	len = 0;
 	exp = NULL;
 	str++;
-	if (str[0] == '?' || ft_isdigit(str[0]))
-		len++;
-	while (str[len] && (ft_isalnum(str[len]) || str[len] == '_') \
-	&& str[0] != '?' && !ft_isdigit(str[0]))
-		len++;
+	len = skipped(str);
 	i = -1;
 	tmp = ft_substr(--str, 0, len + 1);
-	while (env[++i])
-	{
-		if (str[1] == '?' || ft_isdigit(str[1]))
-			break ;
-		if (!ft_strcmpc(env[i], tmp + 1, '='))
-		{
-			len = 0;
-			exp = ft_strchr(env[i], '=') + 1;
-			while (exp[len])
-				len++;
-			exp = ft_substr(exp, 0, len);
-			break ;
-		}
-	}
-	frees = token->str;
+	exp = skipped2(env, str, tmp);
+	len = ft_strlen(exp);
 	if (str[1] == '?')
-		exp = ft_is_interrogant(ft_itoa(token->shell->end_type), &len);
-	if (!env[i] || ft_isdigit(str[1]))
-	{
-		exp = ft_strdup("\0");
-		len = 0;
-	}
+		exp = ft_is_interrogant(ft_itoa(token->shell->end_type));
+	frees = token->str;
 	token->str = get_expansion(ft_substr(token->str, 0, pos),
 			ft_strswap(str, tmp, exp));
 	free(frees);

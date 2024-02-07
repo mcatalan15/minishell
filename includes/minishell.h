@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/06 12:48:12 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/07 11:34:59 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*get_expansion(char *sub, char *exp);
 int		clear_list(t_token *token);
 
 // utils3.c
-char	*ft_is_interrogant(char *end_type, int *len);
+char	*ft_is_interrogant(char *end_type);
 void	remove_quotes(char *str, char f);
 char	*addstr(char *str, char c);
 t_token	*token_new(char *str, int type, t_shell *shell);
@@ -67,6 +67,10 @@ int		stx_erro(t_shell *shell, char c);
 // expansion.c
 t_token	*expanding(t_token *token, char **env);
 void	add_new_token(t_token **new, char **str, t_shell *shell);
+
+// expansion2.c
+int		skipped(char *str);
+char	*skipped2(char **env, char *str, char *tmp);
 
 // split_parsing.c
 char	**ft_split_shell(char const *str);
