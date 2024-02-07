@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:24:52 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/06 12:46:00 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:22:46 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_print_tokens(t_token *tokens)
 	}
 }
 
-void	join_subtoken2(t_token *token, char **str, t_token **new, t_shell *shell)
+void	join_subt2(t_token *token, char **str, t_token **new, t_shell *shell)
 {
 	int	i;
 

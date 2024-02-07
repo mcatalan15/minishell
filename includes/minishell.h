@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/07 11:34:59 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:48:17 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	ft_print_tokens(t_token *tokens);
 int		ft_isoperate(int flag);
 int		ft_issquote(char c);
 int		ft_isdquote(char c);
-void	join_subtoken2(t_token *token, char **str, t_token **new, t_shell *shell);
+void	join_subt2(t_token *token, char **str, t_token **new,
+			t_shell *shell);
 
 // utils2.c
 char	*get_cwd(void);
@@ -67,10 +68,15 @@ int		stx_erro(t_shell *shell, char c);
 // expansion.c
 t_token	*expanding(t_token *token, char **env);
 void	add_new_token(t_token **new, char **str, t_shell *shell);
+int		expand(t_token *token, char **env, char *str, int pos);
+t_token	*split_expansion(t_token *token, char flag, int *p, char **env);
 
 // expansion2.c
 int		skipped(char *str);
 char	*skipped2(char **env, char *str, char *tmp);
+int		get_type2(char flag, int *p, int *len);
+t_token	*get_token(t_token *token, char **env);
+t_token	*add_subtokens(t_token *token, t_token *aux, t_token *next, char **env);
 
 // split_parsing.c
 char	**ft_split_shell(char const *str);

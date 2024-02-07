@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:33:08 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/07 11:33:27 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:46:57 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ char	*skipped2(char **env, char *str, char *tmp)
 			break ;
 		if (!ft_strcmpc(env[i], tmp + 1, '='))
 		{
-			len = 0;
 			exp = ft_strchr(env[i], '=') + 1;
 			while (exp[len])
 				len++;
@@ -50,4 +49,64 @@ char	*skipped2(char **env, char *str, char *tmp)
 	if (!env[i] || ft_isdigit(str[1]))
 		exp = ft_strdup("\0");
 	return (exp);
+}
+
+int	get_type2(char flag, int *p, int *len)
+{
+	int	type;
+
+	type = T_STR;
+	if (flag == '\"')
+		type = T_DQUOTE;
+	else if (flag == '\'')
+		type = T_SQUOTE;
+	if (type != T_STR)
+	{
+		(*p)++;
+		*len += 2;
+	}
+	return (type);
+}
+
+t_token	*get_token(t_token *token, char **env)
+{
+	int	i;
+
+	i = -1;
+	while (token->str[++i] && token->type != T_SQUOTE)
+	{
+		if (token->str[i] == '$' && token->str[i + 1] != '$'
+			&& !ft_isspace(token->str[i + 1]) && token->str[i + 1])
+			i += expand(token, env, &token->str[i], i) - 1;
+	}
+	return (token);
+}
+
+t_token	*add_subtokens(t_token *token, t_token *aux, t_token *next, char **env)
+{
+	int	i;
+
+	i = -1;
+	while (token->str[++i])
+	{
+		if (token->str[i] == '\"')
+			next = split_expansion(token, '\"', &i, env);
+		else if (token->str[i] == '\'')
+			next = split_expansion(token, '\'', &i, env);
+		else
+			next = split_expansion(token, '\0', &i, env);
+		if (!aux)
+		{
+			aux = next;
+			aux->prev = NULL;
+		}
+		else
+		{
+			aux->next = next;
+			next->prev = aux;
+		}
+		aux = next;
+		next = next->next;
+	}
+	return (aux);
 }
