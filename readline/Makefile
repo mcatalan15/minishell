@@ -31,7 +31,7 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/mcatalan/mcatalan15/minishell/readline
+BUILD_DIR = /Users/jpaul-kr/Documents/curso/C03/minishell_code/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}

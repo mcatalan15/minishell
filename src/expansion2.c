@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:33:08 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/07 12:46:57 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:45:25 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ t_token	*get_token(t_token *token, char **env)
 	i = -1;
 	while (token->str[++i] && token->type != T_SQUOTE)
 	{
-		if (token->str[i] == '$' && token->str[i + 1] != '$'
-			&& !ft_isspace(token->str[i + 1]) && token->str[i + 1])
+		if (token->str[i] == '$')
 			i += expand(token, env, &token->str[i], i) - 1;
 	}
 	return (token);

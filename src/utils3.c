@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:51:38 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/07 11:16:55 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:51:01 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,18 @@ char	*ft_is_interrogant(char *end_type)
 	return (end_type);
 }
 
-void	remove_quotes(char *str, char f)
+int	remove_quotes(char *str, char f)
 {
 	int	i;
+	int	len;
 
 	i = 0;
+	len = 0;
 	while (str[i] && str[i + 1] != f)
 	{
 		str[i] = str[i + 1];
 		i++;
+		len++;
 	}
 	while (str[i + 1])
 	{
@@ -38,6 +41,7 @@ void	remove_quotes(char *str, char f)
 		str[i + 1] = str[i + 2];
 		i++;
 	}
+	return (len);
 }
 
 char	*addstr(char *str, char c)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:18:52 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/01/31 17:32:28 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/08 12:12:26 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ struct	s_command
 {
 	char	**cmd;
 	char	*path;
+	int		fd[2];
+	int		pid;
 	t_token	*token;
 };
 
