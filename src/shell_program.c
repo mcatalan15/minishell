@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/08 12:19:01 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/02/08 20:19:53 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,42 @@ static int	parsing(t_shell *shell)
 	return (1);
 }
 
+int	exec_program(t_shell *shell)
+{
+	t_token	*aux;
+	t_token	*list;
+	int		status;
+
+	printf("exec_program\n");
+	aux = shell->command->token;
+	shell->command->in_copy = dup(0);
+	shell->command->out_copy = dup(1);
+	while (aux)
+	{
+		list = aux;
+		while (aux->type != T_PIPE && aux->next)
+			aux = aux->next;
+		if (pipe(shell->command->fd) == -1)
+			return (0);
+		if (aux->type == T_PIPE)
+			dup2(shell->command->fd[0], 1);
+		shell->command->pid = fork();
+		if (!shell->command->pid)
+			exec_cmd(shell, list);
+		dup2(shell->command->fd[1], 0);
+		aux = aux->next;
+	}
+	waitpid(shell->command->pid, &status, 0);
+	return (1);
+}
+
 int	shell_program(t_shell *shell, char *str)
 {
-	t_token *aux;
-
-	aux = shell->command->token;
 	init_vars(str, shell);
 	if (!parsing(shell))
 		return (0);
 	expansion(shell);
-	while (aux)
-	{
-		while (!aux && )
-	}
-	ft_print_tokens(shell->command->token);
+	exec_program(shell);
+	// ft_print_tokens(shell->command->token);
 	return (1);
 }

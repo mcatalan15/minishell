@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:51:38 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/08 11:51:01 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/02/08 17:18:38 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ int	get_type(char *str)
 {
 	if (!str[0])
 		return (T_NULL);
-	if (str[0] == '>' && str[1] != '>')
-		return (T_REDIN);
 	if (str[0] == '<' && str[1] != '<')
+		return (T_REDIN);
+	if (str[0] == '>' && str[1] != '>')
 		return (T_REDOUT);
-	if (str[0] == '>' && str[1] == '>')
-		return (T_DIN);
 	if (str[0] == '<' && str[1] == '<')
+		return (T_DIN);
+	if (str[0] == '>' && str[1] == '>')
 		return (T_DOUT);
 	if (str[0] == '$' && str[1])
 		return (T_DOLLAR);

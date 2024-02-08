@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:33:27 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/06 11:26:06 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/08 20:09:20 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	clear_program(t_shell *shell, int type, int flag)
 		free(shell->command->token);
 		shell->command->token = aux;
 	}
+	free(shell->command->cmd);
+	free(shell->command->path);
 	free(shell->command);
 	if (flag)
 		exit(type);

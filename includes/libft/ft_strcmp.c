@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:50:28 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/01/18 18:53:16 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/08 18:27:30 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
+	
 	while (*s1 && (*s1 == *s2))
 	{
 		s1++;
