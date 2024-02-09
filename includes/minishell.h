@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/08 20:04:26 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/09 13:07:38 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ void	kill_all_quotes(char *str);
 int		cmdlen(t_token *aux);
 void	ft_print_cmd(char **command);
 char	*search_path(t_shell *shell, char **split);
+
+// utils5.c
+int		ft_isbuiltin(char *cmd);
 
 // errors.c
 int		stx_erro(t_shell *shell, char c);

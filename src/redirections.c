@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:58:29 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/08 20:04:29 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/09 11:54:30 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 
 // 	dup2(shell->command->in_copy, 0);
 // 	pipe(shell->command->fd);
-// 	dup2(shell->command->fd[0], 1);
+// 	dup2(shell->command->fd[1], 1);
 // 	line = ft_strdup("\0");
 // 	while (ft_strcmp(line, token->str))
 // 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/08 20:16:43 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/09 12:51:24 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,12 @@ char	*get_path(t_shell *shell)
 
 void	exec_cmd(t_shell *shell, t_token *aux)
 {
+	int	i;
+
+	i = -1;
 	shell->command->cmd = get_cmd(aux);
+	while (shell->command->cmd[++i])
+		dprintf(shell->command->out_copy, "cmd[%d]: %s\n", i, shell->command->cmd[i]);
 	shell->command->path = get_path(shell);
-	printf("path: %s\n", shell->command->path);
-    exit(0);
+	execve(shell->command->path, shell->command->cmd, shell->env);
 }

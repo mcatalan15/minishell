@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strcmpnks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 18:50:28 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/09 12:59:45 by mcatalan         ###   ########.fr       */
+/*   Created: 2024/02/09 12:59:03 by mcatalan          #+#    #+#             */
+/*   Updated: 2024/02/09 13:05:04 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmpnks(char *s1, char *s2)
 {
-	while (*s1 && (*s1 == *s2))
-	{
-		s1++;
-		s2++;
-	}
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	int	i;
+
+	i = -1;
+	while (s1[++i])
+		s1[i] = ft_tolower(s1[i]);
+	i = -1;
+	while (s2[++i])
+		s2[i] = ft_tolower(s2[i]);
+	return (ft_strcmp(s1, s2));
 }

@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   utils5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 18:50:28 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/09 12:59:45 by mcatalan         ###   ########.fr       */
+/*   Created: 2024/02/09 13:01:38 by mcatalan          #+#    #+#             */
+/*   Updated: 2024/02/09 13:10:47 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h" 
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_isbuiltin(char *cmd)
 {
-	while (*s1 && (*s1 == *s2))
-	{
-		s1++;
-		s2++;
-	}
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	if (!ft_strcmpnks(cmd, "echo") || !ft_strcmpnks(cmd, "export"))
+		return (1);
+	if (!ft_strcmpnks(cmd, "unset") || !ft_strcmpnks(cmd, "env"))
+		return (1);
+	if (!ft_strcmpnks(cmd, "cd") || !ft_strcmpnks(cmd, "pwd"))
+		return (1);
+	return (0);
 }
