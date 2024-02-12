@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:24:52 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/07 12:22:46 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/12 12:26:25 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,23 @@ int	ft_isdquote(char c)
 	if (c == '\"')
 		return (1);
 	return (0);
+}
+
+int	ft_isrd(int flag)
+{
+	if ((flag >= T_REDIN && flag <= T_DOUT))
+		return (flag);
+	return (0);
+}
+
+char	*ft_is_interrogant(char *end_type)
+{
+	int	len;
+
+	len = 0;
+	while (end_type[len])
+		len++;
+	return (end_type);
 }
 
 void	ft_print_tokens(t_token *tokens)

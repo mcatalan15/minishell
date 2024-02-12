@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/09 12:51:24 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/12 12:41:24 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ char	**get_cmd(t_token *token)
 	t_token	*aux;
 
 	i = cmdlen(token);
+	//printf("malloced: %d\n", i);
 	aux = token;
 	command = malloc((i + 1) * sizeof(char *));
 	if (!command)
 		return (NULL);
+	command[i] = NULL;
 	i = 0;
 	while (aux && aux->type != T_PIPE)
 	{
-		if ((!aux->prev || (aux->prev && (aux->prev->type < T_REDIN
-						|| aux->prev->type > T_DOUT))) && aux->type == T_STR)
-			command[i++] = aux->str;
+		if ((!aux->prev || !ft_isrd(aux->prev->type)) && aux->type == T_STR)
+			command[i++] = ft_strdup(aux->str);
 		aux = aux->next;
 	}
-	command[i] = NULL;
 	//ft_print_cmd(command);
 	return (command);
 }
@@ -58,14 +58,32 @@ char	*get_path(t_shell *shell)
 	return (path);
 }
 
+void	redirect(t_shell *shell, t_token *list)
+{
+	t_token	*aux;
+
+	aux = list;
+	while (aux && aux->type != T_PIPE)
+	{
+		if (aux->next && ft_isrd(aux->type) && aux->next->type == T_STR)
+			redirection(shell, aux);
+		aux = aux->next;
+	}
+}
+
 void	exec_cmd(t_shell *shell, t_token *aux)
 {
 	int	i;
 
 	i = -1;
 	shell->command->cmd = get_cmd(aux);
-	while (shell->command->cmd[++i])
-		dprintf(shell->command->out_copy, "cmd[%d]: %s\n", i, shell->command->cmd[i]);
 	shell->command->path = get_path(shell);
+	redirect(shell, aux);
 	execve(shell->command->path, shell->command->cmd, shell->env);
+	// if (!shell->command->cmd)
+	// 	dprintf(shell->command->out_copy, "cmd = NULL \n");
+	// while (shell->command->cmd[++i])
+ 	// 	dprintf(shell->command->out_copy, "cmd[%d]: %s\n", i, shell->command->cmd[i]);
+	exit(1);
+	// dprintf(shell->command->out_copy,"path: %s", shell->command->path);
 }

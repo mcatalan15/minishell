@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/09 13:07:38 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/12 12:29:40 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,36 +40,6 @@ int		get_type(char *str);
 // shell_program.c
 int		shell_program(t_shell *shell, char *str);
 
-// utils.c
-void	ft_print_tokens(t_token *tokens);
-int		ft_isoperate(int flag);
-int		ft_issquote(char c);
-int		ft_isdquote(char c);
-void	join_subt2(t_token *token, char **str, t_token **new,
-			t_shell *shell);
-
-// utils2.c
-char	*get_cwd(void);
-int		clear_program(t_shell *shell, int type, int flag);
-int		ft_quoted_closed(char *str);
-char	*get_expansion(char *sub, char *exp);
-int		clear_list(t_token *token);
-
-// utils3.c
-char	*ft_is_interrogant(char *end_type);
-int		remove_quotes(char *str, char f);
-char	*addstr(char *str, char c);
-t_token	*token_new(char *str, int type, t_shell *shell);
-int		get_type(char *str);
-
-// utils4.c
-void	kill_all_quotes(char *str);
-int		cmdlen(t_token *aux);
-void	ft_print_cmd(char **command);
-char	*search_path(t_shell *shell, char **split);
-
-// utils5.c
-int		ft_isbuiltin(char *cmd);
 
 // errors.c
 int		stx_erro(t_shell *shell, char c);
@@ -98,7 +68,40 @@ void	exec_cmd(t_shell *shell, t_token *aux);
 char	**get_cmd(t_token *token);
 
 // redirections.c
+void	redirection(t_shell *shell, t_token *token);
 // void	redirect(t_shell *shell, t_token *token);
 // t_token	*redirect(t_token *token);
+
+// utils.c
+int		ft_isoperate(int flag);
+int		ft_issquote(char c);
+int		ft_isdquote(char c);
+int		ft_isrd(int flag);
+char	*ft_is_interrogant(char *end_type);
+void	join_subt2(t_token *token, char **str, t_token **new,
+			t_shell *shell);
+void	ft_print_tokens(t_token *tokens);
+
+// utils2.c
+char	*get_cwd(void);
+int		clear_program(t_shell *shell, int type, int flag);
+int		ft_quoted_closed(char *str);
+char	*get_expansion(char *sub, char *exp);
+int		clear_list(t_token *token);
+
+// utils3.c
+int		remove_quotes(char *str, char f);
+char	*addstr(char *str, char c);
+t_token	*token_new(char *str, int type, t_shell *shell);
+int		get_type(char *str);
+
+// utils4.c
+void	kill_all_quotes(char *str);
+int		cmdlen(t_token *aux);
+void	ft_print_cmd(char **command);
+char	*search_path(t_shell *shell, char **split);
+
+// utils5.c
+int		ft_isbuiltin(char *cmd);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:14:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/08 20:07:22 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/12 12:00:51 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	cmdlen(t_token	*aux)
 	len = 0;
 	while (aux && aux->type != T_PIPE)
 	{
-		if (aux->prev && !ft_isoperate(aux->prev->type) && aux->type == T_STR)
+		if ((!aux->prev || !ft_isrd(aux->prev->type)) && aux->type == T_STR)
 			len++;
 		aux = aux->next;
 	}

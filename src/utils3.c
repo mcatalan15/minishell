@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:51:38 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/08 17:18:38 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/12 12:26:18 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	*ft_is_interrogant(char *end_type)
-{
-	int	len;
-
-	len = 0;
-	while (end_type[len])
-		len++;
-	return (end_type);
-}
 
 int	remove_quotes(char *str, char f)
 {

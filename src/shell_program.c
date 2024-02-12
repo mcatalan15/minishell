@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/09 12:39:10 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:00:17 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	exec_program(t_shell *shell)
 	aux = shell->command->token;
 	shell->command->in_copy = dup(0);
 	shell->command->out_copy = dup(1);
+	//ft_print_tokens(aux);
 	while (aux)
 	{
 		list = aux;
@@ -76,8 +77,7 @@ int	exec_program(t_shell *shell)
 		{
 			if (pipe(shell->command->fd) == -1)
 				return (0);
-			if (aux->type == T_PIPE)
-				dup2(shell->command->fd[1], 1);
+			dup2(shell->command->fd[1], 1);
 		}
 		shell->command->pid = fork();
 		if (!shell->command->pid)
@@ -90,7 +90,11 @@ int	exec_program(t_shell *shell)
 		}
 		aux = aux->next;
 	}
+	dup2(shell->command->in_copy, 0);
+	dup2(shell->command->out_copy, 1);
 	waitpid(shell->command->pid, &status, 0);
+	if (WIFEXITED(status))
+		shell->end_type = WEXITSTATUS(status);
 	return (1);
 }
 

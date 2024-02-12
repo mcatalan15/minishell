@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:04:55 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/08 19:47:54 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/12 13:09:28 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,19 @@ int	stx_erro(t_shell *shell, char c)
 	else
 		printf("minishell: syntax error near unexpected token `%c'\n", c);
 	dup2(fd, 1);
-	shell->end_type = 258;
+	shell->end_type = STX_ERRO;
 	return (clear_program(shell, STX_ERRO, 0));
 }
 
 void	rdir_erro(t_shell *shell, int type)
 {
-	int	fd;
+	int		fd;
+	char	*s;
 
+	s = "No such file or directory";
 	fd = dup(1);
 	dup2(2, 1);
-	printf("minishell: %s: No such file or directory\n", shell->command->cmd[0]);
+	printf("minishell: %s: %s\n", shell->command->cmd[0], s);
 	dup2(fd, 1);
 	shell->end_type = 1;
 	clear_program(shell, type, 1);
