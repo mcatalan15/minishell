@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpaul-kr <jpaul-kr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/08 11:07:51 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:08:05 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ t_token	*put_tokens(t_token *token, char *str, t_shell *shell)
 int	init_vars(char *line, t_shell *shell)
 {
 	shell->command = command_new();
-	shell->end_type = 0;
 	shell->command->token = put_tokens(shell->command->token, line, shell);
 	if (!shell->command->token)
 		return (0);

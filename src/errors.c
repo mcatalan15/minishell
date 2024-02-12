@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:04:55 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/12 13:18:58 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:08:54 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,7 @@ int	stx_erro(t_shell *shell, char c)
 		printf("minishell: syntax error near unexpected token `%c'\n", c);
 	dup2(fd, 1);
 	shell->end_type = STX_ERRO;
-	clear_list(shell->command->token);
-	shell->command->token = NULL;
-	shell->command->pid = fork();
-	if (!shell->command->pid)
-		exit(STX_ERRO);
-	return (0);
+	return (clear_program(shell, STX_ERRO, 0));
 }
 
 void	rdir_erro(t_shell *shell, int type)

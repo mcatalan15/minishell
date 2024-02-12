@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/12 11:24:16 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:16:01 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int argc, char **argv, char **env)
 	char	*cwd;
 
 	shell.env = env;
+	shell.end_type = 0;
 	using_history();
 	main_args(argc, argv);
 	while (1)

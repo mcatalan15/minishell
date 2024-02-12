@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/12 13:12:31 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:43:29 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int	expansion(t_shell *shell)
 				shell->command->token = expanding(aux, shell->env);
 				while (shell->command->token->prev)
 					shell->command->token = shell->command->token->prev;
+				aux = shell->command->token;
 			}
 			else if (aux->prev->type != T_DOUT)
 				aux = expanding(aux, shell->env);
@@ -67,7 +68,6 @@ int	exec_program(t_shell *shell)
 	aux = shell->command->token;
 	shell->command->in_copy = dup(0);
 	shell->command->out_copy = dup(1);
-	//ft_print_tokens(aux);
 	while (aux)
 	{
 		list = aux;
@@ -101,9 +101,9 @@ int	exec_program(t_shell *shell)
 int	shell_program(t_shell *shell, char *str)
 {
 	init_vars(str, shell);
-	if (parsing(shell))
-		expansion(shell);
+	if (!parsing(shell))
+		return (0);
+	expansion(shell);
 	exec_program(shell);
-	// ft_print_tokens(shell->command->token);
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:58:29 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/12 12:47:26 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:24:10 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,31 @@ void	t_dout(t_shell *shell, t_token *token)
 	dup2(shell->command->fdout, 1);
 }
 
+// https://github.com/JuliaORS/Minishell-42Bcn/blob/main/srcs/execution/heredoc.c
+
 void	here_doc(t_shell *shell, t_token *token)
 {
 	char	*line;
+	int		fd[2];
+	char	*del;
 
 	dup2(shell->command->in_copy, 0);
-	pipe(shell->command->fd);
-	dup2(shell->command->fd[1], 1);
-	line = ft_strdup("\0");
-	while (ft_strcmp(line, token->str))
+	pipe(fd);
+	del = ft_strjoin(token->str, "\n");
+	ft_putstr_fd("> ", shell->command->out_copy);
+	line = get_next_line(0);
+	while (ft_strcmp(line, del) != 0)
 	{
 		free(line);
+		ft_putstr_fd(line, fd[1]);
+		ft_putstr_fd("> ", shell->command->out_copy);
 		line = get_next_line(0);
-		printf("%s", line);
 	}
 	free(line);
-	dup2(shell->command->fd[0], 0);
+	free(del);
+	dup2(fd[0], 0);
+	close(fd[1]);
+	close(fd[0]);
 }
 
 void	redirection(t_shell *shell, t_token *token)

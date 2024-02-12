@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/08 16:13:27 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/12 17:51:47 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ int	expand(t_token *token, char **env, char *str, int pos)
 	exp = NULL;
 	str++;
 	len = skipped(str);
+	if (!len)
+	return (1);
 	tmp = ft_substr(--str, 0, len + 1);
 	exp = skipped2(env, str, tmp);
-	len = ft_strlen(exp);
 	if (str[1] == '?')
 		exp = ft_is_interrogant(ft_itoa(token->shell->end_type));
+	len = ft_strlen(exp);
 	frees = token->str;
 	token->str = get_expansion(ft_substr(token->str, 0, pos),
 			ft_strswap(str, tmp, exp));
