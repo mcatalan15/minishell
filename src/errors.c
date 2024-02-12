@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:04:55 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/12 13:09:28 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:18:58 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ int	stx_erro(t_shell *shell, char c)
 		printf("minishell: syntax error near unexpected token `%c'\n", c);
 	dup2(fd, 1);
 	shell->end_type = STX_ERRO;
-	return (clear_program(shell, STX_ERRO, 0));
+	clear_list(shell->command->token);
+	shell->command->token = NULL;
+	shell->command->pid = fork();
+	if (!shell->command->pid)
+		exit(STX_ERRO);
+	return (0);
 }
 
 void	rdir_erro(t_shell *shell, int type)
