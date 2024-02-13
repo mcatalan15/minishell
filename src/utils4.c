@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:14:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/12 12:00:51 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/13 19:20:35 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char	*search_path(t_shell *shell, char **split)
 		}
 		free(path);
 	}
+	free_dp(split, add);
 	cmd_nf(shell, shell->command->cmd[0]);
 	return (NULL);
 }

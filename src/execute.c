@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/13 13:03:58 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:53:04 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ char	*get_path(t_shell *shell)
 
 	path = NULL;
 	i = -1;
+	if (!*shell->command->cmd)
+		return (NULL);
 	while (shell->env[++i])
 	{
 		if (!ft_strcmpc(shell->env[i], "PATH", '='))
@@ -71,17 +73,22 @@ void	redirect(t_shell *shell, t_token *list)
 	}
 }
 
+// void	execute(t_shell *shell)
+// {
+// 	if ()
+// }
+
 void	exec_cmd(t_shell *shell, t_token *aux)
 {
 	// int	i;
 
 	// i = -1;
-	//printf("hola\n");
+	redirect(shell, aux);
 	shell->command->cmd = get_cmd(aux);
 	shell->command->path = get_path(shell);
-	redirect(shell, aux);
+	//dprintf(shell->command->out_copy, "hola\n");
 	//dprintf(shell->command->out_copy, "cmd 1: %s && cmd 2: %s\n",shell->command->cmd[0], shell->command->cmd[1]);
-	printf("hola\n");
+	//printf("hola\n");
 	execve(shell->command->path, shell->command->cmd, shell->env);
 	// if (!shell->command->cmd)
 	// 	dprintf(shell->command->out_copy, "cmd = NULL \n");

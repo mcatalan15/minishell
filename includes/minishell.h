@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/13 12:10:33 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/13 19:15:09 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int		shell_program(t_shell *shell, char *str);
 
 // errors.c
 int		stx_erro(t_shell *shell, char c);
-void	rdir_erro(t_shell *shell, int type);
+void	nsf_or_dir(t_shell *shell, int type, char *str);
+void	rdir_erro(t_shell *shell, int type, char *str);
 void	perm_den(t_shell *shell, char *cmd);
 void	cmd_nf(t_shell *shell, char *cmd);
 
