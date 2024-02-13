@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/12 12:29:40 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:10:33 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ char	*search_path(t_shell *shell, char **split);
 
 // utils5.c
 int		ft_isbuiltin(char *cmd);
+int		*get_pid(t_token *token);
+void	wait_for_children(t_shell *shell, int *pid);
 
 #endif

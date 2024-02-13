@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:18:52 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/08 18:26:34 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/13 11:36:13 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,9 @@ struct	s_command
 	char	**cmd;
 	char	*path;
 	int		fd[2];
-	int		pid;
+	int		*pid;
 	int		in_copy;
 	int		out_copy;
-	int		fdin;
-	int		fdout;
 	t_token	*token;
 };
 

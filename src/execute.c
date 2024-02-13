@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/13 10:15:42 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:03:58 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,12 @@ void	exec_cmd(t_shell *shell, t_token *aux)
 	// int	i;
 
 	// i = -1;
+	//printf("hola\n");
 	shell->command->cmd = get_cmd(aux);
 	shell->command->path = get_path(shell);
 	redirect(shell, aux);
+	//dprintf(shell->command->out_copy, "cmd 1: %s && cmd 2: %s\n",shell->command->cmd[0], shell->command->cmd[1]);
+	printf("hola\n");
 	execve(shell->command->path, shell->command->cmd, shell->env);
 	// if (!shell->command->cmd)
 	// 	dprintf(shell->command->out_copy, "cmd = NULL \n");

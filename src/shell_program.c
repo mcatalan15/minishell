@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/12 17:43:29 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/13 13:01:26 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,25 +63,31 @@ int	exec_program(t_shell *shell)
 {
 	t_token	*aux;
 	t_token	*list;
-	int		status;
+	int		i;
 
+	i = 0;
 	aux = shell->command->token;
 	shell->command->in_copy = dup(0);
 	shell->command->out_copy = dup(1);
+	shell->command->pid = get_pid(aux);
 	while (aux)
 	{
 		list = aux;
 		while (aux->type != T_PIPE && aux->next)
 			aux = aux->next;
+		dup2(shell->command->out_copy, 1);
 		if (aux->type == T_PIPE)
 		{
 			if (pipe(shell->command->fd) == -1)
 				return (0);
 			dup2(shell->command->fd[1], 1);
 		}
-		shell->command->pid = fork();
-		if (!shell->command->pid)
+		shell->command->pid[i] = fork();
+		if (!shell->command->pid[i++])
+		{
 			exec_cmd(shell, list);
+		}
+		//dprintf(shell->command->out_copy ,"%s\n", get_next_line(shell->command->fd[0]));
 		if (aux->type == T_PIPE)
 		{
 			dup2(shell->command->fd[0], 0);
@@ -90,11 +96,7 @@ int	exec_program(t_shell *shell)
 		}
 		aux = aux->next;
 	}
-	dup2(shell->command->in_copy, 0);
-	dup2(shell->command->out_copy, 1);
-	waitpid(shell->command->pid, &status, 0);
-	if (WIFEXITED(status))
-		shell->end_type = WEXITSTATUS(status);
+	wait_for_children(shell, shell->command->pid);
 	return (1);
 }
 
