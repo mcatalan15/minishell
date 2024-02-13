@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/12 19:25:42 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/13 10:15:42 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	exec_cmd(t_shell *shell, t_token *aux)
 	shell->command->cmd = get_cmd(aux);
 	shell->command->path = get_path(shell);
 	redirect(shell, aux);
-	printf("llega\n");
 	execve(shell->command->path, shell->command->cmd, shell->env);
 	// if (!shell->command->cmd)
 	// 	dprintf(shell->command->out_copy, "cmd = NULL \n");
