@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/14 10:35:48 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/14 11:57:56 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	execute(t_shell *shell)
 {
 	int	builtin;
 
-	builtin = !ft_isbuiltin(shell->command->cmd[0]);
+	builtin = ft_isbuiltin(shell->command->cmd[0]);
 	if (builtin)
 		manage_builtins(shell, builtin);
 	else
@@ -86,20 +86,11 @@ void	execute(t_shell *shell)
 
 void	exec_cmd(t_shell *shell, t_token *aux)
 {
-	// int	i;
-
-	// i = -1;
 	redirect(shell, aux);
 	shell->command->cmd = get_cmd(aux);
-	shell->command->path = get_path(shell);
-	//dprintf(shell->command->out_copy, "hola\n");
-	//dprintf(shell->command->out_copy, "cmd 1: %s && cmd 2: %s\n",shell->command->cmd[0], shell->command->cmd[1]);
-	//printf("hola\n");
+	if (!ft_isbuiltin(shell->command->cmd[0]))
+		shell->command->path = get_path(shell);
 	execute(shell);
-	// if (!shell->command->cmd)
-	// 	dprintf(shell->command->out_copy, "cmd = NULL \n");
-	// while (shell->command->cmd[++i])
- 	// 	dprintf(shell->command->out_copy, "cmd[%d]: %s\n", i, shell->command->cmd[i]);
 	exit(1);
 	// dprintf(shell->command->out_copy,"path: %s", shell->command->path);
 }

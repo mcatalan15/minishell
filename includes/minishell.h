@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/14 10:35:04 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:11:42 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # include "definitions.h"
 
 // Our .c functions by file
+// main.c
+void	free_prompt(t_shell *shell);
+
 // init_vars.c
 int		init_vars(char *line, t_shell *shell);
 t_token	*put_tokens(t_token *token, char *str, t_shell *shell);
@@ -38,7 +41,7 @@ t_token	*token_new(char *str, int type, t_shell *shell);
 int		get_type(char *str);
 
 // shell_program.c
-int		shell_program(t_shell *shell, char *str);
+int		shell_program(t_shell *shell);
 
 
 // errors.c
@@ -109,17 +112,27 @@ void	wait_for_children(t_shell *shell, int *pid);
 
 //built-ins
 //echo.c
+void	my_echo(t_shell *shell);
 
 //env.c
+void	my_env(t_shell *shell);
 
 //exit.c
+void	my_exit(t_shell *shell);
 
 //export.c
+void	my_export(t_shell *shell);
 
 //pwd.c
+void	my_pwd(t_shell *shell);
 
 //unset.c
+void	my_unset(t_shell *shell);
+
+//cd.c
+void	my_cd(t_shell *shell);
 
 //build-utils.c
 void	manage_builtins(t_shell *shell, int built_type);
+
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   definitions.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:57:45 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/08 17:17:22 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/14 12:02:02 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,14 @@
 # define T_PIPE 7
 # define T_SQUOTE 8
 # define T_DQUOTE 9
+
+//built-ins
+# define ECHO 1
+# define EXPORT 2
+# define UNSET 3
+# define ENV 4
+# define CD 5
+# define PWD 6
+# define EXIT 7
 
 #endif

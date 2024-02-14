@@ -6,8 +6,13 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:25 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/14 10:29:56 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:06:09 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	my_export(t_shell *shell)
+{
+	(void)shell;
+}

@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/14 10:12:02 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:18:20 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,12 @@ int	exec_program(t_shell *shell)
 				return (0);
 			dup2(shell->command->fd[1], 1);
 		}
-		shell->command->pid[i] = fork();
-		if (!shell->command->pid[i++])
+		if (!ft_isbuiltin(*(get_cmd(list))) || shell->command->pid[1] != -1)
+			shell->command->pid[i] = fork();
+		if (ft_isbuiltin(*(get_cmd(list))) && shell->command->pid[1] == -1)
 			exec_cmd(shell, list);
-		//dprintf(shell->command->out_copy ,"%s\n", get_next_line(shell->command->fd[0]));
+		else if (!shell->command->pid[i++])
+			exec_cmd(shell, list);
 		if (aux->type == T_PIPE)
 		{
 			dup2(shell->command->fd[0], 0);
@@ -98,9 +100,9 @@ int	exec_program(t_shell *shell)
 	return (1);
 }
 
-int	shell_program(t_shell *shell, char *str)
+int	shell_program(t_shell *shell)
 {
-	init_vars(str, shell);
+	init_vars(shell->str, shell);
 	if (!parsing(shell))
 		return (0);
 	expansion(shell);

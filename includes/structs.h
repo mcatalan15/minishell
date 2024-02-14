@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:18:52 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/13 11:36:13 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:08:46 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ struct s_shell
 {
 	char		**env;
 	int			end_type;
+	char		*cwd;
+	char		*str;
 	t_command	*command;
 };
 

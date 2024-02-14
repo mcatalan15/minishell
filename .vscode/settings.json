@@ -7,6 +7,7 @@
 		"locale": "c",
 		"tuple": "c",
 		"variant": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"libft.h": "c"
 	}
 }

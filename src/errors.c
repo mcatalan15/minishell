@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:04:55 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/13 19:17:22 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/14 12:29:31 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	stx_erro(t_shell *shell, char c)
 		printf("%s", s);
 	else if (c == '\"')
 		printf("%s", s2);
+	else if (c == 'a')
+		printf("minishell: syntax error to many arguments\n");
 	else
 		printf("minishell: syntax error near unexpected token `%c'\n", c);
 	dup2(fd, 1);
