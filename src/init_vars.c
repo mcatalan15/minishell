@@ -6,11 +6,15 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:44:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/12 17:08:05 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/14 18:57:10 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/*
+	This function initializes the command structure.
+*/
 
 static t_command	*command_new(void)
 {
@@ -23,6 +27,11 @@ static t_command	*command_new(void)
 	command_new->path = NULL;
 	return (command_new);
 }
+
+/*
+	This function splits the tokens according to the quotes and returns the
+	position of the next token.
+*/
 
 static int	split_manage(char *str, int i, int pos)
 {
@@ -42,6 +51,12 @@ static int	split_manage(char *str, int i, int pos)
 	}
 	return (pos);
 }
+
+/*
+	This function gets the tokens from the input string and splits them
+	according to the type of token and the quotes.
+	Return the token structure with a pointer to the next token.
+*/
 
 static t_token	*get_tokens(t_token *token, char *str, int *i, t_shell *shell)
 {
@@ -70,6 +85,10 @@ static t_token	*get_tokens(t_token *token, char *str, int *i, t_shell *shell)
 	return (token);
 }
 
+/*
+	This function puts the tokens in a list.
+*/
+
 t_token	*put_tokens(t_token *token, char *str, t_shell *shell)
 {
 	t_token	*aux;
@@ -93,6 +112,10 @@ t_token	*put_tokens(t_token *token, char *str, t_shell *shell)
 	token = aux;
 	return (aux);
 }
+
+/*
+	This function initializes the variables of the shell.
+*/
 
 int	init_vars(char *line, t_shell *shell)
 {

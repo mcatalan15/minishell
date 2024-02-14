@@ -6,11 +6,17 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:14:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/13 19:20:35 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/14 18:45:15 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/*
+	This function iterates through the string until the first quote is found.
+	Then, it removes the quotes from the string and returns the length of the
+	modified string.
+*/
 
 void	kill_all_quotes(char *str)
 {
@@ -23,6 +29,12 @@ void	kill_all_quotes(char *str)
 			i += remove_quotes(&str[i], str[i]) - 1;
 	}
 }
+
+/*
+	This function iterates through the tokens until a pipe is found. Then, it
+	checks if the previous token is a redirection and if the current token is
+	a string. If both conditions are met, it returns the length of the command.
+*/
 
 int	cmdlen(t_token	*aux)
 {
@@ -38,6 +50,10 @@ int	cmdlen(t_token	*aux)
 	return (len);
 }
 
+/*
+	This function prints the command.
+*/
+
 void	ft_print_cmd(char **command)
 {
 	int	i;
@@ -49,6 +65,10 @@ void	ft_print_cmd(char **command)
 	}
 }
 
+/*
+	This function frees the memory of the double pointer and the string.
+*/
+
 void	free_dp(char **str, char *s1)
 {
 	int	i;
@@ -59,6 +79,16 @@ void	free_dp(char **str, char *s1)
 	free(str);
 	free(s1);
 }
+
+/*
+	This function searches for the path of the command and returns it.
+
+	- If the command is not found, it prints an error message and returns NULL.
+	- If the command is found but the user does not have permission to execute
+		it, it prints an error message and returns NULL.
+	- If the command is found and the user has permission to execute it, it
+		returns the path of the command.
+*/
 
 char	*search_path(t_shell *shell, char **split)
 {

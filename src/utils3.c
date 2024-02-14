@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:51:38 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/12 12:26:18 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:31:14 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/*
+	This function removes the quotes from the string. It iterates through the
+	string and removes the quotes until the character 'f' is found. Then, it
+	returns the length of the string without the quotes.
+*/
 
 int	remove_quotes(char *str, char f)
 {
@@ -33,6 +39,11 @@ int	remove_quotes(char *str, char f)
 	}
 	return (len);
 }
+
+/*
+	This function appends a character to the string and returns the new
+	string, freeing the memory of the old string.
+*/
 
 char	*addstr(char *str, char c)
 {
@@ -57,6 +68,11 @@ char	*addstr(char *str, char c)
 	return (new);
 }
 
+/*
+	This function returns the type of the token by examining the first
+	character of the string and returning the corresponding type value.
+*/
+
 int	get_type(char *str)
 {
 	if (!str[0])
@@ -75,6 +91,12 @@ int	get_type(char *str)
 		return (T_PIPE);
 	return (T_STR);
 }
+
+/*
+	This function creates and initializes a new token, then returns it.
+	It allocates memory for the token and sets the values of the string, type,
+	shell, next, and prev members.
+*/
 
 t_token	*token_new(char *str, int type, t_shell *shell)
 {

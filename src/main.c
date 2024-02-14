@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/14 13:12:17 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:50:54 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/*
+	This function prints the environment.
+*/
 
 void	print_env(char **env)
 {
@@ -24,6 +28,11 @@ void	print_env(char **env)
 	}
 }
 
+/*
+	This function handles the arguments of the main function.
+	In case of error, it prints an error message and exits the program.
+*/
+
 void	main_args(int argc, char **argv)
 {
 	if (argc != 1 || argv[1] != NULL)
@@ -33,6 +42,10 @@ void	main_args(int argc, char **argv)
 	}
 }
 
+/*
+	This function handles the history of the shell.
+*/
+
 void	handle_history(char *str)
 {
 	if (!str || *str == '\0')
@@ -40,11 +53,19 @@ void	handle_history(char *str)
 	add_history(str);
 }
 
+/*
+	This function frees the prompt.
+*/
+
 void	free_prompt(t_shell *shell)
 {
 	free(shell->str);
 	free(shell->cwd);
 }
+
+/*
+	This is the main function of the program.
+*/
 
 int	main(int argc, char **argv, char **env)
 {

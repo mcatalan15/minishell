@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/14 13:18:20 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/14 19:02:12 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/*
+	This function handles shell command token expansion, such as variable
+	expansion and removing quotes.
+*/
 
 static int	expansion(t_shell *shell)
 {
@@ -37,6 +42,11 @@ static int	expansion(t_shell *shell)
 	}
 	return (1);
 }
+
+/*
+	This function performs syntax validation on the list of tokens. It returns
+	1 if the syntax is correct and 'stx_erro' if it is not.
+*/
 
 static int	parsing(t_shell *shell)
 {
@@ -99,6 +109,10 @@ int	exec_program(t_shell *shell)
 	wait_for_children(shell, shell->command->pid);
 	return (1);
 }
+
+/*
+	This function initialize the tokens, parsing, expansion and the program.
+*/
 
 int	shell_program(t_shell *shell)
 {

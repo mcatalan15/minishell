@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   utils5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:01:38 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/14 11:41:23 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:48:22 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h" 
+
+/*
+	This function checks if the command is a built-in command. If it is, it
+	returns the corresponding number. If it is not, it returns 0.
+*/
 
 int	ft_isbuiltin(char *cmd)
 {
@@ -31,6 +36,11 @@ int	ft_isbuiltin(char *cmd)
 	return (0);
 }
 
+/*
+	This function calculates the number of pipes in a list of tokens, allocates
+	memory for the pid array and returns a pointer to the array.
+*/
+
 int	*get_pid(t_token *token)
 {
 	int	len;
@@ -49,6 +59,11 @@ int	*get_pid(t_token *token)
 	pid[len] = -1;
 	return (pid);
 }
+
+/*
+	This function waits for all the children to finish and returns the status
+	of the last child.
+*/
 
 void	wait_for_children(t_shell *shell, int *pid)
 {
