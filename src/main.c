@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/13 11:51:19 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:39:30 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ int	main(int argc, char **argv, char **env)
 		cwd = get_cwd();
 		str = readline(cwd);
 		handle_history(str);
-		if (!ft_strcmp(str, "exit"))
-			break ;
 		if (!ft_is_enter(str))
 			shell_program(&shell, str);
 		free_prompt(str, cwd);

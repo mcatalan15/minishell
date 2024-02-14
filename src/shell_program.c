@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/13 13:01:26 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:12:02 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,7 @@ int	exec_program(t_shell *shell)
 		}
 		shell->command->pid[i] = fork();
 		if (!shell->command->pid[i++])
-		{
 			exec_cmd(shell, list);
-		}
 		//dprintf(shell->command->out_copy ,"%s\n", get_next_line(shell->command->fd[0]));
 		if (aux->type == T_PIPE)
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/13 18:53:04 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/14 10:35:48 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,16 @@ void	redirect(t_shell *shell, t_token *list)
 	}
 }
 
-// void	execute(t_shell *shell)
-// {
-// 	if ()
-// }
+void	execute(t_shell *shell)
+{
+	int	builtin;
+
+	builtin = !ft_isbuiltin(shell->command->cmd[0]);
+	if (builtin)
+		manage_builtins(shell, builtin);
+	else
+		execve(shell->command->path, shell->command->cmd, shell->env);
+}
 
 void	exec_cmd(t_shell *shell, t_token *aux)
 {
@@ -89,7 +95,7 @@ void	exec_cmd(t_shell *shell, t_token *aux)
 	//dprintf(shell->command->out_copy, "hola\n");
 	//dprintf(shell->command->out_copy, "cmd 1: %s && cmd 2: %s\n",shell->command->cmd[0], shell->command->cmd[1]);
 	//printf("hola\n");
-	execve(shell->command->path, shell->command->cmd, shell->env);
+	execute(shell);
 	// if (!shell->command->cmd)
 	// 	dprintf(shell->command->out_copy, "cmd = NULL \n");
 	// while (shell->command->cmd[++i])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/13 19:15:09 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/14 10:35:04 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,19 @@ int		ft_isbuiltin(char *cmd);
 int		*get_pid(t_token *token);
 void	wait_for_children(t_shell *shell, int *pid);
 
+//built-ins
+//echo.c
+
+//env.c
+
+//exit.c
+
+//export.c
+
+//pwd.c
+
+//unset.c
+
+//build-utils.c
+void	manage_builtins(t_shell *shell, int built_type);
 #endif

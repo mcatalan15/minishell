@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:01:38 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/13 12:17:58 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:38:52 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,20 @@
 
 int	ft_isbuiltin(char *cmd)
 {
-	if (!ft_strcmpnks(cmd, "echo") || !ft_strcmpnks(cmd, "export"))
+	if (!ft_strcmpnks(cmd, "echo"))
 		return (1);
-	if (!ft_strcmpnks(cmd, "unset") || !ft_strcmpnks(cmd, "env"))
-		return (1);
-	if (!ft_strcmpnks(cmd, "cd") || !ft_strcmpnks(cmd, "pwd"))
-		return (1);
+	if (!ft_strcmpnks(cmd, "export"))
+		return (2);
+	if (!ft_strcmpnks(cmd, "unset"))
+		return (3);
+	if (!ft_strcmpnks(cmd, "env"))
+		return (4);
+	if (!ft_strcmpnks(cmd, "cd"))
+		return (5);
+	if (!ft_strcmpnks(cmd, "pwd"))
+		return (6);
+	if (!ft_strcmpnks(cmd, "exit"))
+		return (7);
 	return (0);
 }
 

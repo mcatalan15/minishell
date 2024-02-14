@@ -39,7 +39,8 @@ READLINE_FILES = $(wildcard $(READLINE_D)$(READLINE) $(READLINE_D)$(READLINE_H))
 
 NAME = minishell
 
-SRCS =	$(wildcard src/*.c)
+SRCS =	$(wildcard src/*.c)	\
+		$(wildcard src/built-ins/*.c)
 
 OBJS = $(SRCS:.c=.o)
 
