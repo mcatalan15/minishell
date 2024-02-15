@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/12 17:51:47 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/15 10:43:20 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	expand(t_token *token, char **env, char *str, int pos)
 	str++;
 	len = skipped(str);
 	if (!len)
-	return (1);
+		return (1);
 	tmp = ft_substr(--str, 0, len + 1);
 	exp = skipped2(env, str, tmp);
 	if (str[1] == '?')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:58:29 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/13 19:18:38 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/15 10:43:59 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	redirection(t_shell *shell, t_token *token)
 	int	type;
 
 	type = token->type;
-	
 	if (type == T_REDIN)
 		t_redin(shell, token->next);
 	else if (type == T_REDOUT)

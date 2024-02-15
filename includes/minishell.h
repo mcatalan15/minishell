@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/14 13:11:42 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/15 10:31:38 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 
 // Our .c functions by file
 // main.c
-void	free_prompt(t_shell *shell);
 
 // init_vars.c
 int		init_vars(char *line, t_shell *shell);
@@ -42,7 +41,6 @@ int		get_type(char *str);
 
 // shell_program.c
 int		shell_program(t_shell *shell);
-
 
 // errors.c
 int		stx_erro(t_shell *shell, char c);
@@ -76,39 +74,48 @@ void	redirection(t_shell *shell, t_token *token);
 // void	redirect(t_shell *shell, t_token *token);
 // t_token	*redirect(t_token *token);
 
-// utils.c
+
+//utils
+//clear_free_functions.c
+int		clear_list(t_token *token);
+int		clear_program(t_shell *shell, int type, int flag);
+void	free_dp(char **str, char *s1);
+void	free_prompt(t_shell *shell);
+
+//print_functions.c
+void	ft_print_tokens(t_token *tokens);
+void	ft_print_cmd(char **command);
+
+//quotes.c
+int		ft_quoted_closed(char *str);
+int		remove_quotes(char *str, char f);
+void	kill_all_quotes(char *str);
+
+//get_functions.c
+char	*get_cwd(void);
+char	*get_expansion(char *sub, char *exp);
+int		get_type(char *str);
+int		*get_pid(t_token *token);
+// utils3.c
+char	*addstr(char *str, char c);
+t_token	*token_new(char *str, int type, t_shell *shell);
+void	join_subt2(t_token *token, char **str, t_token **new,
+			t_shell *shell);
+
+// utils4.c
+int		cmdlen(t_token *aux);
+char	*search_path(t_shell *shell, char **split);
+
+// utils5.c
+int		ft_isbuiltin(char *cmd);
+void	wait_for_children(t_shell *shell, int *pid);
+
+// ft_is_functions.c
 int		ft_isoperate(int flag);
 int		ft_issquote(char c);
 int		ft_isdquote(char c);
 int		ft_isrd(int flag);
 char	*ft_is_interrogant(char *end_type);
-void	join_subt2(t_token *token, char **str, t_token **new,
-			t_shell *shell);
-void	ft_print_tokens(t_token *tokens);
-
-// utils2.c
-char	*get_cwd(void);
-int		clear_program(t_shell *shell, int type, int flag);
-int		ft_quoted_closed(char *str);
-char	*get_expansion(char *sub, char *exp);
-int		clear_list(t_token *token);
-
-// utils3.c
-int		remove_quotes(char *str, char f);
-char	*addstr(char *str, char c);
-t_token	*token_new(char *str, int type, t_shell *shell);
-int		get_type(char *str);
-
-// utils4.c
-void	kill_all_quotes(char *str);
-int		cmdlen(t_token *aux);
-void	ft_print_cmd(char **command);
-char	*search_path(t_shell *shell, char **split);
-
-// utils5.c
-int		ft_isbuiltin(char *cmd);
-int		*get_pid(t_token *token);
-void	wait_for_children(t_shell *shell, int *pid);
 
 //built-ins
 //echo.c

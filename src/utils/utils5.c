@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:01:38 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/14 18:48:22 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/15 10:46:09 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h" 
+#include "../../includes/minishell.h"
 
 /*
 	This function checks if the command is a built-in command. If it is, it
@@ -37,30 +37,6 @@ int	ft_isbuiltin(char *cmd)
 }
 
 /*
-	This function calculates the number of pipes in a list of tokens, allocates
-	memory for the pid array and returns a pointer to the array.
-*/
-
-int	*get_pid(t_token *token)
-{
-	int	len;
-	int	*pid;
-
-	len = 1;
-	while (token)
-	{
-		if (token->type == T_PIPE)
-			len++;
-		token = token->next;
-	}
-	pid = malloc((len + 1) * sizeof(int));
-	if (!pid)
-		return (NULL);
-	pid[len] = -1;
-	return (pid);
-}
-
-/*
 	This function waits for all the children to finish and returns the status
 	of the last child.
 */
@@ -79,4 +55,3 @@ void	wait_for_children(t_shell *shell, int *pid)
 	if (WIFEXITED(status))
 		shell->end_type = WEXITSTATUS(status);
 }
-

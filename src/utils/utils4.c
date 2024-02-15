@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:14:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/14 18:45:15 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/15 10:35:34 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-/*
-	This function iterates through the string until the first quote is found.
-	Then, it removes the quotes from the string and returns the length of the
-	modified string.
-*/
-
-void	kill_all_quotes(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '\"' || str[i] == '\'')
-			i += remove_quotes(&str[i], str[i]) - 1;
-	}
-}
+#include "../../includes/minishell.h"
 
 /*
 	This function iterates through the tokens until a pipe is found. Then, it
@@ -48,36 +30,6 @@ int	cmdlen(t_token	*aux)
 		aux = aux->next;
 	}
 	return (len);
-}
-
-/*
-	This function prints the command.
-*/
-
-void	ft_print_cmd(char **command)
-{
-	int	i;
-
-	i = -1;
-	while (command[++i])
-	{
-		printf("cmd%d: %s\n", i, command[i]);
-	}
-}
-
-/*
-	This function frees the memory of the double pointer and the string.
-*/
-
-void	free_dp(char **str, char *s1)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		free(str[i]);
-	free(str);
-	free(s1);
 }
 
 /*

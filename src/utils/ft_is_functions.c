@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_is_finctions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:24:52 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/14 18:11:48 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/15 10:35:20 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 /*
 	This function, when given a flag, checks if the value is the same as any
@@ -71,45 +71,4 @@ char	*ft_is_interrogant(char *end_type)
 	while (end_type[len])
 		len++;
 	return (end_type);
-}
-
-/*
-	This function prints the saved tokens with their values, types and memory
-	addresses.
-*/
-
-void	ft_print_tokens(t_token *tokens)
-{
-	t_token	*tmp;
-
-	tmp = tokens;
-	while (tmp)
-	{
-		printf("value: %s type: %d mem: %p\n", tmp->str, tmp->type, tmp);
-		tmp = tmp->next;
-	}
-}
-
-/*
-	This function, which is the second part of the join_subt function, appends
-	the whitespace character to the string and adds the new token to the list
-	of tokens.
-*/
-
-void	join_subt2(t_token *token, char **str, t_token **new, t_shell *shell)
-{
-	int	i;
-
-	i = -1;
-	while (token->str[++i])
-	{
-		if (!ft_isspace(token->str[i]) || token->type != T_STR)
-			*str = addstr(*str, token->str[i]);
-		else
-		{
-			add_new_token(new, str, shell);
-			while (ft_isspace(token->str[i + 1]))
-				i++;
-		}
-	}
 }

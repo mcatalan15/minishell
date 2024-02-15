@@ -1,33 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   print_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 10:24:28 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/15 10:45:28 by mcatalan         ###   ########.fr       */
+/*   Created: 2024/02/15 10:19:06 by mcatalan          #+#    #+#             */
+/*   Updated: 2024/02/15 10:35:25 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*get_path(void)
-{
-	char	cwd[1024];
-	char	*cwd_string;
+/*
+	This function prints the saved tokens with their values, types and memory
+	addresses.
+*/
 
-	cwd_string = malloc(strlen(getcwd(cwd, sizeof(cwd))) + 3);
-	strcpy(cwd_string, getcwd(cwd, sizeof(cwd)));
-	return (cwd_string);
+void	ft_print_tokens(t_token *tokens)
+{
+	t_token	*tmp;
+
+	tmp = tokens;
+	while (tmp)
+	{
+		printf("value: %s type: %d mem: %p\n", tmp->str, tmp->type, tmp);
+		tmp = tmp->next;
+	}
 }
 
-void	my_pwd(t_shell *shell)
-{
-	char	*str;
+/*
+	This function prints the command.
+*/
 
-	(void)shell;
-	str = get_path();
-	printf("%s\n", str);
-	exit (0);
+void	ft_print_cmd(char **command)
+{
+	int	i;
+
+	i = -1;
+	while (command[++i])
+	{
+		printf("cmd%d: %s\n", i, command[i]);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/14 11:57:56 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/15 10:42:31 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	**get_cmd(t_token *token)
 	t_token	*aux;
 
 	i = cmdlen(token);
-	//printf("malloced: %d\n", i);
 	aux = token;
 	command = malloc((i + 1) * sizeof(char *));
 	if (!command)
@@ -32,7 +31,6 @@ char	**get_cmd(t_token *token)
 			command[i++] = ft_strdup(aux->str);
 		aux = aux->next;
 	}
-	//ft_print_cmd(command);
 	return (command);
 }
 
@@ -92,5 +90,6 @@ void	exec_cmd(t_shell *shell, t_token *aux)
 		shell->command->path = get_path(shell);
 	execute(shell);
 	exit(1);
-	// dprintf(shell->command->out_copy,"path: %s", shell->command->path);
 }
+
+// dprintf(shell->command->out_copy,"path: %s", shell->command->path);

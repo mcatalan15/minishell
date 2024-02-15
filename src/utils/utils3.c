@@ -3,42 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:51:38 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/14 18:31:14 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/15 10:35:31 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-/*
-	This function removes the quotes from the string. It iterates through the
-	string and removes the quotes until the character 'f' is found. Then, it
-	returns the length of the string without the quotes.
-*/
-
-int	remove_quotes(char *str, char f)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = 0;
-	while (str[i] && str[i + 1] != f)
-	{
-		str[i] = str[i + 1];
-		i++;
-		len++;
-	}
-	while (str[i + 1])
-	{
-		str[i] = str[i + 2];
-		str[i + 1] = str[i + 2];
-		i++;
-	}
-	return (len);
-}
+#include "../../includes/minishell.h"
 
 /*
 	This function appends a character to the string and returns the new
@@ -69,30 +41,6 @@ char	*addstr(char *str, char c)
 }
 
 /*
-	This function returns the type of the token by examining the first
-	character of the string and returning the corresponding type value.
-*/
-
-int	get_type(char *str)
-{
-	if (!str[0])
-		return (T_NULL);
-	if (str[0] == '<' && str[1] != '<')
-		return (T_REDIN);
-	if (str[0] == '>' && str[1] != '>')
-		return (T_REDOUT);
-	if (str[0] == '<' && str[1] == '<')
-		return (T_DIN);
-	if (str[0] == '>' && str[1] == '>')
-		return (T_DOUT);
-	if (str[0] == '$' && str[1])
-		return (T_DOLLAR);
-	if (str[0] == '|')
-		return (T_PIPE);
-	return (T_STR);
-}
-
-/*
 	This function creates and initializes a new token, then returns it.
 	It allocates memory for the token and sets the values of the string, type,
 	shell, next, and prev members.
@@ -111,4 +59,28 @@ t_token	*token_new(char *str, int type, t_shell *shell)
 	token->next = NULL;
 	token->prev = NULL;
 	return (token);
+}
+
+/*
+	This function, which is the second part of the join_subt function, appends
+	the whitespace character to the string and adds the new token to the list
+	of tokens.
+*/
+
+void	join_subt2(t_token *token, char **str, t_token **new, t_shell *shell)
+{
+	int	i;
+
+	i = -1;
+	while (token->str[++i])
+	{
+		if (!ft_isspace(token->str[i]) || token->type != T_STR)
+			*str = addstr(*str, token->str[i]);
+		else
+		{
+			add_new_token(new, str, shell);
+			while (ft_isspace(token->str[i + 1]))
+				i++;
+		}
+	}
 }

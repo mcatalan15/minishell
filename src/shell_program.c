@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/14 19:02:12 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/15 10:11:51 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	exec_program(t_shell *shell)
 }
 
 /*
-	This function initialize the tokens, parsing, expansion and the program.
+	This function initialize the tokens, parsing, expansion and the execution.
 */
 
 int	shell_program(t_shell *shell)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/14 18:50:54 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/15 10:17:02 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,6 @@ void	handle_history(char *str)
 	if (!str || *str == '\0')
 		return ;
 	add_history(str);
-}
-
-/*
-	This function frees the prompt.
-*/
-
-void	free_prompt(t_shell *shell)
-{
-	free(shell->str);
-	free(shell->cwd);
 }
 
 /*
