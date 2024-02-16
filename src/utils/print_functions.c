@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:19:06 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/15 10:35:25 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:33:03 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,21 @@ void	ft_print_cmd(char **command)
 	while (command[++i])
 	{
 		printf("cmd%d: %s\n", i, command[i]);
+	}
+}
+
+/*
+	This function prints the environment.
+*/
+
+void	print_env(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i] != NULL)
+	{
+		printf("%s\n", env[i]);
+		i++;
 	}
 }

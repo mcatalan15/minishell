@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build-utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:28:59 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/16 11:57:48 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:03:56 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

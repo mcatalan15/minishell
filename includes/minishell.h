@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/16 12:16:00 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:07:12 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_token	*add_subtokens(t_token *token, t_token *aux, t_token *next, char **env);
 char	**ft_split_shell(char const *str);
 
 // execute.c
-void	exec_cmd(t_shell *shell, t_token *aux, int pid);
+int		exec_cmd(t_shell *shell, t_token *aux, int pid);
 char	**get_cmd(t_token *token);
 
 // redirections.c
@@ -86,6 +86,7 @@ void	free_prompt(t_shell *shell);
 //print_functions.c
 void	ft_print_tokens(t_token *tokens);
 void	ft_print_cmd(char **command);
+void	print_env(char **env);
 
 //quotes.c
 int		ft_quoted_closed(char *str);
@@ -129,7 +130,7 @@ void	my_env(t_shell *shell);
 void	my_exit(t_shell *shell);
 
 //export.c
-void	my_export(t_shell *shell);
+int		my_export(t_shell *shell);
 
 //pwd.c
 void	my_pwd(t_shell *shell);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_free_functions.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:13:32 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/15 10:35:12 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:58:23 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

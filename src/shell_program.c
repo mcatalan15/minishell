@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/16 13:21:51 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:11:07 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ int	exec_program2(t_shell *shell, t_token *list, t_token *aux, int *pid_num)
 	if (!ft_isbuiltin(*(shell->command->cmd)) || shell->command->pid[1] != -1)
 		shell->command->pid[*(pid_num)] = fork();
 	if (ft_isbuiltin(*(shell->command->cmd)) && shell->command->pid[1] == -1)
-		exec_cmd(shell, list, 1);
+	{
+		if (!exec_cmd(shell, list, 1))
+			return (0);
+	}
 	else if (!shell->command->pid[*(pid_num)++])
 		exec_cmd(shell, list, 0);
 	if (aux->type == T_PIPE)

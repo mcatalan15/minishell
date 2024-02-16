@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:25 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/16 11:44:34 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:05:34 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,40 +60,52 @@ char	**envcpy(char **env)
 	return (new_env);
 }
 
+void	iter_env(char **env, char **new, char *id, char *cmd)
+{
+	int	i;
+	int	j;
+	int	flag;
+
+	i = -1;
+	j = 0;
+	flag = 0;
+	while (env[++i])
+	{
+		if (ft_strcmpc(id, env[i], '=') < 0 && !flag)
+		{
+			new[j++] = cmd;
+			flag = 1;
+			i--;
+		}
+		else if (!ft_strcmpc(id, env[i], '='))
+			new[j++] = cmd;
+		else
+			new[j++] = ft_strdup(env[i]);
+	}
+	if (!flag)
+		new[j++] = cmd;
+	new[j] = NULL;
+}
+
 char	**add_to_env(t_shell *shell, char *cmd, char *id)
 {
-	int		i;
-	int		j;
 	char	**new;
 	char	**env;
+	int		i;
 
 	i = 0;
-	j = 0;
 	env = envcpy(shell->env);
 	while (shell->env[i])
 		i++;
 	new = malloc((i + 2) * sizeof(char *));
 	if (!new)
 		return (NULL);
-	i = -1;
-	while (env[++i])
-	{
-		if (ft_strcmpc(id, env[i], '=') < 0)
-		{
-			new[j++] = cmd;
-			i--;
-		}
-		else if (!ft_strcmpc(id, env[i], '='))
-			new[j++] = cmd;
-		else
-			new[j++] = env[i];
-	}
-	new[j] = NULL;
+	iter_env(env, new, id, cmd);
 	free_dp(env, NULL);
 	return (new);
 }
 
-void	my_export(t_shell *shell)
+int	my_export(t_shell *shell)
 {
 	char	**cmd;
 	char	*id;
@@ -103,8 +115,8 @@ void	my_export(t_shell *shell)
 	id = NULL;
 	pos = 0;
 	cmd = shell->command->cmd;
-	if (cmd[2] != NULL)
-		stx_erro(shell, 'a');
+	if (!ft_strchr(cmd[1], '='))
+		return (stx_erro(shell, 'a'));
 	pos = ft_is_equal(cmd[1], pos);
 	id = malloc(sizeof(char) * (pos + 1));
 	// if (!id)
@@ -117,6 +129,7 @@ void	my_export(t_shell *shell)
 		shell->env = add_to_env(shell, cmd[1], id);
 	//printf("cmd: %s	id: %s\n", shell->command->cmd[1], id);
 	free(id);
+	return (1);
 }
 
 //bash: export: `1A=ads': not a valid identifier
