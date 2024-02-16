@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:01:38 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/15 10:46:09 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:20:45 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 int	ft_isbuiltin(char *cmd)
 {
+	if (!cmd)
+		return (0);
 	if (!ft_strcmp(cmd, "echo"))
 		return (1);
 	if (!ft_strcmp(cmd, "export"))

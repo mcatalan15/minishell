@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:14 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/14 12:28:42 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:16:43 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@ void	my_env(t_shell *shell)
 {
 	int	i;
 
-	if (ft_strcmp(shell->command->cmd[0], "env"))
+	if (!shell->command->cmd[1])
 	{
 		i = -1;
 		while (shell->env[++i])
 			printf("%s\n", shell->env[i]);
-		exit(0);
 	}
 	else
-		stx_erro(shell, 'a');
+		nsf_or_dir2(shell, shell->command->cmd[1]);
 }

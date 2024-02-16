@@ -6,16 +6,27 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:25 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/15 13:05:45 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:44:34 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// char	id_checker(char *s)
-// {
-// 	if (s[0] )
-// }
+int	id_checker(char *s)
+{
+	int	i;
+
+	i = 1;
+	if (!ft_isdigit(s[0]))
+	{
+		while (ft_isalnum(s[i]) || s[i] == '_')
+			i++;
+	}
+	if (s[i] == '=')
+		return (0);
+	else
+		return (1);
+}
 
 int	ft_is_equal(char *cmd, int flag)
 {
@@ -30,37 +41,82 @@ int	ft_is_equal(char *cmd, int flag)
 	return (flag);
 }
 
-// char	*add_to_env(char *cmd)
-// {
-// 	int		i;
-// }
+char	**envcpy(char **env)
+{
+	int		i;
+	char	**new_env;
+
+	i = 0;
+	new_env = NULL;
+	while (env[i])
+		i++;
+	new_env = malloc(sizeof(char *) * (i + 1));
+	if (!new_env)
+		return (NULL);
+	i = -1;
+	while (env[++i])
+		new_env[i] = ft_strdup(env[i]);
+	new_env[i] = NULL;
+	return (new_env);
+}
+
+char	**add_to_env(t_shell *shell, char *cmd, char *id)
+{
+	int		i;
+	int		j;
+	char	**new;
+	char	**env;
+
+	i = 0;
+	j = 0;
+	env = envcpy(shell->env);
+	while (shell->env[i])
+		i++;
+	new = malloc((i + 2) * sizeof(char *));
+	if (!new)
+		return (NULL);
+	i = -1;
+	while (env[++i])
+	{
+		if (ft_strcmpc(id, env[i], '=') < 0)
+		{
+			new[j++] = cmd;
+			i--;
+		}
+		else if (!ft_strcmpc(id, env[i], '='))
+			new[j++] = cmd;
+		else
+			new[j++] = env[i];
+	}
+	new[j] = NULL;
+	free_dp(env, NULL);
+	return (new);
+}
 
 void	my_export(t_shell *shell)
 {
 	char	**cmd;
 	char	*id;
-	char	*value;
 	int		i;
-	int		flag;
+	int		pos;
 
 	id = NULL;
-	value = NULL;
-	flag = 0;
+	pos = 0;
 	cmd = shell->command->cmd;
 	if (cmd[2] != NULL)
 		stx_erro(shell, 'a');
-	flag = ft_is_equal(cmd[1], flag);
-	id = malloc(sizeof(char) * (flag + 1));
-	value = malloc(sizeof(char) * (ft_strlen(cmd[1]) - flag + 1));
-	
+	pos = ft_is_equal(cmd[1], pos);
+	id = malloc(sizeof(char) * (pos + 1));
+	// if (!id)
+	// 	return (NULL);
 	i = -1;
-	while (flag > ++i)
+	while (pos >= ++i)
 		id[i] = cmd[1][i];
-	i = -1;
-	// id_checker(id);
-	printf("cmd: %sid: %s\n", shell->command->cmd[1], id);
+	id[i] = '\0';
+	if (!id_checker(id))
+		shell->env = add_to_env(shell, cmd[1], id);
+	//printf("cmd: %s	id: %s\n", shell->command->cmd[1], id);
 	free(id);
-	free(value);
 }
 
 //bash: export: `1A=ads': not a valid identifier

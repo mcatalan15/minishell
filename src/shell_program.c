@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/15 10:11:51 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:21:51 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,30 @@ static int	parsing(t_shell *shell)
 	return (1);
 }
 
+int	exec_program2(t_shell *shell, t_token *list, t_token *aux, int *pid_num)
+{
+	shell->command->cmd = get_cmd(list);
+	if (aux->type == T_PIPE)
+	{
+		if (pipe(shell->command->fd) == -1)
+			return (0);
+		dup2(shell->command->fd[1], 1);
+	}
+	if (!ft_isbuiltin(*(shell->command->cmd)) || shell->command->pid[1] != -1)
+		shell->command->pid[*(pid_num)] = fork();
+	if (ft_isbuiltin(*(shell->command->cmd)) && shell->command->pid[1] == -1)
+		exec_cmd(shell, list, 1);
+	else if (!shell->command->pid[*(pid_num)++])
+		exec_cmd(shell, list, 0);
+	if (aux->type == T_PIPE)
+	{
+		dup2(shell->command->fd[0], 0);
+		close(shell->command->fd[1]);
+		close(shell->command->fd[0]);
+	}
+	return (1);
+}
+
 int	exec_program(t_shell *shell)
 {
 	t_token	*aux;
@@ -86,24 +110,8 @@ int	exec_program(t_shell *shell)
 		while (aux->type != T_PIPE && aux->next)
 			aux = aux->next;
 		dup2(shell->command->out_copy, 1);
-		if (aux->type == T_PIPE)
-		{
-			if (pipe(shell->command->fd) == -1)
-				return (0);
-			dup2(shell->command->fd[1], 1);
-		}
-		if (!ft_isbuiltin(*(get_cmd(list))) || shell->command->pid[1] != -1)
-			shell->command->pid[i] = fork();
-		if (ft_isbuiltin(*(get_cmd(list))) && shell->command->pid[1] == -1)
-			exec_cmd(shell, list);
-		else if (!shell->command->pid[i++])
-			exec_cmd(shell, list);
-		if (aux->type == T_PIPE)
-		{
-			dup2(shell->command->fd[0], 0);
-			close(shell->command->fd[1]);
-			close(shell->command->fd[0]);
-		}
+		if (!exec_program2(shell, list, aux, &i))
+			return (0);
 		aux = aux->next;
 	}
 	wait_for_children(shell, shell->command->pid);

@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/15 10:31:38 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:16:00 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	nsf_or_dir(t_shell *shell, int type, char *str);
 void	rdir_erro(t_shell *shell, int type, char *str);
 void	perm_den(t_shell *shell, char *cmd);
 void	cmd_nf(t_shell *shell, char *cmd);
+void	nsf_or_dir2(t_shell *shell, char *str);
 
 // expansion.c
 t_token	*expanding(t_token *token, char **env);
@@ -66,7 +67,7 @@ t_token	*add_subtokens(t_token *token, t_token *aux, t_token *next, char **env);
 char	**ft_split_shell(char const *str);
 
 // execute.c
-void	exec_cmd(t_shell *shell, t_token *aux);
+void	exec_cmd(t_shell *shell, t_token *aux, int pid);
 char	**get_cmd(t_token *token);
 
 // redirections.c

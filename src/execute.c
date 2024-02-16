@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/15 10:42:31 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:24:04 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,14 @@ void	execute(t_shell *shell)
 		execve(shell->command->path, shell->command->cmd, shell->env);
 }
 
-void	exec_cmd(t_shell *shell, t_token *aux)
+void	exec_cmd(t_shell *shell, t_token *aux, int pid)
 {
 	redirect(shell, aux);
-	shell->command->cmd = get_cmd(aux);
 	if (!ft_isbuiltin(shell->command->cmd[0]))
 		shell->command->path = get_path(shell);
 	execute(shell);
-	exit(1);
+	if (!pid)
+		exit(0);
 }
 
 // dprintf(shell->command->out_copy,"path: %s", shell->command->path);

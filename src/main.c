@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/15 10:17:02 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:54:52 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	main_args(int argc, char **argv)
 {
 	if (argc != 1 || argv[1] != NULL)
 	{
-		printf("Error: to many arguments\n");
+		printf("Error: too many arguments\n");
 		exit(0);
 	}
 }

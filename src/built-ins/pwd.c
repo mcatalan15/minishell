@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:28 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/15 10:45:28 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:58:59 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,4 @@ void	my_pwd(t_shell *shell)
 	(void)shell;
 	str = get_path();
 	printf("%s\n", str);
-	exit (0);
 }

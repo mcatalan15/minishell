@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:04:55 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/14 12:29:31 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:17:03 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	stx_erro(t_shell *shell, char c)
 	else if (c == '\"')
 		printf("%s", s2);
 	else if (c == 'a')
-		printf("minishell: syntax error to many arguments\n");
+		printf("minishell: syntax error too many arguments\n");
 	else
 		printf("minishell: syntax error near unexpected token `%c'\n", c);
 	dup2(fd, 1);
@@ -43,8 +43,20 @@ void	nsf_or_dir(t_shell *shell, int type, char *str)
 	dup2(2, 1);
 	printf("minishell: %s: %s\n", str, s);
 	dup2(shell->command->out_copy, 1);
-	shell->end_type = 1;
-	clear_program(shell, type, 1);
+	shell->end_type = type;
+	clear_program(shell, 1, 1);
+}
+
+void	nsf_or_dir2(t_shell *shell, char *str)
+{
+	char	*s;
+
+	s = "No such file or directory";
+	dup2(2, 1);
+	printf("%s: %s: %s\n", shell->command->cmd[0], str, s);
+	dup2(shell->command->out_copy, 1);
+	shell->end_type = PATH_ERROR;
+	clear_program(shell, PATH_ERROR, 0);
 }
 
 void	perm_den(t_shell *shell, char *cmd)
