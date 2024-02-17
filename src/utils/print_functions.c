@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:19:06 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/16 18:33:03 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/17 15:16:10 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_print_cmd(char **command)
 	i = -1;
 	while (command[++i])
 	{
-		printf("cmd%d: %s\n", i, command[i]);
+		printf("cmd%d: %s mem:%p\n", i, command[i], command[i]);
 	}
 }
 

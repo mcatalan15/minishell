@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:25 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/16 19:05:34 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/17 14:41:39 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_is_equal(char *cmd, int flag)
 	return (flag);
 }
 
-char	**envcpy(char **env)
+char	**envdup(char **env)
 {
 	int		i;
 	char	**new_env;
@@ -90,18 +90,16 @@ void	iter_env(char **env, char **new, char *id, char *cmd)
 char	**add_to_env(t_shell *shell, char *cmd, char *id)
 {
 	char	**new;
-	char	**env;
 	int		i;
 
 	i = 0;
-	env = envcpy(shell->env);
 	while (shell->env[i])
 		i++;
 	new = malloc((i + 2) * sizeof(char *));
 	if (!new)
 		return (NULL);
-	iter_env(env, new, id, cmd);
-	free_dp(env, NULL);
+	iter_env(shell->env, new, id, cmd);
+	free_dp(shell->env, NULL);
 	return (new);
 }
 

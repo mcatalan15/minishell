@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:13:32 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/16 18:58:23 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/17 15:22:33 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	clear_program(t_shell *shell, int type, int flag)
 	}
 	free(shell->command->cmd);
 	free(shell->command->path);
+	free(shell->command->pid);
 	free(shell->command);
 	if (flag)
 		exit(type);

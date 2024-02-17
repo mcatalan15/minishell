@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/16 19:07:12 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/17 14:38:41 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ void	my_exit(t_shell *shell);
 
 //export.c
 int		my_export(t_shell *shell);
-
-//pwd.c
+char	**envdup(char **env);
+// pwd.c
 void	my_pwd(t_shell *shell);
 
 //unset.c
