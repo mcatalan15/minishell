@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:04:55 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/16 18:59:33 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/17 19:05:01 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,16 @@ void	nsf_or_dir2(t_shell *shell, char *str)
 	dup2(shell->command->out_copy, 1);
 	shell->end_type = PATH_ERROR;
 	clear_program(shell, PATH_ERROR, 0);
+}
+
+int	perm_den2(t_shell *shell, char *dir)
+{
+	dup2(2, 1);
+	printf("minishell: cd: %s: Permission denied\n", dir);
+	dup2(shell->command->out_copy, 1);
+	shell->end_type = 1;
+	clear_program(shell, 1, 0);
+	return (0);
 }
 
 void	perm_den(t_shell *shell, char *cmd)

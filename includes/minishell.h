@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/17 14:38:41 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/17 18:53:40 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	rdir_erro(t_shell *shell, int type, char *str);
 void	perm_den(t_shell *shell, char *cmd);
 void	cmd_nf(t_shell *shell, char *cmd);
 void	nsf_or_dir2(t_shell *shell, char *str);
+int		perm_den2(t_shell *shell, char *dir);
 
 // expansion.c
 t_token	*expanding(t_token *token, char **env);
@@ -139,7 +140,7 @@ void	my_pwd(t_shell *shell);
 void	my_unset(t_shell *shell);
 
 //cd.c
-void	my_cd(t_shell *shell);
+int		my_cd(t_shell *shell);
 
 //build-utils.c
 void	manage_builtins(t_shell *shell, int built_type);
