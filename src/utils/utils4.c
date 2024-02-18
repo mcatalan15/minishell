@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:14:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/15 10:35:34 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/18 14:00:12 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ char	*search_path(t_shell *shell, char **split)
 	int		i;
 	char	*path;
 	char	*add;
+	char	*cmd_no_dot;
 
 	i = -1;
+	cmd_no_dot = shell->command->cmd[0] + 1;
 	add = ft_strjoin("/", shell->command->cmd[0]);
 	while (split[++i])
 	{
@@ -66,6 +68,8 @@ char	*search_path(t_shell *shell, char **split)
 		free(path);
 	}
 	free_dp(split, add);
+	if (!ft_strncmp(shell->command->cmd[0], "./", 2))
+		return (ft_strjoin(get_pwd(), cmd_no_dot));
 	cmd_nf(shell, shell->command->cmd[0]);
 	return (NULL);
 }

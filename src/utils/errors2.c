@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   errors2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 10:24:28 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/18 12:36:33 by mcatalan@st      ###   ########.fr       */
+/*   Created: 2024/02/18 13:51:21 by mcatalan@st       #+#    #+#             */
+/*   Updated: 2024/02/18 13:52:14 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*get_pwd(void)
+void	cmd_nf(t_shell *shell, char *cmd)
 {
-	char	cwd[1024];
-	char	*cwd_string;
-
-	cwd_string = malloc(strlen(getcwd(cwd, sizeof(cwd))) + 3);
-	strcpy(cwd_string, getcwd(cwd, sizeof(cwd)));
-	return (cwd_string);
+	dup2(2, 1);
+	printf("minishell: %s: Command not found\n", cmd);
+	dup2(shell->command->out_copy, 1);
+	clear_program(shell, PATH_ERROR, 1);
 }
 
-void	my_pwd(t_shell *shell)
+void	rdir_erro(t_shell *shell, int type, char *str)
 {
-	char	*str;
+	char	*s;
 
-	(void)shell;
-	str = get_pwd();
-	printf("%s\n", str);
+	s = "Redirection error";
+	dup2(2, 1);
+	printf("minishell: %s: %s\n", str, s);
+	dup2(shell->command->out_copy, 1);
+	shell->end_type = 1;
+	clear_program(shell, type, 1);
 }

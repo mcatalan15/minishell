@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:58:39 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/14 11:24:22 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/18 14:03:12 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	ft_tolower(int c)
 {
-	
 	if (c >= 'A' && 'Z' >= c)
 		c = c + 32;
 	return (c);

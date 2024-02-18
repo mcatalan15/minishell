@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:01:38 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/16 13:20:45 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/18 14:01:38 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,17 @@ void	wait_for_children(t_shell *shell, int *pid)
 		waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status))
 		shell->end_type = WEXITSTATUS(status);
+}
+
+int	ft_is_equal(char *cmd, int flag)
+{
+	int	i;
+
+	i = -1;
+	while (cmd[++i])
+	{
+		if (cmd[i] == '=')
+			flag = i;
+	}
+	return (flag);
 }

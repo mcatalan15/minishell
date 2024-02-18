@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:36:28 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/17 19:01:14 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/18 13:53:35 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	my_cd(t_shell *shell)
 	value = 0;
 	dir = shell->command->cmd[1];
 	value = chdir(dir);
-	// printf("dir: %s\n");
 	if (!access(dir, F_OK) && value == -1)
 	{
 		if (access(dir, X_OK) == -1)
@@ -36,5 +35,3 @@ int	my_cd(t_shell *shell)
 	}
 	return (1);
 }
-
-// /Users/marc/Desktop2/42/CCore/minishell

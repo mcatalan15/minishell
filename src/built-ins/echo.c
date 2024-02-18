@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:19 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/16 13:22:17 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/18 13:53:49 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,4 @@ void	my_echo(t_shell *shell)
 	}
 	if (!flag)
 		printf("\n");
-	
 }

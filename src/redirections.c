@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:58:29 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/15 10:43:59 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/18 13:50:32 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	here_doc(t_shell *shell, t_token *token)
 	int		fd[2];
 	char	*del;
 
-	//dprintf(shell->command->in_copy, "iep\n");
 	dup2(shell->command->in_copy, 0);
 	pipe(fd);
 	del = ft_strjoin(token->str, "\n");

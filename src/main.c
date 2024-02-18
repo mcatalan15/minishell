@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/17 15:22:34 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/18 13:50:43 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	main(int argc, char **argv, char **env)
 			shell_program(&shell);
 		free_prompt(&shell);
 		clear_program(&shell, 0, 0);
-		//free_dp(shell.command->cmd, NULL);
 	}
 	free_prompt(&shell);
 	rl_clear_history();

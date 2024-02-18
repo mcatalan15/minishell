@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:04:55 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/17 19:05:01 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/18 13:51:06 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,24 +75,4 @@ void	perm_den(t_shell *shell, char *cmd)
 	printf("minishell: %s: Permission denied\n", cmd);
 	dup2(shell->command->out_copy, 1);
 	clear_program(shell, NO_PERM, 1);
-}
-
-void	cmd_nf(t_shell *shell, char *cmd)
-{
-	dup2(2, 1);
-	printf("minishell: %s: Command not found\n", cmd);
-	dup2(shell->command->out_copy, 1);
-	clear_program(shell, PATH_ERROR, 1);
-}
-
-void	rdir_erro(t_shell *shell, int type, char *str)
-{
-	char	*s;
-
-	s = "Redirection error";
-	dup2(2, 1);
-	printf("minishell: %s: %s\n", str, s);
-	dup2(shell->command->out_copy, 1);
-	shell->end_type = 1;
-	clear_program(shell, type, 1);
 }

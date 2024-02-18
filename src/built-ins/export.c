@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:25 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/17 14:41:39 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/18 14:01:06 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,6 @@ int	id_checker(char *s)
 		return (0);
 	else
 		return (1);
-}
-
-int	ft_is_equal(char *cmd, int flag)
-{
-	int	i;
-
-	i = -1;
-	while (cmd[++i])
-	{
-		if (cmd[i] == '=')
-			flag = i;
-	}
-	return (flag);
 }
 
 char	**envdup(char **env)
@@ -117,15 +104,12 @@ int	my_export(t_shell *shell)
 		return (stx_erro(shell, 'a'));
 	pos = ft_is_equal(cmd[1], pos);
 	id = malloc(sizeof(char) * (pos + 1));
-	// if (!id)
-	// 	return (NULL);
 	i = -1;
 	while (pos >= ++i)
 		id[i] = cmd[1][i];
 	id[i] = '\0';
 	if (!id_checker(id))
 		shell->env = add_to_env(shell, cmd[1], id);
-	//printf("cmd: %s	id: %s\n", shell->command->cmd[1], id);
 	free(id);
 	return (1);
 }

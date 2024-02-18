@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/17 18:53:40 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/18 14:03:41 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,13 @@ int		shell_program(t_shell *shell);
 // errors.c
 int		stx_erro(t_shell *shell, char c);
 void	nsf_or_dir(t_shell *shell, int type, char *str);
-void	rdir_erro(t_shell *shell, int type, char *str);
 void	perm_den(t_shell *shell, char *cmd);
-void	cmd_nf(t_shell *shell, char *cmd);
 void	nsf_or_dir2(t_shell *shell, char *str);
 int		perm_den2(t_shell *shell, char *dir);
+
+// errors2.c
+void	cmd_nf(t_shell *shell, char *cmd);
+void	rdir_erro(t_shell *shell, int type, char *str);
 
 // expansion.c
 t_token	*expanding(t_token *token, char **env);
@@ -75,7 +77,6 @@ char	**get_cmd(t_token *token);
 void	redirection(t_shell *shell, t_token *token);
 // void	redirect(t_shell *shell, t_token *token);
 // t_token	*redirect(t_token *token);
-
 
 //utils
 //clear_free_functions.c
@@ -111,6 +112,7 @@ char	*search_path(t_shell *shell, char **split);
 
 // utils5.c
 int		ft_isbuiltin(char *cmd);
+int		ft_is_equal(char *cmd, int flag);
 void	wait_for_children(t_shell *shell, int *pid);
 
 // ft_is_functions.c
@@ -135,6 +137,7 @@ int		my_export(t_shell *shell);
 char	**envdup(char **env);
 // pwd.c
 void	my_pwd(t_shell *shell);
+char	*get_pwd(void);
 
 //unset.c
 void	my_unset(t_shell *shell);
