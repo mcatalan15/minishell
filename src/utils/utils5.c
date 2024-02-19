@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:01:38 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/18 14:01:38 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/19 13:33:30 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,21 @@ int	ft_is_equal(char *cmd, int flag)
 			flag = i;
 	}
 	return (flag);
+}
+
+char	*get_path_when_cmd(t_shell *shell)
+{
+	char	*path;
+
+	if (!access(shell->command->cmd[0], F_OK))
+	{
+		if (access(shell->command->cmd[0], X_OK) == -1)
+			perm_den(shell, shell->command->cmd[0]);
+		path = ft_strdup(shell->command->cmd[0]);
+		if (!path)
+			return (NULL);
+		return (path);
+	}
+	nsf_or_dir(shell, PATH_ERROR, shell->command->cmd[0]);
+	return (NULL);
 }

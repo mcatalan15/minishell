@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:04:55 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/18 13:51:06 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/19 13:33:45 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	nsf_or_dir(t_shell *shell, int type, char *str)
 	printf("minishell: %s: %s\n", str, s);
 	dup2(shell->command->out_copy, 1);
 	shell->end_type = type;
-	clear_program(shell, 1, 1);
+	clear_program(shell, type, 1);
 }
 
 void	nsf_or_dir2(t_shell *shell, char *str)

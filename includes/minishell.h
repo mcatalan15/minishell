@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/18 14:03:41 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/19 13:23:10 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ char	*search_path(t_shell *shell, char **split);
 int		ft_isbuiltin(char *cmd);
 int		ft_is_equal(char *cmd, int flag);
 void	wait_for_children(t_shell *shell, int *pid);
+char	*get_path_when_cmd(t_shell *shell);
 
 // ft_is_functions.c
 int		ft_isoperate(int flag);

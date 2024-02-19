@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/18 12:12:02 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/19 13:27:01 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ char	*get_path(t_shell *shell)
 	i = -1;
 	if (!*shell->command->cmd)
 		return (NULL);
+	if (ft_strchr(shell->command->cmd[0], '/'))
+		return (get_path_when_cmd(shell));
 	while (shell->env[++i])
 	{
 		if (!ft_strcmpc(shell->env[i], "PATH", '='))
