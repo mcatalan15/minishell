@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/19 13:23:10 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:46:05 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	nsf_or_dir(t_shell *shell, int type, char *str);
 void	perm_den(t_shell *shell, char *cmd);
 void	nsf_or_dir2(t_shell *shell, char *str);
 int		perm_den2(t_shell *shell, char *dir);
+int		nv_id(t_shell *shell, char *cmd, int type);
 
 // errors2.c
 void	cmd_nf(t_shell *shell, char *cmd);
@@ -122,6 +123,9 @@ int		ft_issquote(char c);
 int		ft_isdquote(char c);
 int		ft_isrd(int flag);
 char	*ft_is_interrogant(char *end_type);
+
+//	heredoc.c
+void	here_doc(t_shell *shell, t_token *token);
 
 //built-ins
 //echo.c

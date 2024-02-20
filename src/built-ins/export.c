@@ -3,29 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:25 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/18 14:01:06 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/20 13:09:13 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	id_checker(char *s)
+int	ft_isalpha_lw(char c)
+{
+	if (ft_isalpha(c) || c == '_')
+		return (0);
+	return (1);
+}
+
+//bash: export: `1A=ads': not a valid identifier
+//bash: export: `=': not a valid identifier
+
+int	id_checker(char *s, t_shell *shell)
 {
 	int	i;
 
-	i = 1;
-	if (!ft_isdigit(s[0]))
+	i = 0;
+	if (!ft_isalpha_lw(s[0]))
 	{
 		while (ft_isalnum(s[i]) || s[i] == '_')
 			i++;
 	}
-	if (s[i] == '=')
+	if (s[i] == '=' && i != 0)
 		return (0);
-	else
-		return (1);
+	else if (i != 0)
+		nv_id(shell, shell->command->cmd[1], 1);
+	i = 0;
+	while (!ft_strchr(shell->command->cmd[i], '='))
+		i++;
+	nv_id(shell, shell->command->cmd[i], 1);
+	return (1);
 }
 
 char	**envdup(char **env)
@@ -65,7 +80,10 @@ void	iter_env(char **env, char **new, char *id, char *cmd)
 			i--;
 		}
 		else if (!ft_strcmpc(id, env[i], '='))
+		{
 			new[j++] = cmd;
+			flag = 1;
+		}
 		else
 			new[j++] = ft_strdup(env[i]);
 	}
@@ -100,19 +118,14 @@ int	my_export(t_shell *shell)
 	id = NULL;
 	pos = 0;
 	cmd = shell->command->cmd;
-	if (!ft_strchr(cmd[1], '='))
-		return (stx_erro(shell, 'a'));
 	pos = ft_is_equal(cmd[1], pos);
 	id = malloc(sizeof(char) * (pos + 1));
 	i = -1;
 	while (pos >= ++i)
 		id[i] = cmd[1][i];
 	id[i] = '\0';
-	if (!id_checker(id))
+	if (!id_checker(id, shell))
 		shell->env = add_to_env(shell, cmd[1], id);
 	free(id);
 	return (1);
 }
-
-//bash: export: `1A=ads': not a valid identifier
-//bash: export: `=': not a valid identifier
