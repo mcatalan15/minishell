@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:04:55 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/20 13:01:54 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:00:52 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	stx_erro(t_shell *shell, char c)
 {
@@ -75,15 +75,4 @@ void	perm_den(t_shell *shell, char *cmd)
 	printf("minishell: %s: Permission denied\n", cmd);
 	dup2(shell->command->out_copy, 1);
 	clear_program(shell, NO_PERM, 1);
-}
-
-int	nv_id(t_shell *shell, char *cmd, int type)
-{
-	dup2(2, 1);
-	printf("minishell: export: `%s': not a valid identifier\n", cmd);
-	dup2(shell->command->out_copy, 1);
-	//clear_program(shell, type, 0);
-	(void)type;
-	return (0);
-	// CHANGE -> bash: export: `1a=hola': not a valid identifier
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:33:27 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/15 10:35:23 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:53:49 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,45 @@
 	character at the end of the string for printing.
 */
 
-char	*get_cwd(void)
+char	*get_cwd(char *shell_cwd)
 {
 	char	cwd[1024];
 	char	*cwd_string;
+	size_t	len;
 
-	cwd_string = malloc(strlen(getcwd(cwd, sizeof(cwd))) + 3);
-	strcpy(cwd_string, getcwd(cwd, sizeof(cwd)));
-	strcat(cwd_string, "$ ");
+	cwd_string = NULL;
+	len = 0;
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	{
+		len = ft_strlen(cwd);
+		cwd_string = malloc(len + 3);
+		if (cwd_string != NULL)
+		{
+			ft_strcpy(cwd_string, cwd);
+			ft_strcat(cwd_string, "$ ");
+		}
+		else
+			printf("Error: malloc failed\n");
+	}
+	else
+	{
+		cwd_string = malloc(ft_strlen(shell_cwd) + 3);
+		if (cwd_string != NULL)
+			ft_strcpy(cwd_string, shell_cwd);
+		else
+			printf("Error: malloc failed\n");
+		free(shell_cwd);
+	}
 	return (cwd_string);
 }
+
+// char	*get_cwd(void)
+// {
+// 	char	cwd[1024];
+// 	char	*cwd_string;
+
+// 	cwd_string = malloc(strlen(getcwd(cwd, sizeof(cwd))) + 
+// }
 
 /*
 	This function concatenates the expansion with the substring and returns

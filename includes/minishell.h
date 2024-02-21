@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/20 12:46:05 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:48:47 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,6 @@ int		get_type(char *str);
 // shell_program.c
 int		shell_program(t_shell *shell);
 
-// errors.c
-int		stx_erro(t_shell *shell, char c);
-void	nsf_or_dir(t_shell *shell, int type, char *str);
-void	perm_den(t_shell *shell, char *cmd);
-void	nsf_or_dir2(t_shell *shell, char *str);
-int		perm_den2(t_shell *shell, char *dir);
-int		nv_id(t_shell *shell, char *cmd, int type);
-
-// errors2.c
-void	cmd_nf(t_shell *shell, char *cmd);
-void	rdir_erro(t_shell *shell, int type, char *str);
 
 // expansion.c
 t_token	*expanding(t_token *token, char **env);
@@ -85,6 +74,7 @@ int		clear_list(t_token *token);
 int		clear_program(t_shell *shell, int type, int flag);
 void	free_dp(char **str, char *s1);
 void	free_prompt(t_shell *shell);
+void	free_prompt_all(t_shell *shell);
 
 //print_functions.c
 void	ft_print_tokens(t_token *tokens);
@@ -97,7 +87,7 @@ int		remove_quotes(char *str, char f);
 void	kill_all_quotes(char *str);
 
 //get_functions.c
-char	*get_cwd(void);
+char	*get_cwd(char *shell_cwd);
 char	*get_expansion(char *sub, char *exp);
 int		get_type(char *str);
 int		*get_pid(t_token *token);
@@ -126,6 +116,18 @@ char	*ft_is_interrogant(char *end_type);
 
 //	heredoc.c
 void	here_doc(t_shell *shell, t_token *token);
+
+// errors.c
+int		stx_erro(t_shell *shell, char c);
+void	nsf_or_dir(t_shell *shell, int type, char *str);
+void	perm_den(t_shell *shell, char *cmd);
+void	nsf_or_dir2(t_shell *shell, char *str);
+int		perm_den2(t_shell *shell, char *dir);
+
+// errors2.c
+void	cmd_nf(t_shell *shell, char *cmd);
+void	rdir_erro(t_shell *shell, int type, char *str);
+int		nv_id(t_shell *shell, char *cmd, int type);
 
 //built-ins
 //echo.c

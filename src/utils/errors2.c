@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 13:51:21 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/18 13:52:14 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/21 10:03:41 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,15 @@ void	rdir_erro(t_shell *shell, int type, char *str)
 	dup2(shell->command->out_copy, 1);
 	shell->end_type = 1;
 	clear_program(shell, type, 1);
+}
+
+int	nv_id(t_shell *shell, char *cmd, int type)
+{
+	dup2(2, 1);
+	printf("minishell: export: `%s': not a valid identifier\n", cmd);
+	dup2(shell->command->out_copy, 1);
+	// clear_program(shell, type, 0);
+	(void)type;
+	return (0);
+	// CHANGE -> bash: export: `1a=hola': not a valid identifier
 }

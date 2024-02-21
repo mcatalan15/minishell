@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:13:32 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/17 15:22:33 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/21 10:48:54 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,12 @@ void	free_dp(char **str, char *s1)
 */
 
 void	free_prompt(t_shell *shell)
+{
+	free(shell->str);
+	// free(shell->cwd);
+}
+
+void	free_prompt_all(t_shell *shell)
 {
 	free(shell->str);
 	free(shell->cwd);
