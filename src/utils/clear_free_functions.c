@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_free_functions.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:13:32 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/21 10:48:54 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/22 13:01:34 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	clear_program(t_shell *shell, int type, int flag)
 	free(shell->command->cmd);
 	free(shell->command->path);
 	free(shell->command->pid);
+	free(shell->command->hd);
 	free(shell->command);
 	if (flag)
 		exit(type);

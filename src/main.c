@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/21 10:48:13 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/22 13:01:26 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(int argc, char **argv, char **env)
 		if (!ft_is_enter(shell.str))
 			shell_program(&shell);
 		free_prompt(&shell);
+		//free_dp(shell.command->cmd, NULL);
 		clear_program(&shell, 0, 0);
 	}
 	free_prompt_all(&shell);

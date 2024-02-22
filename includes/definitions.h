@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:57:45 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/14 12:02:02 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:38:07 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 // exit codes
 # define EXIT_SUCCESS 0
+# define EXIT_FAILURE 1
 # define PATH_ERROR 127
 # define NO_PERM 126
 # define STX_ERRO 258

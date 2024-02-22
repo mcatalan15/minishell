@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:01:38 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/19 13:33:30 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:00:44 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,11 @@ char	*get_path_when_cmd(t_shell *shell)
 	}
 	nsf_or_dir(shell, PATH_ERROR, shell->command->cmd[0]);
 	return (NULL);
+}
+
+int	ft_isalpha_lw(char c)
+{
+	if (ft_isalpha(c) || c == '_')
+		return (0);
+	return (1);
 }

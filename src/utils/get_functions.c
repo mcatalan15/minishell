@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:33:27 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/21 10:53:49 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/22 12:54:40 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ char	*get_cwd(char *shell_cwd)
 	char	*cwd_string;
 	size_t	len;
 
-	cwd_string = NULL;
+	cwd_string = getcwd(cwd, sizeof(cwd));
 	len = 0;
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	if (cwd_string != NULL)
 	{
 		len = ft_strlen(cwd);
 		cwd_string = malloc(len + 3);
@@ -44,8 +44,8 @@ char	*get_cwd(char *shell_cwd)
 			ft_strcpy(cwd_string, shell_cwd);
 		else
 			printf("Error: malloc failed\n");
-		free(shell_cwd);
 	}
+	free(shell_cwd);
 	return (cwd_string);
 }
 

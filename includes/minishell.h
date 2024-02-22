@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/21 10:48:47 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/22 12:58:50 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int		get_type(char *str);
 // shell_program.c
 int		shell_program(t_shell *shell);
 
-
 // expansion.c
 t_token	*expanding(t_token *token, char **env);
 void	add_new_token(t_token **new, char **str, t_shell *shell);
@@ -60,11 +59,11 @@ t_token	*add_subtokens(t_token *token, t_token *aux, t_token *next, char **env);
 char	**ft_split_shell(char const *str);
 
 // execute.c
-int		exec_cmd(t_shell *shell, t_token *aux, int pid);
+int		exec_cmd(t_shell *shell, t_token *aux, int pid, int pid_num);
 char	**get_cmd(t_token *token);
 
 // redirections.c
-void	redirection(t_shell *shell, t_token *token);
+void	redirection(t_shell *shell, t_token *token, int pid_num);
 // void	redirect(t_shell *shell, t_token *token);
 // t_token	*redirect(t_token *token);
 
@@ -91,6 +90,7 @@ char	*get_cwd(char *shell_cwd);
 char	*get_expansion(char *sub, char *exp);
 int		get_type(char *str);
 int		*get_pid(t_token *token);
+
 // utils3.c
 char	*addstr(char *str, char c);
 t_token	*token_new(char *str, int type, t_shell *shell);
@@ -106,6 +106,7 @@ int		ft_isbuiltin(char *cmd);
 int		ft_is_equal(char *cmd, int flag);
 void	wait_for_children(t_shell *shell, int *pid);
 char	*get_path_when_cmd(t_shell *shell);
+int		ft_isalpha_lw(char c);
 
 // ft_is_functions.c
 int		ft_isoperate(int flag);
@@ -115,7 +116,8 @@ int		ft_isrd(int flag);
 char	*ft_is_interrogant(char *end_type);
 
 //	heredoc.c
-void	here_doc(t_shell *shell, t_token *token);
+// void	here_doc(t_shell *shell, t_token *token);
+int		manage_hd(t_shell *shell, t_token *token);
 
 // errors.c
 int		stx_erro(t_shell *shell, char c);
@@ -128,6 +130,7 @@ int		perm_den2(t_shell *shell, char *dir);
 void	cmd_nf(t_shell *shell, char *cmd);
 void	rdir_erro(t_shell *shell, int type, char *str);
 int		nv_id(t_shell *shell, char *cmd, int type);
+int		malloc_err(t_shell *shell);
 
 //built-ins
 //echo.c

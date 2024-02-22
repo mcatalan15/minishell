@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_finctions.c                                  :+:      :+:    :+:   */
+/*   ft_is_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:24:52 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/15 10:35:20 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:49:17 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	ft_isrd(int flag)
 }
 
 /*
-	This function checks if the given string ends with a question mark!!!!!!!!!!!!!!!!!!!!!!!
+	This function adds the expansion of the argument in case starts with '$?'
+	and add to the current str the value.
 */
 
 char	*ft_is_interrogant(char *end_type)

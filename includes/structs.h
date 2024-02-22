@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:18:52 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/20 12:13:51 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:57:44 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ struct	s_command
 	char	**cmd;
 	char	*path;
 	int		fd[2];
-	int		hd[2];
+	int		*hd;
 	int		*pid;
 	int		in_copy;
 	int		out_copy;

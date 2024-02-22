@@ -6,18 +6,11 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:25 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/20 13:09:13 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:00:15 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	ft_isalpha_lw(char c)
-{
-	if (ft_isalpha(c) || c == '_')
-		return (0);
-	return (1);
-}
 
 //bash: export: `1A=ads': not a valid identifier
 //bash: export: `=': not a valid identifier
@@ -73,16 +66,12 @@ void	iter_env(char **env, char **new, char *id, char *cmd)
 	flag = 0;
 	while (env[++i])
 	{
-		if (ft_strcmpc(id, env[i], '=') < 0 && !flag)
+		if (ft_strcmpc(id, env[i], '=') <= 0 && !flag)
 		{
 			new[j++] = cmd;
 			flag = 1;
-			i--;
-		}
-		else if (!ft_strcmpc(id, env[i], '='))
-		{
-			new[j++] = cmd;
-			flag = 1;
+			if (ft_strcmpc(id, env[i], '=') < 0)
+				i--;
 		}
 		else
 			new[j++] = ft_strdup(env[i]);

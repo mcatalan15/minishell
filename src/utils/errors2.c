@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 13:51:21 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/21 10:03:41 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/22 11:42:25 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,13 @@ int	nv_id(t_shell *shell, char *cmd, int type)
 	(void)type;
 	return (0);
 	// CHANGE -> bash: export: `1a=hola': not a valid identifier
+}
+
+int	malloc_err(t_shell *shell)
+{
+	dup2(2, 1);
+	printf("minishell: malloc: error in malloc\n");
+	dup2(shell->command->out_copy, 1);
+	shell->end_type = 1;
+	return (clear_program(shell, EXIT_FAILURE, 0));
 }

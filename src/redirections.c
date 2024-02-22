@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:58:29 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/20 12:09:17 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:37:21 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void	t_redout(t_shell *shell, t_token *token)
 	if (fdout == -1)
 		rdir_erro(shell, 1, token->str);
 	dup2(fdout, 1);
+}
+
+void	t_din(t_shell *shell, int pid_num)
+{
+	dup2(shell->command->hd[pid_num], 0);
 }
 
 void	t_dout(t_shell *shell, t_token *token)
@@ -81,7 +86,7 @@ void	t_dout(t_shell *shell, t_token *token)
 // 	close(fd[0]);
 // }
 
-void	redirection(t_shell *shell, t_token *token)
+void	redirection(t_shell *shell, t_token *token, int pid_num)
 {
 	int	type;
 
@@ -93,5 +98,5 @@ void	redirection(t_shell *shell, t_token *token)
 	else if (type == T_DOUT)
 		t_dout(shell, token->next);
 	else if (type == T_DIN)
-		here_doc(shell, token->next);
+		t_din(shell, pid_num);
 }

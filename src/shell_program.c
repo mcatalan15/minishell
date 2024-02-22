@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/18 12:07:32 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/22 12:09:45 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,12 @@ int	exec_program2(t_shell *shell, t_token *list, t_token *aux, int *pid_num)
 		shell->command->pid[*(pid_num)] = fork();
 	if (ft_isbuiltin(*(shell->command->cmd)) && shell->command->pid[1] == -1)
 	{
-		if (!exec_cmd(shell, list, 1))
+		if (!exec_cmd(shell, list, 1, *pid_num))
 			return (0);
 	}
-	else if (!shell->command->pid[*(pid_num)++])
-		exec_cmd(shell, list, 0);
+	else if (!shell->command->pid[*(pid_num)])
+		exec_cmd(shell, list, 0, *pid_num);
+	(*pid_num)++;
 	if (aux->type == T_PIPE)
 	{
 		dup2(shell->command->fd[0], 0);
@@ -107,6 +108,8 @@ int	exec_program(t_shell *shell)
 	shell->command->in_copy = dup(0);
 	shell->command->out_copy = dup(1);
 	shell->command->pid = get_pid(aux);
+	if (!manage_hd(shell, shell->command->token))
+		return (0);
 	while (aux)
 	{
 		list = aux;

@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/19 13:27:01 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:57:20 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*get_path(t_shell *shell)
 	return (path);
 }
 
-void	redirect(t_shell *shell, t_token *list)
+void	redirect(t_shell *shell, t_token *list, int pid_num)
 {
 	t_token	*aux;
 
@@ -68,7 +68,7 @@ void	redirect(t_shell *shell, t_token *list)
 	while (aux && aux->type != T_PIPE)
 	{
 		if (aux->next && ft_isrd(aux->type) && aux->next->type == T_STR)
-			redirection(shell, aux);
+			redirection(shell, aux, pid_num);
 		aux = aux->next;
 	}
 }
@@ -84,9 +84,9 @@ void	execute(t_shell *shell)
 		execve(shell->command->path, shell->command->cmd, shell->env);
 }
 
-int	exec_cmd(t_shell *shell, t_token *aux, int pid)
+int	exec_cmd(t_shell *shell, t_token *aux, int pid, int pid_num)
 {
-	redirect(shell, aux);
+	redirect(shell, aux, pid_num);
 	if (!ft_isbuiltin(shell->command->cmd[0]))
 		shell->command->path = get_path(shell);
 	execute(shell);
