@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:13:32 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/22 13:01:34 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:58:36 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	clear_program(t_shell *shell, int type, int flag)
 		free(shell->command->token);
 		shell->command->token = aux;
 	}
-	free(shell->command->cmd);
+	free_dp(shell->command->cmd, NULL);
 	free(shell->command->path);
 	free(shell->command->pid);
 	free(shell->command->hd);
@@ -74,8 +74,14 @@ void	free_dp(char **str, char *s1)
 	int	i;
 
 	i = -1;
+	if (!str)
+		return ;
 	while (str[++i])
+	{
+		//printf("%s\n", str[i]);
 		free(str[i]);
+	}
+	//printf("hola\n");
 	free(str);
 	free(s1);
 }

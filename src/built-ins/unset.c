@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:30 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/18 13:53:04 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/23 12:35:12 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,24 @@
 char	**remove_from_env(t_shell *shell, int pos)
 {
 	char	**new_env;
-	char	**env;
 	int		i;
 
 	i = 0;
-	env = envdup(shell->env);
-	free_dp(shell->env, NULL);
-	while (env[i])
+	while (shell->env[i])
 		i++;
-	new_env = malloc(sizeof(char *) * (i -1));
+	new_env = malloc(sizeof(char *) * (i));
 	if (!new_env)
-		return (NULL);
+		malloc_err(shell);
 	i = -1;
-	while (env[++i])
+	while (shell->env[++i])
 	{
 		if (i < pos)
-			new_env[i] = ft_strdup(env[i]);
+			new_env[i] = ft_strdup(shell->env[i]);
 		else if (i > pos)
-			new_env[i - 1] = ft_strdup(env[i]);
+			new_env[i - 1] = ft_strdup(shell->env[i]);
 	}
 	new_env[i - 1] = NULL;
-	free_dp(env, NULL);
+	free_dp(shell->env, NULL);
 	return (new_env);
 }
 
@@ -65,6 +62,7 @@ void	my_unset(t_shell *shell)
 	while (id[++i])
 	{
 		pos = search_id_pos(shell->env, id[i]);
+		printf("%d\n", pos);
 		if (pos != -1)
 			shell->env = remove_from_env(shell, pos);
 	}

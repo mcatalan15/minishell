@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:22 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/17 15:12:51 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/23 12:50:27 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	my_exit(t_shell *shell)
 {
-	ft_putstr_fd("exit\n", shell->command->out_copy);
+	printf("exit\n");
 	free_prompt(shell);
 	free_dp(shell->env, NULL);
 	clear_program(shell, 0, 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:04:55 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/21 10:00:52 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/23 12:57:07 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

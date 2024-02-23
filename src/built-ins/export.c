@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 10:24:25 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/22 12:00:15 by mcatalan         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/02/23 12:02:34 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	iter_env(char **env, char **new, char *id, char *cmd)
 	{
 		if (ft_strcmpc(id, env[i], '=') <= 0 && !flag)
 		{
-			new[j++] = cmd;
+			new[j++] = ft_strdup(cmd);
 			flag = 1;
 			if (ft_strcmpc(id, env[i], '=') < 0)
 				i--;
@@ -77,7 +77,7 @@ void	iter_env(char **env, char **new, char *id, char *cmd)
 			new[j++] = ft_strdup(env[i]);
 	}
 	if (!flag)
-		new[j++] = cmd;
+		new[j++] = ft_strdup(cmd);
 	new[j] = NULL;
 }
 
@@ -99,22 +99,23 @@ char	**add_to_env(t_shell *shell, char *cmd, char *id)
 
 int	my_export(t_shell *shell)
 {
-	char	**cmd;
+	char	*cmd;
 	char	*id;
 	int		i;
 	int		pos;
 
 	id = NULL;
 	pos = 0;
-	cmd = shell->command->cmd;
-	pos = ft_is_equal(cmd[1], pos);
+	cmd = shell->command->cmd[1];
+	pos = ft_is_equal(cmd, pos);
 	id = malloc(sizeof(char) * (pos + 1));
 	i = -1;
 	while (pos >= ++i)
-		id[i] = cmd[1][i];
+		id[i] = cmd[i];
 	id[i] = '\0';
 	if (!id_checker(id, shell))
-		shell->env = add_to_env(shell, cmd[1], id);
+		shell->env = add_to_env(shell, cmd, id);
+	// ft_print_cmd(shell->env);
 	free(id);
 	return (1);
 }
