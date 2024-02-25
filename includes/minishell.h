@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/22 12:58:50 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:49:54 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		remove_quotes(char *str, char f);
 void	kill_all_quotes(char *str);
 
 //get_functions.c
-char	*get_cwd(char *shell_cwd);
+char	*get_cwd(t_shell *shell);
 char	*get_expansion(char *sub, char *exp);
 int		get_type(char *str);
 int		*get_pid(t_token *token);
@@ -147,7 +147,8 @@ int		my_export(t_shell *shell);
 char	**envdup(char **env);
 // pwd.c
 void	my_pwd(t_shell *shell);
-char	*get_pwd(void);
+// char	*get_pwd(void);
+char	*get_pwd(t_shell *shell);
 
 //unset.c
 void	my_unset(t_shell *shell);

@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:14:57 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/21 10:15:50 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/25 19:50:39 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*search_path(t_shell *shell, char **split)
 	}
 	free_dp(split, add);
 	if (!ft_strncmp(shell->command->cmd[0], "./", 2))
-		return (ft_strjoin(get_pwd(), cmd_no_dot));
+		return (ft_strjoin(get_pwd(shell), cmd_no_dot));
 	cmd_nf(shell, shell->command->cmd[0]);
 	return (NULL);
 }
