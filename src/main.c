@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/26 12:44:48 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:36:13 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	main(int argc, char **argv, char **env)
 	main_args(argc, argv);
 	while (1)
 	{
-		// shell.cwd = get_cwd(&shell);
-		// shell.str = readline(shell.cwd);
-		shell.str = readline("");
+		shell.cwd = get_cwd(&shell);
+		shell.str = readline(shell.cwd);
+		// shell.str = readline("");
 		if (!shell.str)
 		{
     		if (isatty(STDIN_FILENO))

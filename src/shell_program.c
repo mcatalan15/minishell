@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/26 11:22:02 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:54:53 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,11 @@ static int	parsing(t_shell *shell)
 	{
 		if (ft_isoperate(aux->type) && aux->type == aux->next->type)
 			return (stx_erro(shell, *aux->next->str));
-		if (ft_isoperate(aux->type) && ft_isoperate(aux->next->type) \
-		&& ft_isoperate(aux->type) != T_PIPE)
+		if ((ft_isoperate(aux->type) && ft_isoperate(aux->next->type) \
+		&& aux->type != T_PIPE))
 			return (stx_erro(shell, *aux->next->str));
+		if ((aux->type == T_PIPE && !aux->prev))
+			return (stx_erro(shell, *aux->str));
 		aux = aux->next;
 	}
 	if (ft_quoted_closed(aux->str))
