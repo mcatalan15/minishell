@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/25 19:49:54 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/26 13:04:20 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ void	cmd_nf(t_shell *shell, char *cmd);
 void	rdir_erro(t_shell *shell, int type, char *str);
 int		nv_id(t_shell *shell, char *cmd, int type);
 int		malloc_err(t_shell *shell);
+int		num_argre(char *cmd);
+int		too_manyargs();
 
 //built-ins
 //echo.c

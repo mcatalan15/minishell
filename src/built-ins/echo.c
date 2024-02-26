@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:19 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/18 13:53:49 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/26 12:36:40 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	is_flag_n(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[0] != '-')
+		return (1);
+	while (str[++i])
+	{
+		if (str[i] != 'n')
+			return (1);
+	}
+	return (0);
+}
 
 void	my_echo(t_shell *shell)
 {
@@ -21,7 +36,7 @@ void	my_echo(t_shell *shell)
 	i = 0;
 	flag = 0;
 	cmd = shell->command->cmd;
-	if (cmd[1] && !ft_strcmp(cmd[1], "-n"))
+	if (cmd[1] && !is_flag_n(cmd[1]))
 		flag = 1;
 	if (flag)
 		i++;

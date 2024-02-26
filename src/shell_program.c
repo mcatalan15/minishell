@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/23 12:53:36 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:22:02 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	expansion(t_shell *shell)
 					shell->command->token = shell->command->token->prev;
 				aux = shell->command->token;
 			}
-			else if (aux->prev->type != T_DOUT)
+			else if (aux->prev->type != T_DIN)
 				aux = expanding(aux, shell->env);
 			else
 				kill_all_quotes(aux->str);
@@ -108,6 +108,7 @@ int	exec_program(t_shell *shell)
 	shell->command->in_copy = dup(0);
 	shell->command->out_copy = dup(1);
 	shell->command->pid = get_pid(aux);
+	//ft_print_tokens(aux);
 	if (!manage_hd(shell, shell->command->token))
 		return (0);
 	while (aux)

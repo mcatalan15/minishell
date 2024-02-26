@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 13:51:21 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/22 11:42:25 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:59:20 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	nv_id(t_shell *shell, char *cmd, int type)
 	dup2(shell->command->out_copy, 1);
 	// clear_program(shell, type, 0);
 	(void)type;
+	shell->end_type = 1;
 	return (0);
 	// CHANGE -> bash: export: `1a=hola': not a valid identifier
 }
@@ -50,4 +51,25 @@ int	malloc_err(t_shell *shell)
 	dup2(shell->command->out_copy, 1);
 	shell->end_type = 1;
 	return (clear_program(shell, EXIT_FAILURE, 0));
+}
+
+int	num_argre(char *cmd)
+{
+	int	fd;
+
+	fd = dup(1);
+	dup2(2, 1);
+	printf("minishell: exit: %s: numeric argument required\n", cmd);
+	dup2(fd, 1);
+	return (255);
+}
+int	too_manyargs()
+{
+	int	fd;
+
+	fd = dup(1);
+	dup2(2, 1);
+	printf("minishell: exit: too many arguments\n");
+	dup2(fd, 1);
+	return (1);
 }
