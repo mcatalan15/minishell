@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:06:27 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2023/03/08 16:35:41 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/27 12:05:08 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char	*ft_strchr(const char *s, char c)
 {
+	if (!s)
+		return (NULL);
 	while (*s != '\0')
 	{
 		if (*s == c)

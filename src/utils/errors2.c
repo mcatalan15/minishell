@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 13:51:21 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/26 12:59:20 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:15:08 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	nv_id(t_shell *shell, char *cmd, int type)
 	// clear_program(shell, type, 0);
 	(void)type;
 	shell->end_type = 1;
-	return (0);
+	return (1);
 	// CHANGE -> bash: export: `1a=hola': not a valid identifier
 }
 

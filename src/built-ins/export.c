@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/23 12:02:34 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:18:02 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //bash: export: `1A=ads': not a valid identifier
 //bash: export: `=': not a valid identifier
 
-int	id_checker(char *s, t_shell *shell)
+int	id_checker(char *s, t_shell *shell, int j)
 {
 	int	i;
 
@@ -27,12 +27,15 @@ int	id_checker(char *s, t_shell *shell)
 	}
 	if (s[i] == '=' && i != 0)
 		return (0);
-	else if (i != 0)
-		nv_id(shell, shell->command->cmd[1], 1);
-	i = 0;
-	while (!ft_strchr(shell->command->cmd[i], '='))
-		i++;
-	nv_id(shell, shell->command->cmd[i], 1);
+	// else if (i != 0)
+	// {
+	// 	nv_id(shell, shell->command->cmd[j], 1);
+	// 	return (1);
+	// }
+	// i = 0;
+	// while (!ft_strchr(shell->command->cmd[i], '='))
+	// 	i++;
+	nv_id(shell, shell->command->cmd[j], 1);
 	return (1);
 }
 
@@ -103,19 +106,26 @@ int	my_export(t_shell *shell)
 	char	*id;
 	int		i;
 	int		pos;
+	int		j;
 
 	id = NULL;
 	pos = 0;
-	cmd = shell->command->cmd[1];
-	pos = ft_is_equal(cmd, pos);
-	id = malloc(sizeof(char) * (pos + 1));
-	i = -1;
-	while (pos >= ++i)
-		id[i] = cmd[i];
-	id[i] = '\0';
-	if (!id_checker(id, shell))
-		shell->env = add_to_env(shell, cmd, id);
-	// ft_print_cmd(shell->env);
-	free(id);
+	j = 0;
+	while (shell->command->cmd[++j])
+	{
+		cmd = shell->command->cmd[j];
+		pos = ft_is_equal(cmd, pos);
+		if (ft_strchr(cmd, '='))
+		{
+			id = malloc(sizeof(char) * (pos + 1));
+			i = -1;
+			while (pos >= ++i)
+				id[i] = cmd[i];
+			id[i] = '\0';
+			if (!id_checker(id, shell, j))
+				shell->env = add_to_env(shell, cmd, id);
+			free(id);
+		}
+	}
 	return (1);
 }

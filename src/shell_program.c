@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/26 18:54:53 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/27 13:19:17 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ int	exec_program(t_shell *shell)
 	shell->command->in_copy = dup(0);
 	shell->command->out_copy = dup(1);
 	shell->command->pid = get_pid(aux);
-	//ft_print_tokens(aux);
 	if (!manage_hd(shell, shell->command->token))
 		return (0);
 	while (aux)
