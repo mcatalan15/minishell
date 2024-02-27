@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_free_functions.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:13:32 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/27 11:48:44 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:23:21 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,7 @@ void	free_dp(char **str, char *s1)
 	if (!str)
 		return ;
 	while (str[++i])
-	{
-		//printf("%s\n", str[i]);
 		free(str[i]);
-	}
-	//printf("hola\n");
 	free(str);
 	free(s1);
 }
@@ -93,7 +89,6 @@ void	free_dp(char **str, char *s1)
 void	free_prompt(t_shell *shell)
 {
 	free(shell->str);
-	// free(shell->cwd);
 }
 
 void	free_prompt_all(t_shell *shell)

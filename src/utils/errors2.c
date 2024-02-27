@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 13:51:21 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/27 13:15:08 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:20:34 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,9 @@ int	nv_id(t_shell *shell, char *cmd, int type)
 	dup2(2, 1);
 	printf("minishell: export: `%s': not a valid identifier\n", cmd);
 	dup2(shell->command->out_copy, 1);
-	// clear_program(shell, type, 0);
 	(void)type;
 	shell->end_type = 1;
 	return (1);
-	// CHANGE -> bash: export: `1a=hola': not a valid identifier
 }
 
 int	malloc_err(t_shell *shell)
@@ -62,14 +60,4 @@ int	num_argre(char *cmd)
 	printf("minishell: exit: %s: numeric argument required\n", cmd);
 	dup2(fd, 1);
 	return (255);
-}
-int	too_manyargs()
-{
-	int	fd;
-
-	fd = dup(1);
-	dup2(2, 1);
-	printf("minishell: exit: too many arguments\n");
-	dup2(fd, 1);
-	return (1);
 }

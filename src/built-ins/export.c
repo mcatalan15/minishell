@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/27 13:18:02 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:23:52 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-//bash: export: `1A=ads': not a valid identifier
-//bash: export: `=': not a valid identifier
 
 int	id_checker(char *s, t_shell *shell, int j)
 {
