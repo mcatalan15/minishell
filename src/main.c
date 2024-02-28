@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/28 13:01:14 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:56:00 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,19 @@ int	main(int argc, char **argv, char **env)
 	main_args(argc, argv);
 	while (1)
 	{
+		init_signals(PROMPT);
 		shell.cwd = get_cwd(&shell);
 		// shell.cwd = "minishell$ ";
 		shell.str = readline(shell.cwd);
-		if (!shell.str)
-		{
-			if (isatty(STDIN_FILENO))
-				write(2, "exit\n", 6);
-			exit(clear_program(&shell, 0, 0));
-		}
+		update_signal(&shell);
+		// if (!shell.str)
+		// {
+		// 	if (isatty(STDIN_FILENO))
+		// 		write(2, "exit\n", 6);
+		// 	exit(clear_program(&shell, 0, 0));
+		// }
 		handle_history(shell.str);
+		signal(SIGINT, SIG_IGN);
 		if (!ft_is_enter(shell.str))
 			shell_program(&shell);
 		free_prompt(&shell);

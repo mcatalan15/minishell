@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   definitions.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:57:45 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/28 12:56:39 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:22:22 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@
 # define EXIT 7
 
 //signals
-# define READ       1
-# define HERE_DOC   2
-# define PROMT      3
+int	g_signal;
+
+# define PROMPT		1
+# define HERE_DOC	2
+# define EXECUTION	3
 
 #endif

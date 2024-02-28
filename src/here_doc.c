@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:05:48 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/26 10:46:22 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:34:12 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	here_doc(t_shell *shell, t_token *token, int pos)
 	char	*del;
 	int		fd[2];
 
+	init_signals(HERE_DOC); //-> execution signals
 	dup2(shell->command->in_copy, 0);
 	pipe(fd);
 	del = ft_strjoin(token->str, "\n");
