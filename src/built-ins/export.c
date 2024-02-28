@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/28 11:07:29 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:14:47 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ int	id_checker(char *s, t_shell *shell, int j)
 	}
 	if (s[i] == '=' && i != 0)
 		return (0);
-	// else if (i != 0)
-	// {
-	// 	nv_id(shell, shell->command->cmd[j], 1);
-	// 	return (1);
-	// }
-	// i = 0;
-	// while (!ft_strchr(shell->command->cmd[i], '='))
-	// 	i++;
 	nv_id(shell, shell->command->cmd[j], 1);
 	return (1);
 }
@@ -119,11 +111,12 @@ int	my_export(t_shell *shell)
 			while (pos >= ++i)
 				id[i] = cmd[i];
 			id[i] = '\0';
-			if (!id_checker(id, shell, j))
+			pos = id_checker(id, shell, j);
+			if (!pos)
 				shell->env = add_to_env(shell, cmd, id);
 			free(id);
 		}
 	}
-	shell->end_type = 0;
+	shell->end_type = pos;
 	return (1);
 }

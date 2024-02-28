@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/27 19:21:15 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/28 13:00:57 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <string.h>

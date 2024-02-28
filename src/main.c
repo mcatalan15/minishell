@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/28 11:12:10 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:01:14 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	main(int argc, char **argv, char **env)
 	main_args(argc, argv);
 	while (1)
 	{
-		// shell.cwd = get_cwd(&shell);
-		shell.cwd = "minishell$ ";
+		shell.cwd = get_cwd(&shell);
+		// shell.cwd = "minishell$ ";
 		shell.str = readline(shell.cwd);
 		if (!shell.str)
 		{

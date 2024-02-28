@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:57:45 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/22 10:38:07 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:56:39 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,10 @@
 # define CD 5
 # define PWD 6
 # define EXIT 7
+
+//signals
+# define READ       1
+# define HERE_DOC   2
+# define PROMT      3
 
 #endif
