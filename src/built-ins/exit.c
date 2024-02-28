@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:22 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/26 18:47:37 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/28 10:54:08 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	my_exit(t_shell *shell)
 {
 	unsigned int	type;
 
-	type = 0;
+	type = (unsigned int)shell->end_type;
 	printf("exit\n");
 	free_prompt(shell);
 	free_dp(shell->env, NULL);

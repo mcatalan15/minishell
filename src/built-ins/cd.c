@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:36:28 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/18 13:53:35 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/28 11:06:24 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int	my_cd(t_shell *shell)
 		dup2(shell->command->out_copy, 1);
 		return (clear_program(shell, 1, 0));
 	}
+	shell->end_type = 0;
 	return (1);
 }

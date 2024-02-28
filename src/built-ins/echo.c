@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:19 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/27 13:20:13 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:06:53 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,5 @@ void	my_echo(t_shell *shell)
 	}
 	if (!flag)
 		printf("\n");
+	shell->end_type = 0;
 }

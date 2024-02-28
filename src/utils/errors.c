@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:04:55 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/27 11:34:43 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:27:47 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	stx_erro(t_shell *shell, char c)
 	s = "minishell: syntax error near unexpected token `newline'\n";
 	s2 = "minishell: syntax error due to quotes unclosed\n";
 	fd = dup(1);
-	dup2(2, 1);
+	dup2(STDERR_FILENO, STDOUT_FILENO);
 	if (c == '\n')
 		printf("%s", s);
 	else if (c == '\"')
@@ -40,7 +40,7 @@ void	nsf_or_dir(t_shell *shell, int type, char *str)
 	char	*s;
 
 	s = "No such file or directory";
-	dup2(2, 1);
+	dup2(STDERR_FILENO, 1);
 	printf("minishell: %s: %s\n", str, s);
 	dup2(shell->command->out_copy, 1);
 	shell->end_type = type;
@@ -52,7 +52,7 @@ void	nsf_or_dir2(t_shell *shell, char *str)
 	char	*s;
 
 	s = "No such file or directory";
-	dup2(2, 1);
+	dup2(STDERR_FILENO, 1);
 	printf("%s: %s: %s\n", shell->command->cmd[0], str, s);
 	dup2(shell->command->out_copy, 1);
 	shell->end_type = PATH_ERROR;

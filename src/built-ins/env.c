@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:14 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/16 12:16:43 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:07:07 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	my_env(t_shell *shell)
 	}
 	else
 		nsf_or_dir2(shell, shell->command->cmd[1]);
+	shell->end_type = 0;
 }

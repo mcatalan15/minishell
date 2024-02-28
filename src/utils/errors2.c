@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 13:51:21 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/27 19:20:34 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/28 11:22:20 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	cmd_nf(t_shell *shell, char *cmd)
 {
 	dup2(2, 1);
-	printf("minishell: %s: Command not found\n", cmd);
+	printf("minishell: %s: command not found\n", cmd);
 	dup2(shell->command->out_copy, 1);
 	clear_program(shell, PATH_ERROR, 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:30 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/25 20:39:57 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/28 11:07:45 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,5 @@ void	my_unset(t_shell *shell)
 		if (pos != -1)
 			shell->env = remove_from_env(shell, pos);
 	}
+	shell->end_type = 0;
 }
