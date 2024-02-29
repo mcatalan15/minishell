@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:35:58 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/29 12:54:52 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:21:03 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static void	execution_s(int sig, siginfo_t *info, void *ucontext)
 {
 	(void)info;
 	(void)ucontext;
-	printf("execution sig: %d\n", sig);
 	if (sig == SIGINT)
 	{
 		g_signal = 130;
@@ -59,15 +58,9 @@ static void	execution_s(int sig, siginfo_t *info, void *ucontext)
 	}
 	else if (sig == SIGQUIT)
 	{
-		printf("ctrl + \\n");
 		g_signal = 131;
 		ft_putstr_fd("Quit: 3\n", STDERR_FILENO);
 		rl_replace_line("", 1);
-	}
-	else if (sig == SIGTERM)
-	{
-		printf("ctrl + D\n");
-		g_signal = 0;
 	}
 }
 
@@ -92,7 +85,6 @@ void	wait_signal(int type)
 	}
 	else if (type == EXECUTION)
 	{
-		printf("entra execution\n");
 		sig.sa_sigaction = execution_s;
 		sigaction(SIGINT, &sig, NULL);
 		sigaction(SIGQUIT, &sig, NULL);

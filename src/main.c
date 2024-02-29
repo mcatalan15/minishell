@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/29 12:53:20 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:15:09 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int argc, char **argv, char **env)
 		wait_signal(PROMPT);
 		shell.cwd = get_cwd(&shell);
 		shell.str = readline(shell.cwd);
+		update_signal(&shell);
 		handle_history(shell.str);
 		if (!shell.str)
 		{
@@ -69,6 +70,7 @@ int	main(int argc, char **argv, char **env)
 		signal(SIGINT, SIG_IGN);
 		if (!ft_is_enter(shell.str))
 			shell_program(&shell);
+		update_signal(&shell);
 		free_prompt(&shell);
 		clear_program(&shell, 0, 0);
 	}

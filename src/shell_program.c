@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/29 12:23:24 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:15:20 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static int	parsing(t_shell *shell)
 int	exec_program2(t_shell *shell, t_token *list, t_token *aux, int *pid_num)
 {
 	wait_signal(EXECUTION);
-	update_signal(shell);
 	shell->command->cmd = get_cmd(list);
 	if (aux->type == T_PIPE)
 	{
