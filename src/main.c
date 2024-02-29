@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/29 17:15:09 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/29 19:04:26 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	handle_history(char *str)
 }
 
 /*
-	This is the main function of the program.
+	This is the main function of the program. Initialize th minishell and the
+	loop to read the input.
 */
 
 int	main(int argc, char **argv, char **env)

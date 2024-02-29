@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:05:48 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/29 10:10:25 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/29 19:04:33 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,17 @@ void	here_doc(t_shell *shell, t_token *token, int pos)
 	del = ft_strjoin(token->str, "\n");
 	ft_putstr_fd("> ", shell->command->out_copy);
 	line = get_next_line(0);
-	while (ft_strcmp(line, del) != 0)
+	while (line && ft_strcmp(line, del) != 0)
 	{
 		ft_putstr_fd(line, fd[1]);
 		free(line);
 		ft_putstr_fd("> ", shell->command->out_copy);
 		line = get_next_line(0);
+	}
+	if (!line)
+	{
+		close(fd[1]);
+		close(fd[0]);
 	}
 	free(line);
 	free(del);
