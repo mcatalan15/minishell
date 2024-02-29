@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:35:58 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/28 19:08:24 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/29 10:43:41 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,7 @@ static void	prompt_s(int sig, siginfo_t *info, void *ucontext)
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	if (sig == SIGTERM)
-	{
-		ft_putstr_fd("exit\n", STDERR_FILENO);
-		exit(0);
-	}
-	//segfault if SIGTERM
+	//segfault if SIGTERM -> ft_isspace
 }
 
 static void	here_doc_s(int sig, siginfo_t *info, void *ucontext)
@@ -49,6 +44,7 @@ static void	here_doc_s(int sig, siginfo_t *info, void *ucontext)
 		rl_replace_line("", 1);
 		exit(1);
 	}
+	//segfault if SIGTERM -> here_doc -> ft_strcmp
 }
 
 static void	execution_s(int sig, siginfo_t *info, void *ucontext)
@@ -71,16 +67,18 @@ static void	execution_s(int sig, siginfo_t *info, void *ucontext)
 	}
 	else if (sig == SIGTERM)
 	{
+		printf("ctrl + D\n");
 		g_signal = 0;
 	}
 }
 
-void	init_signals(int type)
+void	wait_signal(int type)
 {
 	struct sigaction	sig;
 
 	sig.sa_flags = SA_RESTART;
 	sigemptyset(&sig.sa_mask);
+	g_signal = 0;
 	if (type == PROMPT)
 	{
 		sig.sa_sigaction = prompt_s;
@@ -95,7 +93,7 @@ void	init_signals(int type)
 	}
 	else if (type == EXECUTION)
 	{
-		printf("entra\n");
+		printf("entra execution\n");
 		sig.sa_sigaction = execution_s;
 		sigaction(SIGINT, &sig, NULL);
 		sigaction(SIGQUIT, &sig, NULL);

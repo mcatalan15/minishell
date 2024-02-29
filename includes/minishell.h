@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/28 17:56:27 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/02/29 10:05:37 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	redirection(t_shell *shell, t_token *token, int pid_num);
 // t_token	*redirect(t_token *token);
 
 // signals.c
-void	init_signals(int type); //type_signals
+void	wait_signal(int type); //type_signals
 void	update_signal(t_shell *shell);
 
 //utils
