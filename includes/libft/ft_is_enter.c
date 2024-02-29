@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:51:14 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/29 10:26:47 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:21:43 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_is_enter(char *str)
 
 	i = -1;
 	flag = 0;
+	if (!str)
+		return (1);
 	while (str[++i])
 	{
 		if (!ft_isspace(str[i]))

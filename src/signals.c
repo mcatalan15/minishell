@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:35:58 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/29 10:43:41 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:34:05 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ static void	prompt_s(int sig, siginfo_t *info, void *ucontext)
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();
+	}
+	if (sig == SIGTERM)
+	{
+		ft_putstr_fd("exit\n", STDOUT_FILENO);
+		exit (g_signal);
 	}
 	//segfault if SIGTERM -> ft_isspace
 }
@@ -83,6 +88,7 @@ void	wait_signal(int type)
 	{
 		sig.sa_sigaction = prompt_s;
 		signal(SIGQUIT, SIG_IGN);
+		signal(SIGTERM, SIG_IGN);
 		sigaction(SIGINT, &sig, NULL);
 	}
 	else if (type == HERE_DOC)
