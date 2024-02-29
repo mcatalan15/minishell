@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/29 12:21:43 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:20:59 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,15 @@ char	*get_expansion(char *sub, char *exp);
 int		get_type(char *str);
 int		*get_pid(t_token *token);
 
-// utils3.c
+// utils.c
 char	*addstr(char *str, char c);
 t_token	*token_new(char *str, int type, t_shell *shell);
 void	join_subt2(t_token *token, char **str, t_token **new,
 			t_shell *shell);
-
-// utils4.c
 int		cmdlen(t_token *aux);
 char	*search_path(t_shell *shell, char **split);
 
-// utils5.c
+// utils2.c
 int		ft_isbuiltin(char *cmd);
 int		ft_is_equal(char *cmd, int flag);
 void	wait_for_children(t_shell *shell, int *pid);

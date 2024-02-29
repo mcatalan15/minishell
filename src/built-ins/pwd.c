@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:28 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/28 11:07:38 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:15:02 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// char	*get_pwd(void)
-// {
-// 	char	cwd[1024];
-// 	char	*cwd_string;
-
-// 	cwd_string = malloc(strlen(getcwd(cwd, sizeof(cwd))) + 3);
-// 	strcpy(cwd_string, getcwd(cwd, sizeof(cwd)));
-// 	return (cwd_string);
-// }
 
 char	*get_pwd(t_shell *shell)
 {

@@ -39,9 +39,34 @@ READLINE_FILES = $(wildcard $(READLINE_D)$(READLINE) $(READLINE_D)$(READLINE_H))
 
 NAME = minishell
 
-SRCS =	$(wildcard src/*.c)				\
-		$(wildcard src/built-ins/*.c)	\
-		$(wildcard src/utils/*.c)
+SRCS =	src/main.c							\
+		src/init_vars.c						\
+		src/shell_program.c					\
+		src/split_parsing.c					\
+		src/expansion.c						\
+		src/expansion2.c					\
+		src/redirections.c					\
+		src/here_doc.c						\
+		src/execute.c						\
+		src/signals.c						\
+		src/utils/clear_free_functions.c	\
+		src/utils/errors.c					\
+		src/utils/errors2.c					\
+		src/utils/errors3.c					\
+		src/utils/ft_is_functions.c			\
+		src/utils/get_functions.c			\
+		src/utils/print_functions.c			\
+		src/utils/quotes.c					\
+		src/utils/utils.c					\
+		src/utils/utils2.c					\
+		src/built-ins/built-utils.c			\
+		src/built-ins/cd.c					\
+		src/built-ins/echo.c				\
+		src/built-ins/env.c					\
+		src/built-ins/exit.c				\
+		src/built-ins/export.c				\
+		src/built-ins/pwd.c					\
+		src/built-ins/unset.c				\
 
 OBJS = $(SRCS:.c=.o)
 
@@ -59,30 +84,16 @@ libft:
 	@echo "$(YELLOW)Building libft...$(RESET)"
 	@make --no-print-directory -C $(LIBFT_D)
 
+config:
+	@echo "$(YELLOW)Configuring readline...$(RESET)"
+	@cd $(READLINE_D) && ./configure &> /dev/null
+	@echo "$(GREEN)Configured readline!$(RESET)✅"
+
 readline:
-ifeq ($(READLINE_CONFIGURE),)
 	@echo "$(YELLOW)Building readline...$(RESET)"
-	@cd $(READLINE_D) && ./configure &> /dev/null && make
+	@cd $(READLINE_D) && make
 	@make --no-print-directory -C $(READLINE_D)
 	@echo "$(GREEN)Built readline!$(RESET)✅"
-else
-ifeq ($(wildcard $(READLINE_D)/config.status),)
-	@echo "$(YELLOW)Configuring readline$(RESET)"
-	@cd $(READLINE_D) && ./configure
-else
-ifeq ($(READLINE_FILES),)
-	@echo "$(GREEN)Readline Configured$(RESET)✅"
-	@echo "$(YELLOW)Compiling readline...$(RESET)"
-	@echo "$(GREEN)Skipping...$(RESET)✅"
-	@cd $(READLINE_D)
-	@make --no-print-directory -C $(READLINE_D)
-	@echo "$(GREEN)Readline ready$(RESET)✅"
-else
-	@echo "$(GREEN)Readline already built!$(RESET)✅"
-	@echo "$(GREEN)Skipping...$(RESET)✅"
-endif
-endif
-endif
 
 print_message:
 	$(PRINT_MINISHELL)
@@ -100,13 +111,13 @@ $(NAME): $(OBJS) $(LIBFT_D)$(LIBFT) $(READLINE_D)$(READLINE) $(READLINE_D)$(READ
 
 clean:
 	@make clean --no-print-directory -C $(LIBFT_D)
-	@make clean --no-print-directory -C $(READLINE_D)
-	@echo "$(RED)Cleaned readline!$(RESET)✅"
 	@$(RM) $(OBJS) $(DEPS)
 	@echo "$(RED)Cleaned minishell!$(RESET)✅"
 
 fclean: clean
 	@make fclean --no-print-directory -C $(LIBFT_D)
+	@make clean --no-print-directory -C $(READLINE_D)
+	@echo "$(RED)Cleaned readline!$(RESET)✅"
 	@$(RM) $(NAME) $(DEPS)
 	@echo "$(RED)Fcleaned minishell!$(RESET)✅"
 
@@ -118,7 +129,7 @@ jesusg:
 
 re: fclean all
 
-.PHONY: all clean fclean re libft readline jesusg
+.PHONY: all clean fclean re libft readline jesusg config
 
 # UBUNTU
 # Print MINISHELL and authors' names
