@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:22 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/28 10:54:08 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:49:48 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,16 @@ void	my_exit(t_shell *shell)
 	unsigned int	type;
 
 	type = (unsigned int)shell->end_type;
+	g_signal = type;
 	printf("exit\n");
 	free_prompt(shell);
 	free_dp(shell->env, NULL);
-	if (shell->command->token->next)
-		type = exit_errors(shell->command->cmd);
+	if (shell->command)
+	{
+		if (shell->command->token->next)
+			type = exit_errors(shell->command->cmd);
+	}
 	clear_program(shell, type, 1);
+	exit(type);
 }
 // dprintf(shell->command->out_copy, "mem: %p\n", shell->command->);

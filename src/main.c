@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/29 10:07:37 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:53:20 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	main(int argc, char **argv, char **env)
 
 	shell.env = envdup(env);
 	shell.end_type = 0;
+	g_signal = 0;
 	shell.cwd = NULL;
 	using_history();
 	main_args(argc, argv);
@@ -54,16 +55,17 @@ int	main(int argc, char **argv, char **env)
 	{
 		wait_signal(PROMPT);
 		shell.cwd = get_cwd(&shell);
-		// shell.cwd = "minishell$ ";
 		shell.str = readline(shell.cwd);
-		update_signal(&shell);
-		// if (!shell.str)
-		// {
-		// 	if (isatty(STDIN_FILENO))
-		// 		write(2, "exit\n", 6);
-		// 	exit(clear_program(&shell, 0, 0));
-		// }
 		handle_history(shell.str);
+		if (!shell.str)
+		{
+			if (isatty(STDIN_FILENO))
+			{
+				my_exit(&shell);
+			}
+			break ;
+		}
+		update_signal(&shell);
 		signal(SIGINT, SIG_IGN);
 		if (!ft_is_enter(shell.str))
 			shell_program(&shell);
@@ -72,5 +74,5 @@ int	main(int argc, char **argv, char **env)
 	}
 	free_prompt_all(&shell);
 	rl_clear_history();
-	clear_program(&shell, 0, 1);
+	clear_program(&shell, shell.end_type, 1);
 }

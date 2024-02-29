@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/29 10:05:37 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:21:43 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	redirection(t_shell *shell, t_token *token, int pid_num);
 // signals.c
 void	wait_signal(int type); //type_signals
 void	update_signal(t_shell *shell);
+void	sig_errors(t_shell *shell);
 
 //utils
 //clear_free_functions.c
