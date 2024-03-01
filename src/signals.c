@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:35:58 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/29 19:01:44 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/01 14:17:19 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ static void	here_doc_s(int sig, siginfo_t *info, void *ucontext)
 	(void)ucontext;
 	if (sig == SIGINT)
 	{
+		// printf("ctrl-C\n");
 		ft_putstr_fd("\n", STDERR_FILENO);
 		rl_replace_line("", 1);
-		g_exit_here_doc = 1;
+		exit(1);
 	}
 }
 

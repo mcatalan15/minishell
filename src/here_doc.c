@@ -3,44 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:05:48 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/29 19:04:33 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/01 13:25:01 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	here_doc(t_shell *shell, t_token *token, int pos)
+int	here_doc(t_shell *shell, t_token *token, int pos)
 {
 	char	*line;
-	char	*del;
+	int		status;
+	int		pid;
 	int		fd[2];
 
-	wait_signal(HERE_DOC); //-> execution signals
 	dup2(shell->command->in_copy, 0);
 	pipe(fd);
-	del = ft_strjoin(token->str, "\n");
-	ft_putstr_fd("> ", shell->command->out_copy);
-	line = get_next_line(0);
-	while (line && ft_strcmp(line, del) != 0)
+	pid = fork();
+	if (!pid)
 	{
-		ft_putstr_fd(line, fd[1]);
+		wait_signal(HERE_DOC);
+		line = readline("> ");
+		while (line && (ft_strcmp(line, token->str) != 0))
+		{
+			ft_putstr_fd(line, fd[1]);
+			free(line);
+			line = readline("> ");
+			write(fd[1], "\n", 1);
+		}
 		free(line);
-		ft_putstr_fd("> ", shell->command->out_copy);
-		line = get_next_line(0);
-	}
-	if (!line)
-	{
 		close(fd[1]);
 		close(fd[0]);
+		exit(0);
 	}
-	free(line);
-	free(del);
+	waitpid(pid, &status, 0);
+	shell->end_type = WEXITSTATUS(status);
+	if (shell->end_type == 1)
+		return (0);
 	shell->command->hd[pos] = dup(fd[0]);
 	close(fd[1]);
 	close(fd[0]);
+	return (1);
 }
 
 int	manage_hd(t_shell *shell, t_token *list)
@@ -64,7 +69,8 @@ int	manage_hd(t_shell *shell, t_token *list)
 	while (list->next)
 	{
 		if (list->type == T_DIN)
-			here_doc(shell, list->next, i);
+			if (!here_doc(shell, list->next, i))
+				return (0);
 		if (list->type == T_PIPE)
 			i++;
 		list = list->next;
