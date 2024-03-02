@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:20:46 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/02 13:58:19 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:34:28 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	too_manyargs(void)
 	// dup2(2, 1);
 	// printf("minishell: exit: too many arguments\n");
 	// dup2(fd, 1);
-	ft_putstr_fd("too many arguments\n", 2);
+	ft_putstr_fd(" too many arguments\n", 2);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 13:51:21 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/02 14:01:34 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:34:02 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	nv_id(t_shell *shell, char *cmd, int type)
 	// dup2(2, 1);
 	// printf("minishell: export: `%s': not a valid identifier\n", cmd);
 	// dup2(shell->command->out_copy, 1);
-	ft_putstr_fd("not a valid identifier\n", 2);
+	ft_putstr_fd(" not a valid identifier\n", 2);
 	(void)type;
 	shell->end_type = 1;
 	return (1);
@@ -67,6 +67,6 @@ int	num_argre(char *cmd)
 	// dup2(2, 1);
 	// printf("minishell: exit: %s: numeric argument required\n", cmd);
 	// dup2(fd, 1);
-	ft_putstr_fd("numeric argument required\n", 2);
+	ft_putstr_fd(" numeric argument required\n", 2);
 	return (255);
 }

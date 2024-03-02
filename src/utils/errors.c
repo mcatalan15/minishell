@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:04:55 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 13:59:25 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:28:14 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	nsf_or_dir(t_shell *shell, int type, char *str)
 	// dup2(2, 1);
 	// printf("minishell: %s: %s\n", str, s);
 	// dup2(shell->command->out_copy, 1);
-	ft_putstr_fd("No such file or directory\n", 2);
+	ft_putstr_fd(" No such file or directory\n", 2);
 	shell->end_type = type;
 	clear_program(shell, type, 1);
 }
@@ -61,7 +61,7 @@ void	nsf_or_dir2(t_shell *shell, char *str)
 	// dup2(STDERR_FILENO, 1);
 	// printf("%s: %s: %s\n", shell->command->cmd[0], str, s);
 	// dup2(shell->command->out_copy, 1);
-	ft_putstr_fd("No such file or directory\n", 2);
+	ft_putstr_fd(" No such file or directory\n", 2);
 	shell->end_type = PATH_ERROR;
 	clear_program(shell, PATH_ERROR, 0);
 }

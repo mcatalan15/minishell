@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:01:59 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/02 14:03:19 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:44:15 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ int	id_checker(char *s, t_shell *shell, int j)
 		while (ft_isalnum(s[i]) || s[i] == '_')
 			i++;
 	}
-	if ((s[i] == '=' && i != 0))
+	if ((s[i] == '=' || !s[i]) && i != 0)
+	{
+		//printf("entra : %s : %d\n", s, i);
 		return (0);
+	}
 	nv_id(shell, shell->command->cmd[j], 1);
 	return (1);
 }
@@ -108,26 +111,24 @@ int	my_export(t_shell *shell)
 		//shell, pos, j
 		cmd = shell->command->cmd[j];
 		pos = ft_is_equal(cmd, pos);
+		id = malloc(sizeof(char) * (pos + 1));
+		if (!id)
+			malloc_err(shell);
+		i = -1;
+		while (pos >= ++i)
+			id[i] = cmd[i];
+		id[i] = '\0';
+		pos = id_checker(id, shell, j);
 		if (ft_strchr(cmd, '='))
 		{
-			id = malloc(sizeof(char) * (pos + 1));
-			if (!id)
-				malloc_err(shell);
-			i = -1;
-			while (pos >= ++i)
-				id[i] = cmd[i];
-			id[i] = '\0';
-			pos = id_checker(id, shell, j);
 			if (!pos)
 				shell->env = add_to_env(shell, cmd, id);
-			free(id);
 		}
-		else if (ft_strchr(cmd, '+') || ft_strchr(cmd, '-'))
-			nv_id(shell, shell->command->cmd[j], 1);
+		free(id);
+
 	}
 	if (j == 1)
 		export_no_args(shell);
-	//pos err 
 	shell->end_type = pos;
 	return (1);
 }
