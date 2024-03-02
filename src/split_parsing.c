@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 09:47:34 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/01/17 18:12:35 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/02 10:47:30 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	**ft_split_shell_3(const char *str, char **res, int i, int s)
 			while (str[i] == ' ' || str[i] == '\t')
 				i--;
 			res[k] = malloc(sizeof(char) * (i - s + 1));
+			// -> malloc_err(shell);
 			ft_strncpy(res[k++], &str[s], (i - s));
 		}
 	}
@@ -88,6 +89,7 @@ char	**ft_split_shell(const char *str)
 	i = 0;
 	s = -1;
 	split = malloc(sizeof(char *) * (ft_split_shell_2(str, i) + 1));
+	// -> malloc_err(shell);
 	split = ft_split_shell_3(str, split, i, s);
 	return (split);
 }

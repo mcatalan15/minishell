@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:05:48 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/01 13:25:01 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 10:37:00 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	manage_hd(t_shell *shell, t_token *list)
 	}
 	shell->command->hd = ft_calloc((len + 1), sizeof(int));
 	if (!shell->command->hd)
-		return (0);
+		return (0); //-> malloc_err(shell);?
 	while (list->next)
 	{
 		if (list->type == T_DIN)

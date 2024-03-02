@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:33:27 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/27 11:43:20 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 10:45:17 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*get_cwd(t_shell *shell)
 	len = 0;
 	if (cwd_string != NULL)
 	{
+		// len, cwd, cwd_string, shell
 		len = ft_strlen(cwd);
 		cwd_string = malloc(len + 3);
 		if (cwd_string != NULL)
@@ -116,7 +117,7 @@ int	*get_pid(t_token *token)
 	}
 	pid = malloc((len + 1) * sizeof(int));
 	if (!pid)
-		return (NULL);
+		return (NULL); // -> malloc_err(shell);
 	pid[len] = -1;
 	return (pid);
 }

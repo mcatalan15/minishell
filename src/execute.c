@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/28 18:23:20 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/02 10:34:37 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**get_cmd(t_token *token)
 	aux = token;
 	command = malloc((i + 1) * sizeof(char *));
 	if (!command)
-		return (NULL);
+		return (NULL); // -> malloc_err(shell);
 	command[i] = NULL;
 	i = 0;
 	while (aux && aux->type != T_PIPE)

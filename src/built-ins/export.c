@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:01:59 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/29 18:05:51 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/02 11:16:06 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	id_checker(char *s, t_shell *shell, int j)
 		while (ft_isalnum(s[i]) || s[i] == '_')
 			i++;
 	}
-	if (s[i] == '=' && i != 0)
+	if ((s[i] == '=' && i != 0))
 		return (0);
 	nv_id(shell, shell->command->cmd[j], 1);
 	return (1);
@@ -39,7 +39,7 @@ char	**envdup(char **env)
 		i++;
 	new_env = malloc(sizeof(char *) * (i + 1));
 	if (!new_env)
-		return (NULL);
+		return (NULL); // -> malloc_err(shell);
 	i = -1;
 	while (env[++i])
 		new_env[i] = ft_strdup(env[i]);
@@ -83,7 +83,7 @@ char	**add_to_env(t_shell *shell, char *cmd, char *id)
 		i++;
 	new = malloc((i + 2) * sizeof(char *));
 	if (!new)
-		return (NULL);
+		malloc_err(shell);
 	iter_env(shell->env, new, id, cmd);
 	free_dp(shell->env, NULL);
 	return (new);
@@ -102,11 +102,14 @@ int	my_export(t_shell *shell)
 	j = 0;
 	while (shell->command->cmd[++j])
 	{
+		//shell, pos, j
 		cmd = shell->command->cmd[j];
 		pos = ft_is_equal(cmd, pos);
 		if (ft_strchr(cmd, '='))
 		{
 			id = malloc(sizeof(char) * (pos + 1));
+			if (!id)
+				malloc_err(shell);
 			i = -1;
 			while (pos >= ++i)
 				id[i] = cmd[i];
@@ -116,7 +119,11 @@ int	my_export(t_shell *shell)
 				shell->env = add_to_env(shell, cmd, id);
 			free(id);
 		}
+		else if (ft_strchr(cmd, '+') || ft_strchr(cmd, '-'))
+			nv_id(shell, shell->command->cmd[j], 1);
 	}
+	if (j == 1)
+		export_no_args(shell);
 	shell->end_type = pos;
 	return (1);
 }

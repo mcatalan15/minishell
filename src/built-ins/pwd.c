@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:28 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/29 18:15:02 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/02 10:32:02 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*remove_dollar(char *str)
 	{
 		new = malloc(i);
 		if (!new)
-			return (NULL);
+			return (NULL); // -> malloc_err(shell);
 		i = 0;
 		while (str[i] && str[i] != '$')
 		{

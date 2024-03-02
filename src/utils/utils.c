@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:51:38 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/02/29 18:18:18 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/02 10:33:59 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*addstr(char *str, char c)
 	i = 0;
 	new = malloc((ft_strlen(str) + 2) * sizeof(char));
 	if (!new)
-		return (NULL);
+		return (NULL); // -> malloc_err(shell);
 	if (str)
 	{
 		while (str[i])

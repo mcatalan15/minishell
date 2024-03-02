@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/15 10:43:20 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 10:36:13 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	add_new_token(t_token **new, char **str, t_shell *shell)
 	{
 		*str = malloc(sizeof(char));
 		*str[0] = '\0';
+		//-> malloc_err(shell); ?
 	}
 	aux = token_new(*str, T_STR, shell);
 	if (!*new)
