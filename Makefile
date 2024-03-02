@@ -59,6 +59,7 @@ SRCS =	src/main.c							\
 		src/utils/quotes.c					\
 		src/utils/utils.c					\
 		src/utils/utils2.c					\
+		src/utils/utils3.c					\
 		src/built-ins/built-utils.c			\
 		src/built-ins/cd.c					\
 		src/built-ins/echo.c				\

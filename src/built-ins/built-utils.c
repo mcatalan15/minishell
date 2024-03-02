@@ -1,16 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   build-utils.c                                      :+:      :+:    :+:   */
+/*   built-utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:28:59 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/27 13:19:54 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 11:44:38 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/*
+	This function compares and filters based on a given type for each case of
+	built-in functions.
+*/
 
 void	manage_builtins(t_shell *shell, int built_type)
 {

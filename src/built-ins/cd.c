@@ -6,11 +6,18 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:36:28 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/28 11:06:24 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 11:47:48 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/*
+	This function behaves like the 'cd' command in a shell. It searches to
+	determine if the directory exists and whether it is not a directory.
+	Additionally, it checks if the user has the necessary permissions to
+	access the directory.
+*/
 
 int	my_cd(t_shell *shell)
 {

@@ -6,11 +6,17 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:19 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/28 11:06:53 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 11:55:06 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/*
+	This function searches for the '-n' flag in the given string. If the flag is
+	present, it returns 1. This enables the echo built-in function to mimic the
+	behavior of the echo command in bash when used with this flag.
+*/
 
 int	is_flag_n(char *str)
 {
@@ -26,6 +32,15 @@ int	is_flag_n(char *str)
 	}
 	return (0);
 }
+
+/*
+	This function replicates the behavior of the echo command in bash. It
+	utilizes the 'is_flag_n' function to determine if the '-n' flag is present,
+	updating the flag accordingly. If the flag is present, it is skipped, and the
+	function proceeds to print all the given arguments. After printing all
+	arguments, it checks if the flag is '-n'; if not found, it prints a newline
+	character.
+*/
 
 void	my_echo(t_shell *shell)
 {

@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 11:02:09 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 11:40:51 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,9 @@ void	wait_for_children(t_shell *shell, int *pid);
 char	*get_path_when_cmd(t_shell *shell);
 int		ft_isalpha_lw(char c);
 
+// utils3.c
+char	**envdup(char **env);
+
 // ft_is_functions.c
 int		ft_isoperate(int flag);
 int		ft_issquote(char c);
@@ -120,7 +123,6 @@ int		ft_isrd(int flag);
 char	*ft_is_interrogant(char *end_type);
 
 //	heredoc.c
-// void	here_doc(t_shell *shell, t_token *token);
 int		manage_hd(t_shell *shell, t_token *token);
 
 // errors.c
@@ -153,10 +155,8 @@ void	my_exit(t_shell *shell);
 
 //export.c
 int		my_export(t_shell *shell);
-char	**envdup(char **env);
 // pwd.c
 void	my_pwd(t_shell *shell);
-// char	*get_pwd(void);
 char	*get_pwd(t_shell *shell);
 
 //unset.c

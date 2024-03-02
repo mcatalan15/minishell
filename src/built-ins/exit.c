@@ -6,11 +6,15 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:22 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 10:29:37 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 12:12:37 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/*
+	
+*/
 
 int	exit_errors(char **cmd)
 {
@@ -22,7 +26,7 @@ int	exit_errors(char **cmd)
 	while (ft_isspace(cmd[1][i]))
 		i++;
 	if ((cmd[1][i] == '+' || cmd[1][i] == '-'))
-			i++;
+		i++;
 	while (cmd[1][i])
 	{
 		if (!ft_isdigit(cmd[1][i]) && (!ft_isspace(cmd[1][i]) || !flag))
@@ -38,6 +42,13 @@ int	exit_errors(char **cmd)
 		return (too_manyargs());
 	return (ft_atoi(cmd[1]));
 }
+
+/*
+	This function behave as the exit function and is also used in case of ctrl-D, to exit the minishell.
+	Prints an 'exit' output and clears all the program.
+	In case the exit command is executed in a pipe and minishell has more commands to execute enters in exit_errors???????????????????
+	
+*/
 
 void	my_exit(t_shell *shell)
 {

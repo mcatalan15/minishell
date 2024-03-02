@@ -6,11 +6,18 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:28 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 10:32:02 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 12:21:32 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/*
+	This function retrieves the current path using the getcwd function and
+	prints it as the prompt. If the minishell program is located in a
+	nonexistent path and getcwd returns null, the prompt is retrieved from the
+	last stored path in shell->cwd.
+*/
 
 char	*get_pwd(t_shell *shell)
 {
@@ -40,6 +47,11 @@ char	*get_pwd(t_shell *shell)
 	return (cwd_string);
 }
 
+/*
+	This function takes the path printed on the prompt as input (passed as str)
+	and removes the dollar sign, which is reserved for the prompt output.
+*/
+
 char	*remove_dollar(char *str)
 {
 	char	*new;
@@ -64,6 +76,12 @@ char	*remove_dollar(char *str)
 	free(str);
 	return (new);
 }
+
+/*
+	This function replicates the behavior of the pwd command in Bash. It
+	retrieves the current path, removes the dollar sign from the saved path,
+	and prints it.
+*/
 
 void	my_pwd(t_shell *shell)
 {

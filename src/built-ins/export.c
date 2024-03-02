@@ -6,11 +6,17 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:01:59 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/02 11:16:06 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 12:27:02 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/*
+	This function takes an identifier as input and checks if all characters in
+	the identifier are alphanumeric and lowercase. If the identifier is valid,
+	it returns 0. Otherwise, it raises a 'not valid id' error.
+*/
 
 int	id_checker(char *s, t_shell *shell, int j)
 {
@@ -28,24 +34,12 @@ int	id_checker(char *s, t_shell *shell, int j)
 	return (1);
 }
 
-char	**envdup(char **env)
-{
-	int		i;
-	char	**new_env;
-
-	i = 0;
-	new_env = NULL;
-	while (env[i])
-		i++;
-	new_env = malloc(sizeof(char *) * (i + 1));
-	if (!new_env)
-		return (NULL); // -> malloc_err(shell);
-	i = -1;
-	while (env[++i])
-		new_env[i] = ft_strdup(env[i]);
-	new_env[i] = NULL;
-	return (new_env);
-}
+/*
+	This function inserts the command (id=value) at the correct position in the
+	environment. It iterates through the environment until it finds an id with
+	an equal value (to update the command) or a larger value (to add the command
+	to a new position in the environment).
+*/
 
 void	iter_env(char **env, char **new, char *id, char *cmd)
 {
@@ -73,6 +67,12 @@ void	iter_env(char **env, char **new, char *id, char *cmd)
 	new[j] = NULL;
 }
 
+/*
+	This function adds a new environment variable (cmd) to the shell's
+	environment at the specified position known by comparing the identifier
+	using the iter_env function.
+*/
+
 char	**add_to_env(t_shell *shell, char *cmd, char *id)
 {
 	char	**new;
@@ -88,6 +88,9 @@ char	**add_to_env(t_shell *shell, char *cmd, char *id)
 	free_dp(shell->env, NULL);
 	return (new);
 }
+
+/*
+*/
 
 int	my_export(t_shell *shell)
 {
