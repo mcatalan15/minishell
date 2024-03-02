@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:01:59 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/02 12:27:02 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 14:03:19 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int	my_export(t_shell *shell)
 	}
 	if (j == 1)
 		export_no_args(shell);
+	//pos err 
 	shell->end_type = pos;
 	return (1);
 }

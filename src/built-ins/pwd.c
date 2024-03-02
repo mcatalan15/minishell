@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:28 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 12:21:32 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 13:08:34 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_pwd(t_shell *shell)
 	and removes the dollar sign, which is reserved for the prompt output.
 */
 
-char	*remove_dollar(char *str)
+char	*remove_dollar(char *str, t_shell *shell)
 {
 	char	*new;
 	int		i;
@@ -62,12 +62,12 @@ char	*remove_dollar(char *str)
 	{
 		new = malloc(i);
 		if (!new)
-			return (NULL); // -> malloc_err(shell);
+			malloc_err(shell);
 		i = 0;
 		while (str[i] && str[i] != '$')
 		{
-				new[i] = str[i];
-				i++;
+			new[i] = str[i];
+			i++;
 		}
 		new[i] = '\0';
 	}
@@ -88,7 +88,7 @@ void	my_pwd(t_shell *shell)
 	char	*str;
 
 	str = get_pwd(shell);
-	str = remove_dollar(str);
+	str = remove_dollar(str, shell);
 	printf("%s\n", str);
 	free(str);
 	shell->end_type = 0;

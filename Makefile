@@ -42,7 +42,6 @@ NAME = minishell
 SRCS =	src/main.c							\
 		src/init_vars.c						\
 		src/shell_program.c					\
-		src/split_parsing.c					\
 		src/expansion.c						\
 		src/expansion2.c					\
 		src/redirections.c					\

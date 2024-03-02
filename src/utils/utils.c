@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:51:38 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/02 10:33:59 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 13:10:18 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	string, freeing the memory of the old string.
 */
 
-char	*addstr(char *str, char c)
+char	*addstr(char *str, char c, t_shell *shell)
 {
 	char	*new;
 	int		i;
@@ -25,7 +25,7 @@ char	*addstr(char *str, char c)
 	i = 0;
 	new = malloc((ft_strlen(str) + 2) * sizeof(char));
 	if (!new)
-		return (NULL); // -> malloc_err(shell);
+		malloc_err(shell);
 	if (str)
 	{
 		while (str[i])
@@ -75,7 +75,7 @@ void	join_subt2(t_token *token, char **str, t_token **new, t_shell *shell)
 	while (token->str[++i])
 	{
 		if (!ft_isspace(token->str[i]) || token->type != T_STR)
-			*str = addstr(*str, token->str[i]);
+			*str = addstr(*str, token->str[i], shell);
 		else
 		{
 			add_new_token(new, str, shell);

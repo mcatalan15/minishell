@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:33:27 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 10:45:17 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 13:09:00 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	*get_pid(t_token *token)
 	}
 	pid = malloc((len + 1) * sizeof(int));
 	if (!pid)
-		return (NULL); // -> malloc_err(shell);
+		malloc_err(token->shell);
 	pid[len] = -1;
 	return (pid);
 }

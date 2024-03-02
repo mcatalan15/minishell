@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 11:40:51 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 13:20:00 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,6 @@ int		get_type2(char flag, int *p, int *len);
 t_token	*get_token(t_token *token, char **env);
 t_token	*add_subtokens(t_token *token, t_token *aux, t_token *next, char **env);
 
-// split_parsing.c
-char	**ft_split_shell(char const *str);
-
 // execute.c
 int		exec_cmd(t_shell *shell, t_token *aux, int pid, int pid_num);
 char	**get_cmd(t_token *token);
@@ -98,7 +95,7 @@ int		get_type(char *str);
 int		*get_pid(t_token *token);
 
 // utils.c
-char	*addstr(char *str, char c);
+char	*addstr(char *str, char c, t_shell *shell);
 t_token	*token_new(char *str, int type, t_shell *shell);
 void	join_subt2(t_token *token, char **str, t_token **new,
 			t_shell *shell);

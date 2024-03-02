@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 11:39:08 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 11:39:55 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 13:20:38 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,21 @@ char	**envdup(char **env)
 		i++;
 	new_env = malloc(sizeof(char *) * (i + 1));
 	if (!new_env)
-		return (NULL); // -> malloc_err(shell);
+	{
+		ft_putstr_fd("minishell: malloc: error in malloc\n", 2);
+		exit(1);
+	}
 	i = -1;
 	while (env[++i])
+	{
 		new_env[i] = ft_strdup(env[i]);
+		if (!new_env[i])
+		{
+			ft_putstr_fd("minishell: malloc: error in malloc\n", 2);
+			free_dp(new_env, NULL);
+			exit(1);
+		}
+	}/////////////// revisar caso err malloc (salir de mini?)
 	new_env[i] = NULL;
 	return (new_env);
 }
