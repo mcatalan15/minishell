@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 13:20:00 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 17:04:55 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		exec_cmd(t_shell *shell, t_token *aux, int pid, int pid_num);
 char	**get_cmd(t_token *token);
 
 // redirections.c
-void	redirection(t_shell *shell, t_token *token, int pid_num);
+int		redirection(t_shell *shell, t_token *token, int pid_num);
 // void	redirect(t_shell *shell, t_token *token);
 // t_token	*redirect(t_token *token);
 

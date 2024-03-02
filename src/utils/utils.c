@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:51:38 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/02 13:10:18 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 16:24:45 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_token	*token_new(char *str, int type, t_shell *shell)
 
 	token = malloc(sizeof(t_token));
 	if (!token)
-		return (NULL);
+		malloc_err(shell);
 	token->str = str;
 	token->type = type;
 	token->shell = shell;
@@ -125,9 +125,13 @@ char	*search_path(t_shell *shell, char **split)
 	i = -1;
 	cmd_no_dot = shell->command->cmd[0] + 1;
 	add = ft_strjoin("/", shell->command->cmd[0]);
+	if (!add)
+		malloc_err(shell);
 	while (split[++i])
 	{
 		path = ft_strjoin(split[i], add);
+		if (!path)
+			malloc_err(shell);
 		if (!access(path, F_OK))
 		{
 			free_dp(split, add);

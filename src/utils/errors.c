@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:04:55 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 15:28:14 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 16:49:12 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,19 @@ int	stx_erro(t_shell *shell, char c)
 
 void	nsf_or_dir(t_shell *shell, int type, char *str)
 {
-	(void)type;
-	(void)str;
+	int	flag;
 	// char	*s;
 
+	flag = 1;
 	// s = "No such file or directory";
 	// dup2(2, 1);
 	// printf("minishell: %s: %s\n", str, s);
 	// dup2(shell->command->out_copy, 1);
 	ft_putstr_fd(" No such file or directory\n", 2);
 	shell->end_type = type;
-	clear_program(shell, type, 1);
+	if (shell->command->pid[1] == -1 && ft_isbuiltin(str))
+		flag = 0;
+	clear_program(shell, type, flag);
 }
 
 void	nsf_or_dir2(t_shell *shell, char *str)
@@ -80,10 +82,14 @@ int	perm_den2(t_shell *shell, char *dir)
 
 void	perm_den(t_shell *shell, char *cmd)
 {
-	(void)cmd;
+	int	flag;
+
+	flag = 1;
 	// dup2(2, 1);
 	// printf("minishell: %s: Permission denied\n", cmd);
 	// dup2(shell->command->out_copy, 1);
+	if (shell->command->pid[1] == -1 && ft_isbuiltin(cmd))
+		flag = 0;
 	ft_putstr_fd("Permission denied\n", 2);
-	clear_program(shell, NO_PERM, 1);
+	clear_program(shell, NO_PERM, flag);
 }

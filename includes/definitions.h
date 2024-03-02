@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   definitions.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:57:45 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/02/29 19:02:08 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/02 17:32:10 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@
 
 //signals
 int	g_signal;
-int g_exit_here_doc;
 
 # define PROMPT		1
 # define HERE_DOC	2

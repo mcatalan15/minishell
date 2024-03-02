@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/02 13:01:38 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:00:47 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,18 @@ char	**get_cmd(t_token *token)
 	i = 0;
 	while (aux && aux->type != T_PIPE)
 	{
-		if ((!aux->prev || !ft_isrd(aux->prev->type)) && aux->type == T_STR)
-			command[i++] = ft_strdup(aux->str);
+		if (*aux->str)
+		{
+			if ((!aux->prev || !ft_isrd(aux->prev->type)) && aux->type == T_STR)
+			{
+				command[i] = ft_strdup(aux->str);
+				if (!command[i++])
+					malloc_err(token->shell);
+			}
+		}
 		aux = aux->next;
 	}
+	command[i] = NULL;
 	return (command);
 }
 
@@ -52,7 +60,7 @@ char	*get_path(t_shell *shell)
 		{
 			split = ft_split(ft_strchr(shell->env[i], '=') + 1, ':');
 			if (!split)
-				return (NULL);
+				malloc_err(shell);
 			path = search_path(shell, split);
 			break ;
 		}
@@ -60,7 +68,7 @@ char	*get_path(t_shell *shell)
 	return (path);
 }
 
-void	redirect(t_shell *shell, t_token *list, int pid_num)
+int	redirect(t_shell *shell, t_token *list, int pid_num)
 {
 	t_token	*aux;
 
@@ -69,9 +77,13 @@ void	redirect(t_shell *shell, t_token *list, int pid_num)
 	{
 		if (aux->next && ft_isrd(aux->type) && \
 		(aux->next->type == T_STR || aux->next->type == T_DOLLAR))
-			redirection(shell, aux, pid_num);
+		{
+			if (!redirection(shell, aux, pid_num))
+				return (0);
+		}
 		aux = aux->next;
 	}
+	return (1);
 }
 
 void	execute(t_shell *shell)
@@ -87,7 +99,9 @@ void	execute(t_shell *shell)
 
 int	exec_cmd(t_shell *shell, t_token *aux, int pid, int pid_num)
 {
-	redirect(shell, aux, pid_num);
+	//ft_print_tokens(aux);
+	if (!redirect(shell, aux, pid_num))
+		return (0);
 	if (!ft_isbuiltin(shell->command->cmd[0]))
 		shell->command->path = get_path(shell);
 	execute(shell);
