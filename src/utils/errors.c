@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:04:55 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 16:49:12 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 19:49:19 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,17 @@ void	nsf_or_dir2(t_shell *shell, char *str)
 
 int	perm_den2(t_shell *shell, char *dir)
 {
-	(void)dir;
+	int	flag;
+
+	flag = 1;
 	// dup2(2, 1);
 	// printf("minishell: cd: %s: Permission denied\n", dir);
 	// dup2(shell->command->out_copy, 1);
-	ft_putstr_fd("Permission denied\n", 2);
+	ft_putstr_fd(" Permission denied\n", 2);
 	shell->end_type = 1;
-	clear_program(shell, 1, 0);
+	if (shell->command->pid[1] == -1 && ft_isbuiltin(dir))
+		flag = 0;
+	clear_program(shell, 1, flag);
 	return (0);
 }
 
@@ -90,6 +94,7 @@ void	perm_den(t_shell *shell, char *cmd)
 	// dup2(shell->command->out_copy, 1);
 	if (shell->command->pid[1] == -1 && ft_isbuiltin(cmd))
 		flag = 0;
-	ft_putstr_fd("Permission denied\n", 2);
-	clear_program(shell, NO_PERM, flag);
+	ft_putstr_fd(" Permission denied\n", 2);
+	shell->end_type = 126;
+	clear_program(shell, 126, flag);
 }

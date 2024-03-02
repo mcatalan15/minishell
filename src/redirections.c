@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:58:29 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 17:02:28 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 20:31:25 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	t_redin(t_shell *shell, t_token *token)
 	}
 	if (access(token->str, R_OK) == -1)
 	{
-		perm_den2(shell, token->str);
+		perm_den2(shell, shell->command->cmd[0]);
 		return (0);
 	}
 	fdin = open(token->str, O_RDONLY);
 	if (fdin == -1)
 	{
-		rdir_erro(shell, 1, token->str);
+		rdir_erro(shell, 1, shell->command->cmd[0]);
 		return (0);
 	}
 	dup2(fdin, 0);
@@ -44,14 +44,14 @@ int	t_redout(t_shell *shell, t_token *token)
 	{
 		if (access(token->str, W_OK) == -1)
 		{
-			perm_den2(shell, token->str);
+			perm_den2(shell, shell->command->cmd[0]);
 			return (0);
 		}
 	}
 	fdout = open(token->str, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (fdout == -1)
 	{
-		rdir_erro(shell, 1, token->str);
+		rdir_erro(shell, 1, shell->command->cmd[0]);
 		return (0);
 	}
 	dup2(fdout, 1);
@@ -71,14 +71,14 @@ int	t_dout(t_shell *shell, t_token *token)
 	{
 		if (access(token->str, W_OK) == -1)
 		{
-			perm_den(shell, token->str);
+			perm_den2(shell, shell->command->cmd[0]);
 			return (0);
 		}
 	}
 	fdout = open(token->str, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (fdout == -1)
 	{
-		rdir_erro(shell, 1, token->str);
+		rdir_erro(shell, 1, shell->command->cmd[0]);
 		return (0);
 	}
 	dup2(fdout, 1);

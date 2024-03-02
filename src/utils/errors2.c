@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 13:51:21 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/02 15:34:02 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/02 20:03:20 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,26 @@ void	cmd_nf(t_shell *shell, char *cmd)
 	// dup2(2, 1);
 	// printf("minishell: %s: command not found\n", cmd);
 	// dup2(shell->command->out_copy, 1);
-	ft_putstr_fd("command not found\n", 2);
+	ft_putstr_fd(" command not found\n", 2);
 	clear_program(shell, PATH_ERROR, 1);
 }
 
 void	rdir_erro(t_shell *shell, int type, char *str)
 {
+	int	flag;
 	// char	*s;
 
-	(void)str;
+	flag = 1;
 	// s = "Redirection error";
 	// dup2(2, 1);
 	// printf("minishell: %s: %s\n", str, s);
 	// dup2(shell->command->out_copy, 1);
+	if (shell->command->pid[1] == -1 && ft_isbuiltin(str))
+		flag = 0;
+	printf("flag : %d\n", flag);
 	ft_putstr_fd("Redirection error\n", 2);
 	shell->end_type = 1;
-	clear_program(shell, type, 1);
+	clear_program(shell, type, flag);
 }
 
 int	nv_id(t_shell *shell, char *cmd, int type)
