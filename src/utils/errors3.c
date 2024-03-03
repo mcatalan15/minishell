@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:20:46 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/02 15:34:28 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/03 13:52:59 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ int	export_no_args(t_shell *shell)
 	ft_putstr_fd("arguments needed\n", 2);
 	shell->end_type = 1;
 	return (1);
+}
+
+int is_dir(t_shell *shell)
+{
+	ft_putstr_fd(" is a directory\n", 2);
+	// dup2(2, 1);
+	// printf("minishell: malloc: error in malloc\n");
+	// dup2(shell->command->out_copy, 1);
+	shell->end_type = 126;
+	return (clear_program(shell, 126, 1));
 }
 
 // int	nv_id2(t_shell *shell, char *cmd, int type)

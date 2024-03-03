@@ -34,8 +34,8 @@ READLINE_D = readline/
 READLINE = libreadline.a
 READLINE_H = libhistory.a
 READLINE_FLAGS = -lreadline -ltermcap
-READLINE_CONFIGURE = $(wildcard $(READLINE_D)config.status)
-READLINE_FILES = $(wildcard $(READLINE_D)$(READLINE) $(READLINE_D)$(READLINE_H))
+# READLINE_CONFIGURE = $(wildcard $(READLINE_D)config.status)
+# READLINE_FILES = $(wildcard $(READLINE_D)$(READLINE) $(READLINE_D)$(READLINE_H))
 
 NAME = minishell
 

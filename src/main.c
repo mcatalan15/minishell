@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/03/01 12:48:56 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/03 13:42:49 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ int	main(int argc, char **argv, char **env)
 
 	shell.env = envdup(env);
 	shell.end_type = 0;
+	shell.command = NULL;
 	g_signal = 0;
 	shell.cwd = NULL;
+	shell.str = NULL;
 	using_history();
 	main_args(argc, argv);
 	while (1)
@@ -57,6 +59,7 @@ int	main(int argc, char **argv, char **env)
 		wait_signal(PROMPT);
 		shell.cwd = get_cwd(&shell);
 		shell.str = readline(shell.cwd);
+		// printf("while -> str: %s\n", shell.str); //-> delete
 		update_signal(&shell);
 		handle_history(shell.str);
 		if (!shell.str)
@@ -65,6 +68,7 @@ int	main(int argc, char **argv, char **env)
 			{
 				my_exit(&shell);
 			}
+			// printf("entra\n"); //-> delete
 			break ;
 		}
 		update_signal(&shell);

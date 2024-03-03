@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:36:28 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 19:56:54 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/03 13:43:45 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	my_cd(t_shell *shell)
 	value = 0;
 	dir = shell->command->cmd[1];
 	value = chdir(dir);
-	if (!access(dir, F_OK) && value == -1)
+	if (!access(dir, F_OK) && value == -1 && dir)
 	{
 		if (access(dir, X_OK) == -1)
 			return (perm_den2(shell, dir));
 	}
-	else if (value == -1)
+	else if (value == -1 && dir)
 	{
 		// dup2(2, 1);
 		// printf("minishell: cd: %s: No such file or directory\n", dir);
@@ -40,7 +40,8 @@ int	my_cd(t_shell *shell)
 		// dup2(shell->command->out_copy, 1);
 		ft_putstr_fd(" No such file or directory\n", 2);
 		shell->end_type = 1;
-		return (clear_program(shell, 1, 0));
+		//return (clear_program(shell, 1, 0));
+		return (0);
 	}
 	shell->end_type = 0;
 	return (1);
