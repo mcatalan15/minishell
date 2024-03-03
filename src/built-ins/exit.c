@@ -6,14 +6,17 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:22 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/03 13:21:15 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/03 20:14:21 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /*
-	
+	This function handles errors related to the exit command. If the exit
+	command is executed with more than one argument or with non-numerical
+	characters, it prints an error message and returns 1. If the exit command
+	is successful, it returns the number of the argument given.
 */
 
 int	exit_errors(char **cmd)
@@ -40,14 +43,13 @@ int	exit_errors(char **cmd)
 		return (num_argre(cmd[1]));
 	if (cmd[2])
 		return (too_manyargs());
-	return (ft_atoi(cmd[1]));
+	return (ft_atoi(cmd[1])); // -> function too long
 }
 
 /*
-	This function behave as the exit function and is also used in case of ctrl-D, to exit the minishell.
-	Prints an 'exit' output and clears all the program.
-	In case the exit command is executed in a pipe and minishell has more commands to execute enters in exit_errors???????????????????
-	
+	This function behave as the exit function and is also used in case of
+	ctrl-D, to exit the minishell. Prints an 'exit' output and clears all
+	the program.
 */
 
 void	my_exit(t_shell *shell)
@@ -59,7 +61,6 @@ void	my_exit(t_shell *shell)
 	printf("exit\n");
 	free_prompt(shell);
 	free_dp(shell->env, NULL);
-	//ft_print_tokens(shell->command->token);
 	if (shell->command)
 	{
 		if (shell->command->token->next)
@@ -68,4 +69,3 @@ void	my_exit(t_shell *shell)
 	clear_program(shell, type, 1);
 	exit(type);
 }
-// dprintf(shell->command->out_copy, "mem: %p\n", shell->command->);

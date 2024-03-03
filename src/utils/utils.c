@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:51:38 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/02 16:24:45 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/03 20:32:24 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ void	join_subt2(t_token *token, char **str, t_token **new, t_shell *shell)
 	int	i;
 
 	i = -1;
+	if (!token->str)
+	{
+		*str = NULL;
+		return ;
+	}
 	while (token->str[++i])
 	{
 		if (!ft_isspace(token->str[i]) || token->type != T_STR)
@@ -123,30 +128,34 @@ char	*search_path(t_shell *shell, char **split)
 	char	*cmd_no_dot;
 
 	i = -1;
+	add = NULL;
 	cmd_no_dot = shell->command->cmd[0] + 1;
-	add = ft_strjoin("/", shell->command->cmd[0]);
-	if (!add)
-		malloc_err(shell);
-	while (split[++i])
+	if (*shell->command->cmd[0])
 	{
-		path = ft_strjoin(split[i], add);
-		if (!path)
+		add = ft_strjoin("/", shell->command->cmd[0]);
+		if (!add)
 			malloc_err(shell);
-		if (!access(path, F_OK))
+		while (split[++i])
 		{
-			free_dp(split, add);
-			if (access(path, X_OK) == -1)
+			path = ft_strjoin(split[i], add);
+			if (!path)
+				malloc_err(shell);
+			if (!access(path, F_OK))
 			{
-				free(path);
-				perm_den(shell, shell->command->cmd[0]);
+				free_dp(split, add);
+				if (access(path, X_OK) == -1)
+				{	
+					free(path);
+					perm_den(shell, shell->command->cmd[0]);
+				}
+				return (path);
 			}
-			return (path);
+			free(path);
 		}
-		free(path);
 	}
 	free_dp(split, add);
 	if (!ft_strncmp(shell->command->cmd[0], "./", 2))
 		return (ft_strjoin(get_pwd(shell), cmd_no_dot));
 	cmd_nf(shell, shell->command->cmd[0]);
-	return (NULL);
+	return (NULL); // -> function too many lines
 }

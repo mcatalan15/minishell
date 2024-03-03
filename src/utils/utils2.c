@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:01:38 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/03 14:34:37 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/03 19:58:02 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ void	wait_for_children(t_shell *shell, int *pid)
 		shell->end_type = WEXITSTATUS(status);
 }
 
+/*
+	This function iterates through the command and returns the position of the
+	equal sign.
+*/
+
 int	ft_is_equal(char *cmd, int flag)
 {
 	int	i;
@@ -93,6 +98,10 @@ char	*get_path_when_cmd(t_shell *shell)
 	nsf_or_dir(shell, PATH_ERROR, shell->command->cmd[0]);
 	return (NULL);
 }
+
+/*
+	This function checks if the character is a letter or an underscore.
+*/
 
 int	ft_isalpha_lw(char c)
 {

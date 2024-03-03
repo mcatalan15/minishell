@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/03 14:48:41 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/03 20:20:23 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,15 @@ char	**get_cmd(t_token *token)
 	command = malloc((i + 1) * sizeof(char *));
 	if (!command)
 		malloc_err(token->shell);
-	command[i] = NULL;
 	i = 0;
 	while (aux && aux->type != T_PIPE)
 	{
-		if (*aux->str)
+		if ((!aux->prev || !ft_isrd(aux->prev->type)) && \
+		aux->type == T_STR && aux->str)
 		{
-			if ((!aux->prev || !ft_isrd(aux->prev->type)) && aux->type == T_STR)
-			{
-				command[i] = ft_strdup(aux->str);
-				if (!command[i++])
-					malloc_err(token->shell);
-			}
+			command[i] = ft_strdup(aux->str);
+			if (!command[i++])
+				malloc_err(token->shell);
 		}
 		aux = aux->next;
 	}
@@ -83,6 +80,11 @@ int	redirect(t_shell *shell, t_token *list, int pid_num)
 		}
 		aux = aux->next;
 	}
+	if (aux && aux->type == T_PIPE)
+	{
+		close(shell->command->fd[0]);
+		close(shell->command->fd[1]);
+	}
 	return (1);
 }
 
@@ -90,27 +92,21 @@ void	execute(t_shell *shell)
 {
 	int	builtin;
 
-	//ft_print_cmd(shell->command->cmd);
 	builtin = ft_isbuiltin(shell->command->cmd[0]);
 	if (builtin)
 		manage_builtins(shell, builtin);
 	else
 	{
-		// printf("hola000\n");
 		execve(shell->command->path, shell->command->cmd, shell->env);
 	}
 }
 
 int	exec_cmd(t_shell *shell, t_token *aux, int pid, int pid_num)
 {
-	//ft_print_tokens(aux);
-	close(shell->command->fd[0]);
-	close(shell->command->fd[1]);
 	if (!redirect(shell, aux, pid_num))
 		return (0);
 	if (!ft_isbuiltin(shell->command->cmd[0]))
 		shell->command->path = get_path(shell);
-	dup2(shell->command->in_copy, 0);
 	execute(shell);
 	if (!pid)
 		exit(0);
@@ -118,5 +114,3 @@ int	exec_cmd(t_shell *shell, t_token *aux, int pid, int pid_num)
 		return (0);
 	return (1);
 }
-
-// dprintf(shell->command->out_copy,"path: %s", shell->command->path);

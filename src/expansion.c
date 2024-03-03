@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/03/02 16:23:20 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/03 19:59:21 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	add_new_token(t_token **new, char **str, t_shell *shell)
 		if (!*str)
 			malloc_err(shell);
 		*str[0] = '\0';
-		//-> malloc_err(shell); ?
 	}
 	aux = token_new(*str, T_STR, shell);
 	if (!*new)
@@ -71,6 +70,8 @@ static t_token	*join_subtokens(t_token *token)
 	str = NULL;
 	new = NULL;
 	shell = token->shell;
+	if (!token->str && !token->next)
+		return (token);
 	while (token)
 	{
 		join_subt2(token, &str, &new, shell);
@@ -80,6 +81,7 @@ static t_token	*join_subtokens(t_token *token)
 		add_new_token(&new, &str, shell);
 	while (new->prev)
 		new = new->prev;
+	clear_list(token);
 	return (new);
 }
 
@@ -103,7 +105,7 @@ t_token	*split_expansion(t_token *token, char flag, int *p, char **env)
 		(*p)--;
 	s = ft_substr(token->str, i, len);
 	if (!s)
-		return (NULL);
+		malloc_err(token->shell);
 	token = token_new(s, type, token->shell);
 	if (flag)
 		remove_quotes(token->str, flag);
@@ -122,7 +124,7 @@ t_token	*expanding(t_token *token, char **env)
 		aux = aux->prev;
 	next = aux;
 	aux = join_subtokens(aux);
-	clear_list(next);
+	//ft_print_tokens(aux);
 	aux->prev = token->prev;
 	if (token->prev)
 		token->prev->next = aux;

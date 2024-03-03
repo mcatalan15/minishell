@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:01:59 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/02 15:44:15 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/03 18:38:44 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,5 @@ int	my_export(t_shell *shell)
 	if (j == 1)
 		export_no_args(shell);
 	shell->end_type = pos;
-	return (1);
+	return (1); // -> function too long
 }

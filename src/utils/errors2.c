@@ -3,74 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   errors2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 13:51:21 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/02 20:03:20 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/03 19:54:14 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/*
+	This function is used to print the error message when a command is not
+	found.
+*/
+
 void	cmd_nf(t_shell *shell, char *cmd)
 {
 	(void)cmd;
-	// dup2(2, 1);
-	// printf("minishell: %s: command not found\n", cmd);
-	// dup2(shell->command->out_copy, 1);
 	ft_putstr_fd(" command not found\n", 2);
 	clear_program(shell, PATH_ERROR, 1);
 }
 
+/*
+	This function is used to handle errors related to the redirections. It
+	prints an error message and returns the end type. If the redirection error
+	is related to a builtin command, it returns 0 so the program can continue.
+*/
+
 void	rdir_erro(t_shell *shell, int type, char *str)
 {
 	int	flag;
-	// char	*s;
 
 	flag = 1;
-	// s = "Redirection error";
-	// dup2(2, 1);
-	// printf("minishell: %s: %s\n", str, s);
-	// dup2(shell->command->out_copy, 1);
 	if (shell->command->pid[1] == -1 && ft_isbuiltin(str))
 		flag = 0;
-	printf("flag : %d\n", flag);
 	ft_putstr_fd("Redirection error\n", 2);
 	shell->end_type = 1;
 	clear_program(shell, type, flag);
 }
 
+/*
+	This function is used to print error message when the id given for export
+	is not valid.
+*/
+
 int	nv_id(t_shell *shell, char *cmd, int type)
 {
 	(void)cmd;
-	// dup2(2, 1);
-	// printf("minishell: export: `%s': not a valid identifier\n", cmd);
-	// dup2(shell->command->out_copy, 1);
 	ft_putstr_fd(" not a valid identifier\n", 2);
 	(void)type;
 	shell->end_type = 1;
 	return (1);
 }
 
+/*
+	This function is used when a malloc error occurs. It prints an error
+	message and returns with EXIT_FAILURE.
+*/
+
 int	malloc_err(t_shell *shell)
 {
 	ft_putstr_fd("error in malloc\n", 2);
-	// dup2(2, 1);
-	// printf("minishell: malloc: error in malloc\n");
-	// dup2(shell->command->out_copy, 1);
 	shell->end_type = 1;
 	return (clear_program(shell, EXIT_FAILURE, 0));
 }
 
+/*
+	This function is used to handle errors related to the exit command. If the
+	exit command is executed with more than one argument or with non-numerical
+	characters, it prints an error message and returns 255. If the exit command
+	is successful, it returns the number of the argument given.
+*/
+
 int	num_argre(char *cmd)
 {
-	// int	fd;
-
 	(void)cmd;
-	// fd = dup(1);
-	// dup2(2, 1);
-	// printf("minishell: exit: %s: numeric argument required\n", cmd);
-	// dup2(fd, 1);
 	ft_putstr_fd(" numeric argument required\n", 2);
 	return (255);
 }

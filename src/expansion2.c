@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:33:08 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/02/26 10:30:40 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/03 19:55:31 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ t_token	*get_token(t_token *token, char **env)
 	{
 		if (token->str[i] == '$')
 			i += expand(token, env, &token->str[i], i) - 1;
+	}
+	if (!*token->str && token->type == T_STR)
+	{
+		free(token->str);
+		token->str = NULL;
 	}
 	return (token);
 }

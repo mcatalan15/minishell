@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:13:32 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/03 13:39:55 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/03 18:56:39 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,17 @@ void	free_dp(char **str, char *s1)
 }
 
 /*
-	This function frees the prompt.
+	This function frees the promt str.
 */
 
 void	free_prompt(t_shell *shell)
 {
 	free(shell->str);
 }
+
+/*
+	This function frees the memory of the prompt strings. Cwd and str.
+*/
 
 void	free_prompt_all(t_shell *shell)
 {

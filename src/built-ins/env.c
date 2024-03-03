@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:14 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 12:06:33 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/03 18:35:02 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 /*
 	This function behaves as the env command in bash.
-	Search if the
+	If no arguments are given, it prints the environment variables.
 */
-//acabar/cambiar header
+
 void	my_env(t_shell *shell)
 {
 	int	i;

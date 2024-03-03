@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/03 14:34:48 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/03 18:06:32 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int		ft_isalpha_lw(char c);
 
 // utils3.c
 char	**envdup(char **env);
+int		is_father(t_shell *shell);
 
 // ft_is_functions.c
 int		ft_isoperate(int flag);
