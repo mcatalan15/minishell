@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/03 13:53:27 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/03 14:34:48 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <string.h>
+# include <dirent.h>
 
 // Readline .h files
 # include "readline/readline.h"
@@ -139,7 +140,7 @@ int		num_argre(char *cmd);
 //errors3.c
 int		too_manyargs(void);
 int		export_no_args(t_shell *shell);
-int		is_dir(t_shell *shell);
+int		is_dir(t_shell *shell, DIR *dir);
 
 //built-ins
 //echo.c

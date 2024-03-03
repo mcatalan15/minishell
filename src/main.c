@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:39:21 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/03/03 13:42:49 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/03 14:52:00 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	main(int argc, char **argv, char **env)
 		wait_signal(PROMPT);
 		shell.cwd = get_cwd(&shell);
 		shell.str = readline(shell.cwd);
-		// printf("while -> str: %s\n", shell.str); //-> delete
 		update_signal(&shell);
 		handle_history(shell.str);
 		if (!shell.str)
@@ -68,7 +67,6 @@ int	main(int argc, char **argv, char **env)
 			{
 				my_exit(&shell);
 			}
-			// printf("entra\n"); //-> delete
 			break ;
 		}
 		update_signal(&shell);

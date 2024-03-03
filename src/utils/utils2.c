@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:01:38 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/03 14:11:43 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/03 14:34:37 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	ft_is_equal(char *cmd, int flag)
 char	*get_path_when_cmd(t_shell *shell)
 {
 	char	*path;
+	DIR		*dir;
 
 	if (!access(shell->command->cmd[0], F_OK))
 	{
@@ -84,8 +85,9 @@ char	*get_path_when_cmd(t_shell *shell)
 		path = ft_strdup(shell->command->cmd[0]);
 		if (!path)
 			malloc_err(shell);
-		if (!shell->command->cmd[1])
-			is_dir(shell);
+		dir = opendir(path);
+		if (dir)
+			is_dir(shell, dir);
 		return (path);
 	}
 	nsf_or_dir(shell, PATH_ERROR, shell->command->cmd[0]);

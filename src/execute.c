@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/02 20:31:55 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/03 14:48:41 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int	exec_cmd(t_shell *shell, t_token *aux, int pid, int pid_num)
 		return (0);
 	if (!ft_isbuiltin(shell->command->cmd[0]))
 		shell->command->path = get_path(shell);
+	dup2(shell->command->in_copy, 0);
 	execute(shell);
 	if (!pid)
 		exit(0);
