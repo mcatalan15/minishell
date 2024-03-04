@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 11:39:08 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/03 18:59:09 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/04 09:55:05 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ char	**envdup(char **env)
 	new_env[i] = NULL;
 	return (new_env); // -> function too many lines
 }
+
+/*
+	This function checks if the command is executed in the father process.
+*/
 
 int	is_father(t_shell *shell)
 {

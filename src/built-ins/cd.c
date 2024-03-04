@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:36:28 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/03 13:43:45 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/04 09:52:03 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,9 @@ int	my_cd(t_shell *shell)
 	}
 	else if (value == -1 && dir)
 	{
-		// dup2(2, 1);
-		// printf("minishell: cd: %s: No such file or directory\n", dir);
-		// shell->end_type = 1;
-		// dup2(shell->command->out_copy, 1);
+
 		ft_putstr_fd(" No such file or directory\n", 2);
 		shell->end_type = 1;
-		//return (clear_program(shell, 1, 0));
 		return (0);
 	}
 	shell->end_type = 0;

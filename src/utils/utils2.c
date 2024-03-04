@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:01:38 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/03 19:58:02 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/04 09:54:21 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ int	ft_is_equal(char *cmd, int flag)
 		flag = i;
 	return (flag);
 }
+
+/*
+	This function is used to get the path of the command when the command is
+	entered with a path.
+*/
 
 char	*get_path_when_cmd(t_shell *shell)
 {

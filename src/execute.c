@@ -6,11 +6,16 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/03 20:20:23 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/04 09:57:37 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/*
+	This function returns the command malloced and filled with the strings of
+	the tokens. Giving to execve the command to execute.
+*/
 
 char	**get_cmd(t_token *token)
 {
@@ -39,6 +44,11 @@ char	**get_cmd(t_token *token)
 	return (command);
 }
 
+/*
+	This function returns the path of the command to execute. If the command
+	is not found, it returns NULL.
+*/
+
 char	*get_path(t_shell *shell)
 {
 	int		i;
@@ -65,6 +75,11 @@ char	*get_path(t_shell *shell)
 	return (path);
 }
 
+/*
+	This function redirects the input and output of the command to the
+	corresponding file.
+*/
+
 int	redirect(t_shell *shell, t_token *list, int pid_num)
 {
 	t_token	*aux;
@@ -87,6 +102,12 @@ int	redirect(t_shell *shell, t_token *list, int pid_num)
 	}
 	return (1);
 }
+
+/*
+	This function executes the command. If the command is a builtin, it calls
+	the function to manage the builtin. If the command is not a builtin, it
+	calls the function to execute the command.
+*/
 
 void	execute(t_shell *shell)
 {

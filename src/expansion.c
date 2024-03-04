@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 09:50:14 by jpaul-kr          #+#    #+#             */
-/*   Updated: 2024/03/03 19:59:21 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/04 09:57:50 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ t_token	*expanding(t_token *token, char **env)
 		aux = aux->prev;
 	next = aux;
 	aux = join_subtokens(aux);
-	//ft_print_tokens(aux);
 	aux->prev = token->prev;
 	if (token->prev)
 		token->prev->next = aux;
