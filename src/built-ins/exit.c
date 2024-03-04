@@ -43,7 +43,7 @@ int	exit_errors(char **cmd)
 		return (num_argre(cmd[1]));
 	if (cmd[2])
 		return (too_manyargs());
-	return (ft_atoi(cmd[1])); // -> function too long
+	return (ft_atoi(cmd[1]));
 }
 
 /*

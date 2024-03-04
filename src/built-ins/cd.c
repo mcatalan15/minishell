@@ -34,7 +34,6 @@ int	my_cd(t_shell *shell)
 	}
 	else if (value == -1 && dir)
 	{
-
 		ft_putstr_fd(" No such file or directory\n", 2);
 		shell->end_type = 1;
 		return (0);

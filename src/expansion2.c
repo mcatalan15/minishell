@@ -73,6 +73,8 @@ t_token	*get_token(t_token *token, char **env)
 	int	i;
 
 	i = -1;
+	// printf("get1\n");
+	// ft_print_tokens(token);
 	while (token->str[++i] && token->type != T_SQUOTE)
 	{
 		if (token->str[i] == '$')
@@ -83,6 +85,8 @@ t_token	*get_token(t_token *token, char **env)
 		free(token->str);
 		token->str = NULL;
 	}
+	// printf("get2\n");
+	// ft_print_tokens(token);
 	return (token);
 }
 
@@ -94,11 +98,23 @@ t_token	*add_subtokens(t_token *token, t_token *aux, t_token *next, char **env)
 	while (token->str[++i])
 	{
 		if (token->str[i] == '\"')
+		{
 			next = split_expansion(token, '\"', &i, env);
+			// printf("split1\n");
+			// ft_print_tokens(token);
+		}
 		else if (token->str[i] == '\'')
+		{
 			next = split_expansion(token, '\'', &i, env);
+			// printf("split2\n");
+			// ft_print_tokens(token);
+		}
 		else
+		{
 			next = split_expansion(token, '\0', &i, env);
+			// printf("split3\n");
+			// ft_print_tokens(token);
+		}
 		if (!aux)
 		{
 			aux = next;

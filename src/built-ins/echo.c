@@ -58,7 +58,7 @@ void	my_echo(t_shell *shell)
 	while (cmd[++i])
 	{
 		printf("%s", cmd[i]);
-		if ((cmd[i + 1] && *(cmd[i])))
+		if ((cmd[i + 1]))
 			printf(" ");
 	}
 	if (!flag)

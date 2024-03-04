@@ -27,7 +27,6 @@ char	*get_cwd(t_shell *shell)
 	len = 0;
 	if (cwd_string != NULL)
 	{
-		// len, cwd, cwd_string, shell
 		len = ft_strlen(cwd);
 		cwd_string = malloc(len + 3);
 		if (cwd_string != NULL)

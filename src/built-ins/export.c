@@ -29,10 +29,7 @@ int	id_checker(char *s, t_shell *shell, int j)
 			i++;
 	}
 	if ((s[i] == '=' || !s[i]) && i != 0)
-	{
-		//printf("entra : %s : %d\n", s, i);
 		return (0);
-	}
 	nv_id(shell, shell->command->cmd[j], 1);
 	return (1);
 }
@@ -92,43 +89,47 @@ char	**add_to_env(t_shell *shell, char *cmd, char *id)
 	return (new);
 }
 
+int	iter_export(t_shell *shell, int pos, int j)
+{
+	char	*cmd;
+	char	*id;
+	int		i;
+
+	cmd = NULL;
+	id = NULL;
+	cmd = shell->command->cmd[j];
+	pos = ft_is_equal(cmd, pos);
+	id = malloc(sizeof(char) * (pos + 1));
+	if (!id)
+		malloc_err(shell);
+	i = -1;
+	while (pos >= ++i)
+		id[i] = cmd[i];
+	id[i] = '\0';
+	pos = id_checker(id, shell, j);
+	if (ft_strchr(cmd, '='))
+	{
+		if (!pos)
+			shell->env = add_to_env(shell, cmd, id);
+	}
+	free(id);
+	return (pos);
+}
+
 /*
 */
 
 int	my_export(t_shell *shell)
 {
-	char	*cmd;
-	char	*id;
-	int		i;
 	int		pos;
 	int		j;
 
-	id = NULL;
 	pos = 0;
 	j = 0;
 	while (shell->command->cmd[++j])
-	{
-		//shell, pos, j
-		cmd = shell->command->cmd[j];
-		pos = ft_is_equal(cmd, pos);
-		id = malloc(sizeof(char) * (pos + 1));
-		if (!id)
-			malloc_err(shell);
-		i = -1;
-		while (pos >= ++i)
-			id[i] = cmd[i];
-		id[i] = '\0';
-		pos = id_checker(id, shell, j);
-		if (ft_strchr(cmd, '='))
-		{
-			if (!pos)
-				shell->env = add_to_env(shell, cmd, id);
-		}
-		free(id);
-
-	}
+		pos = iter_export(shell, pos, j);
 	if (j == 1)
 		export_no_args(shell);
 	shell->end_type = pos;
-	return (1); // -> function too long
+	return (1);
 }

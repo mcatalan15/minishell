@@ -66,9 +66,11 @@ static t_token	*join_subtokens(t_token *token)
 	t_token	*new;
 	char	*str;
 	t_shell	*shell;
+	t_token	*aux;
 
 	str = NULL;
 	new = NULL;
+	aux = token;
 	shell = token->shell;
 	if (!token->str && !token->next)
 		return (token);
@@ -82,6 +84,8 @@ static t_token	*join_subtokens(t_token *token)
 	while (new->prev)
 		new = new->prev;
 	clear_list(token);
+	clear_list(aux);
+	//ft_print_tokens(aux);
 	return (new);
 }
 

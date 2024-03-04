@@ -28,6 +28,6 @@ void	my_env(t_shell *shell)
 			printf("%s\n", shell->env[i]);
 	}
 	else
-		nsf_or_dir2(shell, shell->command->cmd[1]); //->cambiar a not arguments or flags need
+		nsf_or_dir2(shell, shell->command->cmd[1]);
 	shell->end_type = 0;
 }

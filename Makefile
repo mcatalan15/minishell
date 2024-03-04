@@ -6,7 +6,7 @@
 #    By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:38:40 by mcatalan          #+#    #+#              #
-#    Updated: 2024/01/11 11:5:04 by mcatalan         ###   ########.fr        #
+#    Updated: 2024/01/11 11:5:04 by mcatalan         ###   ########.fr         #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,6 @@ READLINE_D = readline/
 READLINE = libreadline.a
 READLINE_H = libhistory.a
 READLINE_FLAGS = -lreadline -ltermcap
-# READLINE_CONFIGURE = $(wildcard $(READLINE_D)config.status)
-# READLINE_FILES = $(wildcard $(READLINE_D)$(READLINE) $(READLINE_D)$(READLINE_H))
 
 NAME = minishell
 
