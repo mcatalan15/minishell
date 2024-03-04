@@ -72,6 +72,8 @@ char	*get_path(t_shell *shell)
 			break ;
 		}
 	}
+	if (!shell->env[i])
+		nsf_or_dir(shell, PATH_ERROR, shell->command->cmd[0]);
 	return (path);
 }
 

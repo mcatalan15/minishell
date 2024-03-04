@@ -48,18 +48,17 @@ void	my_echo(t_shell *shell)
 	int		flag;
 	char	**cmd;
 
-	i = 0;
+	i = 1;
 	flag = 0;
 	cmd = shell->command->cmd;
-	if (cmd[1] && !is_flag_n(cmd[1]))
-		flag = 1;
-	if (flag)
-		i++;
-	while (cmd[++i])
+	while (cmd[i] && !is_flag_n(cmd[i]))
+		flag = ++i;
+	while (cmd[i])
 	{
 		printf("%s", cmd[i]);
 		if ((cmd[i + 1]))
 			printf(" ");
+		i++;
 	}
 	if (!flag)
 		printf("\n");

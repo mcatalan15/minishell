@@ -17,9 +17,10 @@
 	more than expected and returns 1.
 */
 
-int	too_manyargs(void)
+int	too_manyargs(t_shell *shell)
 {
 	ft_putstr_fd(" too many arguments\n", 2);
+	shell->end_type = 1;
 	return (1);
 }
 

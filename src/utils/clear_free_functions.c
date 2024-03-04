@@ -60,9 +60,7 @@ int	clear_program(t_shell *shell, int type, int flag)
 	free(shell->command->hd);
 	free(shell->command);
 	if (flag)
-	{
 		exit(type);
-	}
 	shell->command = NULL;
 	return (0);
 }
@@ -91,6 +89,7 @@ void	free_dp(char **str, char *s1)
 void	free_prompt(t_shell *shell)
 {
 	free(shell->str);
+	shell->str = NULL;
 }
 
 /*

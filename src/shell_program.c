@@ -22,7 +22,6 @@ static int	expansion(t_shell *shell)
 	t_token	*aux;
 
 	aux = shell->command->token;
-	// ft_print_tokens(shell->command->token);
 	while (aux)
 	{
 		if ((aux->type == T_DOLLAR || aux->type == T_STR))

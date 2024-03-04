@@ -19,13 +19,15 @@
 	is successful, it returns the number of the argument given.
 */
 
-int	exit_errors(char **cmd)
+int	exit_errors(t_shell *shell)
 {
-	int	i;
-	int	flag;
+	int		i;
+	int		flag;
+	char	**cmd;
 
 	i = 0;
 	flag = 0;
+	cmd = shell->command->cmd;
 	while (ft_isspace(cmd[1][i]))
 		i++;
 	if ((cmd[1][i] == '+' || cmd[1][i] == '-'))
@@ -33,17 +35,17 @@ int	exit_errors(char **cmd)
 	while (cmd[1][i])
 	{
 		if (!ft_isdigit(cmd[1][i]) && (!ft_isspace(cmd[1][i]) || !flag))
-			return (num_argre(cmd[1]));
+			return (num_argre(shell));
 		if (flag || cmd[1][i] != '0' || \
 		ft_isspace(cmd[1][i + 1]) || !cmd[1][i + 1])
 			flag++;
 		i++;
 	}
 	if (i == 0 || !flag || flag > 10)
-		return (num_argre(cmd[1]));
+		return (num_argre(shell));
 	if (cmd[2])
-		return (too_manyargs());
-	return (ft_atoi(cmd[1]));
+		return (too_manyargs(shell));
+	return (clear_program(shell, ft_atoi(cmd[1]), 1));
 }
 
 /*
@@ -58,14 +60,18 @@ void	my_exit(t_shell *shell)
 
 	type = (unsigned int)shell->end_type;
 	g_signal = type;
-	printf("exit\n");
+	if (is_father(shell))
+		printf("exit\n");
 	free_prompt(shell);
-	free_dp(shell->env, NULL);
 	if (shell->command)
 	{
 		if (shell->command->token->next)
-			type = exit_errors(shell->command->cmd);
+			type = exit_errors(shell);
+		else
+		{
+			free_dp(shell->env, NULL);
+			clear_program(shell, type, 1);
+		}
+		shell->end_type = type;
 	}
-	clear_program(shell, type, 1);
-	exit(type);
 }

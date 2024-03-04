@@ -98,8 +98,6 @@ int		*get_pid(t_token *token);
 // utils.c
 char	*addstr(char *str, char c, t_shell *shell);
 t_token	*token_new(char *str, int type, t_shell *shell);
-void	join_subt2(t_token *token, char **str, t_token **new,
-			t_shell *shell);
 int		cmdlen(t_token *aux);
 char	*search_path(t_shell *shell, char **split);
 
@@ -113,6 +111,8 @@ int		ft_isalpha_lw(char c);
 // utils3.c
 char	**envdup(char **env);
 int		is_father(t_shell *shell);
+void	join_subt2(t_token *token, char **str, t_token **new,
+			t_shell *shell);
 
 // ft_is_functions.c
 int		ft_isoperate(int flag);
@@ -136,10 +136,10 @@ void	cmd_nf(t_shell *shell, char *cmd);
 void	rdir_erro(t_shell *shell, int type, char *str);
 int		nv_id(t_shell *shell, char *cmd, int type);
 int		malloc_err(t_shell *shell);
-int		num_argre(char *cmd);
+int		num_argre(t_shell *shell);
 
 //errors3.c
-int		too_manyargs(void);
+int		too_manyargs(t_shell *shell);
 int		export_no_args(t_shell *shell);
 int		is_dir(t_shell *shell, DIR *dir);
 

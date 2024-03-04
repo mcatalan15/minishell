@@ -22,7 +22,7 @@ void	main_args(int argc, char **argv)
 	if (argc != 1 || argv[1] != NULL)
 	{
 		printf("Error: too many arguments\n");
-		exit(0);
+		exit(1);
 	}
 }
 
@@ -42,6 +42,31 @@ void	handle_history(char *str)
 	loop to read the input.
 */
 
+void	main_loop(t_shell *shell)
+{
+	while (1)
+	{
+		wait_signal(PROMPT);
+		shell->cwd = get_cwd(shell);
+		shell->str = readline(shell->cwd);
+		update_signal(shell);
+		handle_history(shell->str);
+		if (!shell->str)
+		{
+			if (isatty(STDIN_FILENO))
+				my_exit(shell);
+			break ;
+		}
+		update_signal(shell);
+		signal(SIGINT, SIG_IGN);
+		if (!ft_is_enter(shell->str))
+			shell_program(shell);
+		update_signal(shell);
+		free_prompt(shell);
+		clear_program(shell, 0, 0);
+	}
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	shell;
@@ -54,29 +79,7 @@ int	main(int argc, char **argv, char **env)
 	shell.str = NULL;
 	using_history();
 	main_args(argc, argv);
-	while (1)
-	{
-		wait_signal(PROMPT);
-		shell.cwd = get_cwd(&shell);
-		shell.str = readline(shell.cwd);
-		update_signal(&shell);
-		handle_history(shell.str);
-		if (!shell.str)
-		{
-			if (isatty(STDIN_FILENO))
-			{
-				my_exit(&shell);
-			}
-			break ;
-		}
-		update_signal(&shell);
-		signal(SIGINT, SIG_IGN);
-		if (!ft_is_enter(shell.str))
-			shell_program(&shell);
-		update_signal(&shell);
-		free_prompt(&shell);
-		clear_program(&shell, 0, 0);
-	}
+	main_loop(&shell);
 	free_prompt_all(&shell);
 	rl_clear_history();
 	clear_program(&shell, shell.end_type, 1);

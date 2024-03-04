@@ -17,26 +17,31 @@
 	character at the end of the string for printing.
 */
 
+char	*get_cwd2(t_shell *shell, char *cwd_s, char *cwd)
+{
+	size_t	len;
+
+	len = 0;
+	len = ft_strlen(cwd);
+	cwd_s = malloc(len + 3);
+	if (cwd_s != NULL)
+	{
+		ft_strcpy(cwd_s, cwd);
+		ft_strcat(cwd_s, "$ ");
+	}
+	else
+		malloc_err(shell);
+	return (cwd_s);
+}
+
 char	*get_cwd(t_shell *shell)
 {
 	char	cwd[1024];
 	char	*cwd_string;
-	size_t	len;
 
 	cwd_string = getcwd(cwd, sizeof(cwd));
-	len = 0;
 	if (cwd_string != NULL)
-	{
-		len = ft_strlen(cwd);
-		cwd_string = malloc(len + 3);
-		if (cwd_string != NULL)
-		{
-			ft_strcpy(cwd_string, cwd);
-			ft_strcat(cwd_string, "$ ");
-		}
-		else
-			malloc_err(shell);
-	}
+		cwd_string = get_cwd2(shell, cwd_string, cwd);
 	else
 	{
 		cwd_string = malloc(ft_strlen(shell->cwd) + 3);
@@ -48,14 +53,6 @@ char	*get_cwd(t_shell *shell)
 	free(shell->cwd);
 	return (cwd_string);
 }
-
-// char	*get_cwd(void)
-// {
-// 	char	cwd[1024];
-// 	char	*cwd_string;
-
-// 	cwd_string = malloc(strlen(getcwd(cwd, sizeof(cwd))) + 
-// }
 
 /*
 	This function concatenates the expansion with the substring and returns

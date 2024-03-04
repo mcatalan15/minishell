@@ -22,7 +22,6 @@ char	**envdup(char **env)
 	char	**new_env;
 
 	i = 0;
-	new_env = NULL;
 	while (env[i])
 		i++;
 	new_env = malloc(sizeof(char *) * (i + 1));
@@ -43,7 +42,7 @@ char	**envdup(char **env)
 		}
 	}
 	new_env[i] = NULL;
-	return (new_env); // -> function too many lines
+	return (new_env);
 }
 
 /*
@@ -54,6 +53,8 @@ int	is_father(t_shell *shell)
 {
 	t_token	*aux;
 
+	if (!shell->str)
+		return (1);
 	aux = shell->command->token;
 	while (aux)
 	{
@@ -64,4 +65,33 @@ int	is_father(t_shell *shell)
 	if (ft_isbuiltin(shell->command->cmd[0]))
 		return (1);
 	return (0);
+}
+
+/*
+	This function, which is the second part of the join_subt function, appends
+	the whitespace character to the string and adds the new token to the list
+	of tokens.
+*/
+
+void	join_subt2(t_token *token, char **str, t_token **new, t_shell *shell)
+{
+	int	i;
+
+	i = -1;
+	if (!token->str)
+	{
+		*str = NULL;
+		return ;
+	}
+	while (token->str[++i])
+	{
+		if (!ft_isspace(token->str[i]) || token->type != T_STR)
+			*str = addstr(*str, token->str[i], shell);
+		else
+		{
+			add_new_token(new, str, shell);
+			while (ft_isspace(token->str[i + 1]))
+				i++;
+		}
+	}
 }

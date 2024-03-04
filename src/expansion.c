@@ -85,7 +85,6 @@ static t_token	*join_subtokens(t_token *token)
 		new = new->prev;
 	clear_list(token);
 	clear_list(aux);
-	//ft_print_tokens(aux);
 	return (new);
 }
 

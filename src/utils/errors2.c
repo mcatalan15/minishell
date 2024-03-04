@@ -75,9 +75,10 @@ int	malloc_err(t_shell *shell)
 	is successful, it returns the number of the argument given.
 */
 
-int	num_argre(char *cmd)
+int	num_argre(t_shell *shell)
 {
-	(void)cmd;
 	ft_putstr_fd(" numeric argument required\n", 2);
-	return (255);
+	free_dp(shell->env, NULL);
+	clear_program(shell, 255, 1);
+	return (0);
 }

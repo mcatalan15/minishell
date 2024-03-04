@@ -12,9 +12,28 @@
 
 #include "../includes/minishell.h"
 
-int	here_doc(t_shell *shell, t_token *token, int pos)
+void	here_doc2(t_token *token, int *fd)
 {
 	char	*line;
+
+	line = NULL;
+	wait_signal(HERE_DOC);
+	line = readline("> ");
+	while (line && (ft_strcmp(line, token->str) != 0))
+	{
+		ft_putstr_fd(line, fd[1]);
+		free(line);
+		line = readline("> ");
+		write(fd[1], "\n", 1);
+	}
+	free(line);
+	close(fd[1]);
+	close(fd[0]);
+	exit(0);
+}
+
+int	here_doc(t_shell *shell, t_token *token, int pos)
+{
 	int		status;
 	int		pid;
 	int		fd[2];
@@ -23,21 +42,7 @@ int	here_doc(t_shell *shell, t_token *token, int pos)
 	pipe(fd);
 	pid = fork();
 	if (!pid)
-	{
-		wait_signal(HERE_DOC);
-		line = readline("> ");
-		while (line && (ft_strcmp(line, token->str) != 0))
-		{
-			ft_putstr_fd(line, fd[1]);
-			free(line);
-			line = readline("> ");
-			write(fd[1], "\n", 1);
-		}
-		free(line);
-		close(fd[1]);
-		close(fd[0]);
-		exit(0);
-	}
+		here_doc2(token, fd);
 	waitpid(pid, &status, 0);
 	shell->end_type = WEXITSTATUS(status);
 	if (shell->end_type == 1)
@@ -50,22 +55,21 @@ int	here_doc(t_shell *shell, t_token *token, int pos)
 
 int	manage_hd(t_shell *shell, t_token *list)
 {
-	int		len;
 	int		i;
 	t_token	*aux;
 
-	len = 1;
-	i = 0;
+	i = 1;
 	aux = list;
 	while (aux->next)
 	{
 		if (aux->type == T_PIPE)
-			len++;
+			i++;
 		aux = aux->next;
 	}
-	shell->command->hd = ft_calloc((len + 1), sizeof(int));
+	shell->command->hd = ft_calloc((i + 1), sizeof(int));
 	if (!shell->command->hd)
 		malloc_err(shell);
+	i = 0;
 	while (list->next)
 	{
 		if (list->type == T_DIN)
