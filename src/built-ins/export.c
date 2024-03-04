@@ -128,8 +128,8 @@ int	my_export(t_shell *shell)
 	j = 0;
 	while (shell->command->cmd[++j])
 		pos = iter_export(shell, pos, j);
+	shell->end_type = pos;
 	if (j == 1)
 		export_no_args(shell);
-	shell->end_type = pos;
 	return (1);
 }

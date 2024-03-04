@@ -73,7 +73,6 @@ static int	parsing(t_shell *shell)
 
 int	exec_program2(t_shell *shell, t_token *list, t_token *aux, int *pid_num)
 {
-	wait_signal(EXECUTION);
 	shell->command->cmd = get_cmd(list);
 	if (aux->type == T_PIPE)
 	{
@@ -89,14 +88,14 @@ int	exec_program2(t_shell *shell, t_token *list, t_token *aux, int *pid_num)
 			return (0);
 	}
 	else if (!shell->command->pid[*(pid_num)])
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		exec_cmd(shell, list, 0, *pid_num);
+	}
 	(*pid_num)++;
 	if (aux->type == T_PIPE)
-	{
-		dup2(shell->command->fd[0], 0);
-		close(shell->command->fd[1]);
-		close(shell->command->fd[0]);
-	}
+		close_pipe(shell);
 	return (1);
 }
 
@@ -113,6 +112,8 @@ int	exec_program(t_shell *shell)
 	shell->command->pid = get_pid(aux);
 	if (!manage_hd(shell, shell->command->token))
 		return (0);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	while (aux)
 	{
 		list = aux;

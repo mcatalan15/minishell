@@ -58,7 +58,6 @@ void	main_loop(t_shell *shell)
 			break ;
 		}
 		update_signal(shell);
-		signal(SIGINT, SIG_IGN);
 		if (!ft_is_enter(shell->str))
 			shell_program(shell);
 		update_signal(shell);

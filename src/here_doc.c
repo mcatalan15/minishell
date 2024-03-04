@@ -17,7 +17,6 @@ void	here_doc2(t_token *token, int *fd)
 	char	*line;
 
 	line = NULL;
-	wait_signal(HERE_DOC);
 	line = readline("> ");
 	while (line && (ft_strcmp(line, token->str) != 0))
 	{
@@ -38,6 +37,7 @@ int	here_doc(t_shell *shell, t_token *token, int pos)
 	int		pid;
 	int		fd[2];
 
+	wait_signal(HERE_DOC);
 	dup2(shell->command->in_copy, 0);
 	pipe(fd);
 	pid = fork();

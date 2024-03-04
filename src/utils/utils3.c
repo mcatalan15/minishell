@@ -95,3 +95,10 @@ void	join_subt2(t_token *token, char **str, t_token **new, t_shell *shell)
 		}
 	}
 }
+
+void	close_pipe(t_shell *shell)
+{
+	dup2(shell->command->fd[0], 0);
+	close(shell->command->fd[1]);
+	close(shell->command->fd[0]);
+}

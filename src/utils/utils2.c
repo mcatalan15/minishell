@@ -47,15 +47,25 @@ void	wait_for_children(t_shell *shell, int *pid)
 {
 	int	i;
 	int	status;
+	int	wpid;
+	int	signal;
 
 	i = -1;
 	status = 0;
+	(void)signal;
 	dup2(shell->command->in_copy, 0);
 	dup2(shell->command->out_copy, 1);
 	while (pid[++i] != -1)
-		waitpid(pid[i], &status, 0);
+		wpid = waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status) && (i != 1 || !ft_isbuiltin(shell->command->cmd[0])))
 		shell->end_type = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		shell->end_type = 128 + WTERMSIG(status);
+		if (WTERMSIG(status) == SIGQUIT)
+			printf("Quit: 3");
+		printf("\n");
+	}
 }
 
 /*
