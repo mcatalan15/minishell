@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/03 20:05:40 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/05 17:16:12 by jpaul-kr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ static int	parsing(t_shell *shell)
 
 int	exec_program2(t_shell *shell, t_token *list, t_token *aux, int *pid_num)
 {
+	if (shell->command->cmd)
+	{
+		free_dp(shell->command->cmd, NULL);
+		shell->command->cmd = NULL;
+	}
 	shell->command->cmd = get_cmd(list);
 	if (aux->type == T_PIPE)
 	{
