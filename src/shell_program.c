@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:11:35 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/05 17:16:12 by jpaul-kr         ###   ########.fr       */
+/*   Updated: 2024/03/05 20:07:36 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	parsing(t_shell *shell)
 	return (1);
 }
 
-int	exec_program2(t_shell *shell, t_token *list, t_token *aux, int *pid_num)
+void	exec_program3(t_shell *shell, t_token *list)
 {
 	if (shell->command->cmd)
 	{
@@ -79,6 +79,11 @@ int	exec_program2(t_shell *shell, t_token *list, t_token *aux, int *pid_num)
 		shell->command->cmd = NULL;
 	}
 	shell->command->cmd = get_cmd(list);
+}
+
+int	exec_program2(t_shell *shell, t_token *list, t_token *aux, int *pid_num)
+{
+	exec_program3(shell, list);
 	if (aux->type == T_PIPE)
 	{
 		if (pipe(shell->command->fd) == -1)

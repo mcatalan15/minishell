@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:51:38 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/03 20:32:24 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/05 20:05:58 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ char	*search_path(t_shell *shell, char **split)
 	add = NULL;
 	path = NULL;
 	cmd_no_dot = shell->command->cmd[0] + 1;
-	if (*shell->command->cmd[0])
+	if (*shell->command->cmd[0] && (ft_strcmp(shell->command->cmd[0], "..")))
 	{
 		add = ft_strjoin("/", shell->command->cmd[0]);
 		if (!add)

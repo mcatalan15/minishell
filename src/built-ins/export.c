@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:01:59 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/03 18:38:44 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/05 20:05:40 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	iter_env(char **env, char **new, char *id, char *cmd)
 	flag = 0;
 	while (env[++i])
 	{
-		if (ft_strcmpc(id, env[i], '=') <= 0 && !flag)
+		if (!ft_strcmpc(id, env[i], '=') && !flag)
 		{
 			new[j++] = ft_strdup(cmd);
 			flag = 1;

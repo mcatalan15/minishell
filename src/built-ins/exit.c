@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:24:22 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/03 20:14:21 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/05 18:57:05 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,10 @@ void	my_exit(t_shell *shell)
 			clear_program(shell, type, 1);
 		}
 		shell->end_type = type;
+	}
+	else
+	{
+		free_dp(shell->env, NULL);
+		exit (type);
 	}
 }

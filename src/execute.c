@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:13:50 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/04 09:57:37 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/05 20:07:57 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,7 @@ void	execute(t_shell *shell)
 	if (builtin)
 		manage_builtins(shell, builtin);
 	else
-	{
 		execve(shell->command->path, shell->command->cmd, shell->env);
-	}
 }
 
 int	exec_cmd(t_shell *shell, t_token *aux, int pid, int pid_num)
