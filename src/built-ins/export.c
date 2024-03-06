@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:01:59 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/05 20:05:40 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/06 09:26:52 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,13 @@ char	**add_to_env(t_shell *shell, char *cmd, char *id)
 	return (new);
 }
 
+/*
+	This function iterates through the export values and check if the command
+	contains an equal sign. If it does, it calls the iter_env function to add
+	the command to the environment. If the command does not contain an equal
+	sign, it raises a 'not valid id' error.
+*/
+
 int	iter_export(t_shell *shell, int pos, int j)
 {
 	char	*cmd;
@@ -117,6 +124,9 @@ int	iter_export(t_shell *shell, int pos, int j)
 }
 
 /*
+	This function is called when the export command is called. Iterates the
+	command given to the export command and calls the iter_export function to
+	check if the command is valid and to add it to the environment.
 */
 
 int	my_export(t_shell *shell)
