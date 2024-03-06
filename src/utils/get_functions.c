@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:33:27 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/02 13:09:00 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/06 09:28:07 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ char	*get_cwd2(t_shell *shell, char *cwd_s, char *cwd)
 		malloc_err(shell);
 	return (cwd_s);
 }
+
+/*
+	This function returns the current working directory and appends the prompt
+	character at the end of the string for printing. If the getcwd function
+	fails, it returns the previous working directory.
+*/
 
 char	*get_cwd(t_shell *shell)
 {

@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 11:39:08 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/04 09:55:05 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/06 09:29:04 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ void	join_subt2(t_token *token, char **str, t_token **new, t_shell *shell)
 		}
 	}
 }
+
+/*
+	TBC
+*/
 
 void	close_pipe(t_shell *shell)
 {
