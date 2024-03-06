@@ -6,7 +6,7 @@
 #    By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:38:40 by mcatalan          #+#    #+#              #
-#    Updated: 2024/01/11 11:5:04 by mcatalan         ###   ########.fr         #
+#    Updated: 2024/03/06 13:30:41 by mcatalan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,11 @@ LIBFT_D = includes/libft/
 LIBFT = libft.a
 
 READLINE_D = readline/
-READLINE = libreadline.a
-READLINE_H = libhistory.a
+READLINE_A = $(READLINE_D)libhistory.a $(READLINE_D)libreadline.a
 READLINE_FLAGS = -lreadline -ltermcap
+READLINE_URL = http://git.savannah.gnu.org/cgit/readline.git/snapshot/readline-bfe9c573a9e376323929c80b2b71c59727fab0cc.tar.gz
+READLINE_TAR = readline.tar.gz
+DEFS = -DREADLINE_LIBRARY
 
 NAME = minishell
 
@@ -71,27 +73,32 @@ OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
 
 INCLUDE = -I./
-RM = rm -f
+RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror
 OFLAGS = -g #-fsanitize=address
 
-all: print_message libft readline $(NAME)
+all: print_message $(READLINE_A) libft $(NAME)
 	@echo "$(GREEN)Build finished successfully!$(RESET)✅"
+
+$(READLINE_D):
+			@curl -k $(READLINE_URL) > $(READLINE_TAR)
+			@tar -xf $(READLINE_TAR) && mv readline-* readline
+			@rm -rf $(READLINE_TAR)
+
+$(READLINE_A): $(READLINE_D)
+			@if [ ! -f $(READLINE_D)config.status ] ; then \
+				printf "$(YELLOW)Configuring READLINE...$(DEFAULT)" && \
+				cd ./$(READLINE_D) && \
+				./configure &> /dev/null && \
+				echo ✅; \
+			fi
+			@printf "$(YELLOW)Making READLINE...$(DEFAULT)"
+			@cd ./$(READLINE_D) && make &> /dev/null
+			@echo ✅
 
 libft:
 	@echo "$(YELLOW)Building libft...$(RESET)"
 	@make --no-print-directory -C $(LIBFT_D)
-
-config:
-	@echo "$(YELLOW)Configuring readline...$(RESET)"
-	@cd $(READLINE_D) && ./configure &> /dev/null
-	@echo "$(GREEN)Configured readline!$(RESET)✅"
-
-readline:
-	@echo "$(YELLOW)Building readline...$(RESET)"
-	@cd $(READLINE_D) && make
-	@make --no-print-directory -C $(READLINE_D)
-	@echo "$(GREEN)Built readline!$(RESET)✅"
 
 print_message:
 	$(PRINT_MINISHELL)
@@ -99,11 +106,11 @@ print_message:
 
 %.o: %.c
 	@echo "$(YELLOW)Compiling...$(RESET)"
-	@${CC} ${CFLAGS} -MMD $(INCLUDE) -c $< -o $@
+	@${CC} ${CFLAGS} $(DEFS) -MMD $(INCLUDE) -c $< -o $@
 
-$(NAME): $(OBJS) $(LIBFT_D)$(LIBFT) $(READLINE_D)$(READLINE) $(READLINE_D)$(READLINE_H)
+$(NAME): $(OBJS) $(LIBFT_D)$(LIBFT) $(READLINE_A)
 	@echo "$(YELLOW)Linking...$(RESET)"
-	@$(CC) $(CFLAGS) $(READLINE_FLAGS) $(OBJS) -o $@ $(LIBFT_D)$(LIBFT) $(READLINE_D)$(READLINE) $(READLINE_D)$(READLINE_H) $(OFLAGS)
+	@$(CC) $(CFLAGS) $(DEFS) $(READLINE_FLAGS) $(OBJS) -o $@ $(LIBFT_D)$(LIBFT) $(READLINE_A) $(OFLAGS)
 	@echo "$(GREEN)Linked!$(RESET)✅"
 -include $(DEPS)
 
@@ -112,11 +119,9 @@ clean:
 	@$(RM) $(OBJS) $(DEPS)
 	@echo "$(RED)Cleaned minishell!$(RESET)✅"
 
-fclean: clean
+fclean:
 	@make fclean --no-print-directory -C $(LIBFT_D)
-	@make clean --no-print-directory -C $(READLINE_D)
-	@echo "$(RED)Cleaned readline!$(RESET)✅"
-	@$(RM) $(NAME) $(DEPS)
+	@$(RM) $(NAME) $(DEPS) $(OBJS) $(READLINE_A)
 	@echo "$(RED)Fcleaned minishell!$(RESET)✅"
 
 	
@@ -128,75 +133,3 @@ jesusg:
 re: fclean all
 
 .PHONY: all clean fclean re libft readline jesusg config
-
-# UBUNTU
-# Print MINISHELL and authors' names
-# MINISHELL_MSG = MINISHELL
-# AUTHORS_MSG = by jpaul-kr & mcatalan
-# MESSAGE_LEN = $$(($(shell echo $(MINISHELL_MSG) | wc -c) - 1))
-
-# PRINT_MINISHELL = @printf "$(VIOLET)%*s$(RESET)\n" $(MESSAGE_LEN) $(MINISHELL_MSG)
-# PRINT_AUTHORS = @echo "$(BLUE)$(AUTHORS_MSG)$(RESET)"
-
-# # Colors
-# RED = \033[0;31m
-# GREEN = \033[0;32m
-# YELLOW = \033[0;33m
-# BLUE = \033[0;34m
-# VIOLET = \033[0;35m
-# RESET = \033[0m
-
-# LIBFT_D = includes/libft/
-# LIBFT = libft.a
-
-# READLINE_FLAGS = 
-
-# NAME = minishell
-
-# SRCS =	$(wildcard src/*.c)
-
-# OBJS = $(SRCS:.c=.o)
-
-# DEPS = $(SRCS:.c=.d)
-
-# INCLUDE = -I./
-# RM = rm -f
-# CFLAGS = -Wall -Wextra -Werror
-# OFLAGS = -g -lreadline -L/usr/x86_64-linux-gnu 
-# FFLAGS = -fsanitize=address
-
-# all: print_message libft readline $(NAME)
-# 	@echo "$(GREEN)Build finished successfully!$(RESET)✅"
-
-# libft:
-# 	@echo "$(YELLOW)Building libft...$(RESET)"
-# 	@make --no-print-directory -C $(LIBFT_D)
-
-# print_message:
-# 	$(PRINT_MINISHELL)
-# 	$(PRINT_AUTHORS)
-
-# %.o: %.c
-# 	@echo "$(YELLOW)Compiling...$(RESET)"
-# 	@${CC} ${CFLAGS} -MMD $(INCLUDE) -c $< -o $@
-
-# $(NAME): $(OBJS) $(LIBFT_D)$(LIBFT)
-# 	@echo "$(YELLOW)Linking...$(RESET)"
-# 	@$(CC) $(CFLAGS) $(OBJS) -o $@ $(LIBFT_D)$(LIBFT) $(OFLAGS) $(FFLAGS)
-# 	@echo "$(GREEN)Linked!$(RESET)✅"
-# -include $(DEPS)
-
-# clean:
-# 	@make clean --no-print-directory -C $(LIBFT_D)
-# 	@echo "$(RED)Cleaned readline!$(RESET)✅"
-# 	@$(RM) $(OBJS) $(DEPS)
-# 	@echo "$(RED)Cleaned minishell!$(RESET)✅"
-
-# fclean: clean
-# 	@make fclean --no-print-directory -C $(LIBFT_D)
-# 	@$(RM) $(NAME) $(DEPS)
-# 	@echo "$(RED)Fcleaned minishell!$(RESET)✅"
-
-# re: fclean all
-
-# .PHONY: all clean fclean re libft readline 
