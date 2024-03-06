@@ -106,3 +106,17 @@ void	close_pipe(t_shell *shell)
 	close(shell->command->fd[1]);
 	close(shell->command->fd[0]);
 }
+
+/*
+	TBC
+*/
+
+void	exec_program3(t_shell *shell, t_token *list)
+{
+	if (shell->command->cmd)
+	{
+		free_dp(shell->command->cmd, NULL);
+		shell->command->cmd = NULL;
+	}
+	shell->command->cmd = get_cmd(list);
+}

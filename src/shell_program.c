@@ -71,16 +71,6 @@ static int	parsing(t_shell *shell)
 	return (1);
 }
 
-void	exec_program3(t_shell *shell, t_token *list)
-{
-	if (shell->command->cmd)
-	{
-		free_dp(shell->command->cmd, NULL);
-		shell->command->cmd = NULL;
-	}
-	shell->command->cmd = get_cmd(list);
-}
-
 int	exec_program2(t_shell *shell, t_token *list, t_token *aux, int *pid_num)
 {
 	exec_program3(shell, list);

@@ -114,6 +114,7 @@ int		is_father(t_shell *shell);
 void	join_subt2(t_token *token, char **str, t_token **new,
 			t_shell *shell);
 void	close_pipe(t_shell *shell);
+void	exec_program3(t_shell *shell, t_token *list);
 
 // ft_is_functions.c
 int		ft_isoperate(int flag);
