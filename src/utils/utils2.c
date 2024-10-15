@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:01:38 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/04 09:54:21 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/06 20:51:06 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	wait_for_children(t_shell *shell, int *pid)
 {
 	int	i;
 	int	status;
-	int	wpid;
+	// int	wpid;
 	int	signal;
 
 	i = -1;
@@ -56,7 +56,7 @@ void	wait_for_children(t_shell *shell, int *pid)
 	dup2(shell->command->in_copy, 0);
 	dup2(shell->command->out_copy, 1);
 	while (pid[++i] != -1)
-		wpid = waitpid(pid[i], &status, 0);
+		// wpid = waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status) && (i != 1 || !ft_isbuiltin(shell->command->cmd[0])))
 		shell->end_type = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))

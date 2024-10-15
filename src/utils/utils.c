@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:51:38 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/05 20:05:58 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/06 20:50:28 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,12 @@ char	*search_path2(t_shell *shell, char **split, char *path, char *add)
 
 char	*search_path(t_shell *shell, char **split)
 {
-	int		i;
+	// int		i;
 	char	*path;
 	char	*add;
 	char	*cmd_no_dot;
 
-	i = -1;
+	// i = -1;
 	add = NULL;
 	path = NULL;
 	cmd_no_dot = shell->command->cmd[0] + 1;
